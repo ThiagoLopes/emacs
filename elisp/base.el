@@ -4,6 +4,16 @@
 
 ;;; Code:
 
+;; Change tab width and change tabs to spaces
+(setq-default tab-width 4)
+(setq-default indent-tabs-mode nil)
+
+;; Show current line
+(linum-mode)
+
+;; Python indentation
+(setq python-indent 4)
+
 ;; Configurando UTF-8
 ;; UTF-8 please
 (set-charset-priority 'unicode)
@@ -37,7 +47,6 @@
       highlight-nonselected-windows      nil
       ;; PATH
       exec-path                          (append exec-path '("/usr/local/bin/"))
-      indent-tabs-mode                   nil
       inhibit-startup-message            t
       fringes-outside-margins            t
       x-select-enable-clipboard          t
@@ -46,9 +55,9 @@
 
 ;; Bookmarks
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; (setq							       ;;
-;;  ;; persistent bookmarks					       ;;
-;;  bookmark-save-flag                      t			       ;;
+;; (setq                                   ;;
+;;  ;; persistent bookmarks                        ;;
+;;  bookmark-save-flag                      t                  ;;
 ;;  bookmark-default-file              (concat temp-dir "/bookmarks")) ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 

@@ -7,9 +7,9 @@
 ;;-----PACKAGES-----------------------------------------------------------------
 ;; Package sources
 (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
-			 ("org" . "http://orgmode.org/elpa/")
-			 ("marmalade" . "http://marmalade-repo.org/packages/")
-			 ("melpa-stable" . "http://melpa-stable.milkbox.net/packages/")))
+             ("org" . "http://orgmode.org/elpa/")
+             ("marmalade" . "http://marmalade-repo.org/packages/")
+             ("melpa-stable" . "http://melpa-stable.milkbox.net/packages/")))
 (package-initialize)
 
 ;; If package isn't installed, fetch it
@@ -28,7 +28,8 @@
 ;; Iniciando tema monokai
 (require-package 'monokai-alt-theme)
 (require-package 'monokai-theme)
-(load-theme 'monokai-alt t)
+(require-package 'color-theme-sanityinc-tomorrow)
+(load-theme 'sanityinc-tomorrow-night t)
 
 ;; Iniciando powerline
 (require-package 'powerline)
@@ -50,11 +51,12 @@
 (require-package 'ido-vertical-mode)
 (ido-mode t)
 (ido-vertical-mode 1)
-(setq ido-vertical-define-keys 'C-n-and-C-p-only)
+(setq ido-vertical-define-keys 'C-n-and-C-p-
 
 ;; Company mode - autocomplete
 (require-package 'company)
 (add-hook 'after-init-hook 'global-company-mode)
+
 
 ;; Magit - Work with Git inside Emacs
 (require-package 'magit)
@@ -69,5 +71,26 @@
 (setq switch-window-qwerty-shortcuts
       '("a" "s" "d" "f" "j" "k" "l" ";" "w" "e" "i" "o"))
 
-(Provide 'base-packages)
+;; Python Elpy
+(require-package 'elpy)
+(elpy-enable)
+
+;; Dashboard
+(require-package 'dashboard)
+(dashboard-setup-startup-hook)
+
+;; Emmet
+(require-package 'emmet-mode)
+(add-hook 'sgml-mode-hook 'emmet-mode) ;; Auto-start on any markup modes
+
+;; Elm
+(require-package 'elm-mode)
+
+;; FUN NYAN MODE
+(require-package 'nyan-mode)
+(nyan-mode)
+(nyan-toggle-wavy-trail)
+(nyan-start-animation)
+
+(provide 'base-packages)
 ;;; base-packages ends here
