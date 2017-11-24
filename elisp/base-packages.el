@@ -58,4 +58,16 @@
 
 ;; Magit - Work with Git inside Emacs
 (require-package 'magit)
+
+;; Rainbow mode - CSS
+(require-package 'rainbow-mode)
+
+;; Switch window
+(require-package 'switch-window)
+(global-set-key (kbd "C-x o") 'switch-window)
+(setq switch-window-shortcut-style 'qwerty)
+(setq switch-window-qwerty-shortcuts
+      '("a" "s" "d" "f" "j" "k" "l" ";" "w" "e" "i" "o"))
+
+(Provide 'base-packages)
 ;;; base-packages ends here
