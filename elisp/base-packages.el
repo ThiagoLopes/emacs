@@ -51,7 +51,7 @@
 (require-package 'ido-vertical-mode)
 (ido-mode t)
 (ido-vertical-mode 1)
-(setq ido-vertical-define-keys 'C-n-and-C-p-
+(setq ido-vertical-define-keys 'C-n-and-C-p-)
 
 ;; Company mode - autocomplete
 (require-package 'company)
