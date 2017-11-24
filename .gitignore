@@ -66,4 +66,11 @@ company-statistics-cache.el
 # anaconda-mode
 anaconda-mode/
 
+# more things
+.custom.el
+ac-comphist.dat
+ido.last
+network-security.data
+recentf
+
 # End of https://www.gitignore.io/api/emacs
