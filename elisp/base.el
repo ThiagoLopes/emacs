@@ -1,35 +1,36 @@
+;;; package --- Main Base file
+;;; Commentary:
+;;; Base com configurações básicas
+
+;;; Code:
+
 ;;---------------------------------------------------------------------------
 ;; Configurando MELPA
-(package-initialize)
-(add-to-list 'package-archives
-             '("melpa" . "https://melpa.org/packages/")
-             '("elpy" . "http://jorgenschaefer.github.io/packages/"))
 
-;; Add package sources
-(setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
-                         ("marmalade" . "http://marmalade-repo.org/packages/")
-                         ("melpa" . "http://melpa.org/packages/")))
-;; (when (not package-archive-contents)
-;;   (package-refresh-contents))
+(require 'package) ;; You might already have this line
+(let* ((no-ssl (and (memq system-type '(windows-nt ms-dos))
+                    (not (gnutls-available-p))))
+       (url (concat (if no-ssl "http" "https") "://melpa.org/packages/")))
+  (add-to-list 'package-archives (cons "melpa" url) t))
+(when (< emacs-major-version 24)
+  ;; For important compatibility libraries like cl-lib
+  (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
+(package-initialize) ;; You might already have this line
 
-;; (unless (package-installed-p 'use-package)
-;;   (package-install 'use-package))
-
-(defconst private-dir  (expand-file-name "private" user-emacs-directory))
-(defconst temp-dir (format "%s/cache" private-dir)
-  "Hostname-based elisp temp directories")
+; fetch the list of packages available
+(unless package-archive-contents
+  (package-refresh-contents))
 ;;---------------------------------------------------------------------------
-
 
 ;; Configurando UTF-8
 ;; UTF-8 please
 (set-charset-priority 'unicode)
 (setq locale-coding-system   'utf-8)   ; pretty
-;; (set-terminal-coding-system  'utf-8)   ; pretty
-;; (set-keyboard-coding-system  'utf-8)   ; pretty
-;; (set-selection-coding-system 'utf-8)   ; please
-;; (prefer-coding-system        'utf-8)   ; with sugar on top
-;; (setq default-process-coding-system '(utf-8-unix . utf-8-unix))
+(set-terminal-coding-system  'utf-8)   ; pretty
+(set-keyboard-coding-system  'utf-8)   ; pretty
+(set-selection-coding-system 'utf-8)   ; please
+(prefer-coding-system        'utf-8)   ; with sugar on top
+(setq default-process-coding-system '(utf-8-unix . utf-8-unix))
 
 ;; ;; Emacs customizations
 
@@ -62,10 +63,12 @@
 
 
 ;; Bookmarks
-(setq
- ;; persistent bookmarks
- bookmark-save-flag                      t
- bookmark-default-file              (concat temp-dir "/bookmarks"))
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; (setq							       ;;
+;;  ;; persistent bookmarks					       ;;
+;;  bookmark-save-flag                      t			       ;;
+;;  bookmark-default-file              (concat temp-dir "/bookmarks")) ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; Backups enabled, use nil to disable
 (setq backup-directory-alist '(("." . "~/.emacs-backup")))
@@ -75,7 +78,6 @@
  backup-inhibited                   nil
  make-backup-files                  t
  auto-save-default                  t
- auto-save-list-file-name           (concat temp-dir "/autosave")
  make-backup-files                  t
  create-lockfiles                   nil
 )
