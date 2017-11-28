@@ -86,6 +86,10 @@
 ;; Elm
 (require-package 'elm-mode)
 
+;; NumberLines
+(require-package 'nlinum)
+(global-nlinum-mode)
+
 ;; FUN NYAN MODE
 (require-package 'nyan-mode)
 (nyan-mode)

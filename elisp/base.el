@@ -8,8 +8,8 @@
 (setq-default tab-width 4)
 (setq-default indent-tabs-mode nil)
 
-;; Show current line
-(linum-mode)
+;; Hl Line
+(global-hl-line-mode 1)
 
 ;; Python indentation
 (setq python-indent 4)

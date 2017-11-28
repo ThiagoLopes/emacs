@@ -18,5 +18,11 @@
 (global-set-key (kbd "C-a") (quote back-to-indentation-or-beginning))
 
 
+(defun kill-other-buffers ()
+      "Kill all other buffers."
+      (interactive)
+      (mapc 'kill-buffer (delq (current-buffer) (buffer-list))))
+
+
 (provide 'keybindings)
 ;;; keybindings.el ends here
