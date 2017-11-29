@@ -1,4 +1,5 @@
 ;;; Code:
+
 ;; newline-without-break-of-line
 (defun newline-without-break-of-line ()
   "1. move to end of the line.

@@ -9,7 +9,7 @@
 (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
              ("org" . "http://orgmode.org/elpa/")
              ("marmalade" . "http://marmalade-repo.org/packages/")
-             ("melpa-stable" . "http://melpa-stable.milkbox.net/packages/")))
+             ("melpa" . "http://melpa.org/packages/")))
 (package-initialize)
 
 ;; If package isn't installed, fetch it
@@ -24,16 +24,6 @@
 ;; Autopair - Automatically pair braces and quotes like in TextMate
 (require-package 'autopair)
 (autopair-global-mode) ;; enable autopair in all buffers
-
-;; Iniciando tema monokai
-(require-package 'monokai-alt-theme)
-(require-package 'monokai-theme)
-(require-package 'color-theme-sanityinc-tomorrow)
-(load-theme 'sanityinc-tomorrow-night t)
-
-;; Iniciando powerline
-(require-package 'powerline)
-(powerline-default-theme)
 
 ;; Highlight symbol
 (require-package 'highlight-symbol)
@@ -50,8 +40,10 @@
 (require-package 'ido-hacks)
 (require-package 'ido-vertical-mode)
 (ido-mode t)
-(ido-vertical-mode 1)
+(setq ido-use-faces t)
 (setq ido-vertical-define-keys 'C-n-and-C-p-)
+(ido-vertical-mode 1)
+
 
 ;; Company mode - autocomplete
 (require-package 'company)
@@ -101,6 +93,18 @@
 ;; Virtualenvwrapper
 (require-package 'virtualenvwrapper)
 (venv-initialize-eshell) ;; if you want eshell support
+(setq venv-location "~/.virtualenv/")
+
+;; Zoom
+(require-package 'zoom)
+(custom-set-variables
+ '(zoom-size '(0.618 . 0.618)))
+(custom-set-variables
+ '(zoom-mode t))
+
+;; Beacon
+(require-package 'beacon)
+(beacon-mode 1)
 
 (provide 'base-packages)
 ;;; base-packages ends here
