@@ -8,8 +8,14 @@
 (setq-default tab-width 4)
 (setq-default indent-tabs-mode nil)
 
+;; Set undo tree
+(setq undo-tree-history-directory-alist '(("." . "~/.emacs-backup/undo")))
+
+;; Save history command
+(savehist-mode 1)
+
 ;; Hl Line
-(global-hl-line-mode 1)
+;; (global-hl-line-mode 1)
 
 ;; Python indentation
 (setq python-indent 4)
