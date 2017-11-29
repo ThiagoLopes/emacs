@@ -100,7 +100,7 @@
 
 ;; Virtualenvwrapper
 (require-package 'virtualenvwrapper)
-x(venv-initialize-eshell) ;; if you want eshell support
+(venv-initialize-eshell) ;; if you want eshell support
 
 (provide 'base-packages)
 ;;; base-packages ends here
