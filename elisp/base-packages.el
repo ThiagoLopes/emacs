@@ -87,14 +87,16 @@
 (require-package 'elm-mode)
 
 ;; NumberLines
-(require-package 'nlinum)
-(global-nlinum-mode)
+;;(require-package 'nlinum)
+;;(global-nlinum-mode)
 
 ;; FUN NYAN MODE
 (require-package 'nyan-mode)
 (nyan-mode)
-(nyan-toggle-wavy-trail)
-(nyan-start-animation)
+
+;; Git gutter mode
+(require-package 'git-gutter)
+(global-git-gutter-mode +1)
 
 (provide 'base-packages)
 ;;; base-packages ends here

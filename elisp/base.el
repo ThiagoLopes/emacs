@@ -93,5 +93,11 @@
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 (autoload 'ibuffer "ibuffer" "List buffers." t)
 
+;; Set up list buffer in C-x C-b
+(global-set-key (kbd "C-x C-b") 'ibuffer)
+
+;; Set up C-x C-s to C-x s
+(global-set-key (kbd "C-x s") 'save-buffer)
+
 (provide 'base)
 ;;; base ends here
