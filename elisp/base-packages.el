@@ -98,5 +98,9 @@
 (require-package 'git-gutter)
 (global-git-gutter-mode +1)
 
+;; Virtualenvwrapper
+(require-package 'virtualenvwrapper)
+x(venv-initialize-eshell) ;; if you want eshell support
+
 (provide 'base-packages)
 ;;; base-packages ends here
