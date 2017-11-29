@@ -18,5 +18,6 @@
 (require 'base)
 (require 'base-packages)
 (require 'keybindings)
+(require 'themes)
 
 ;;; init.el ends here
