@@ -34,7 +34,15 @@
 
 ;; Flyckech Mode
 (require-package 'flycheck)
-(add-hook 'after-init-hook #'global-flycheck-mode)
+;; highlight per-line instead
+(setq flycheck-highlighting-mode 'lines)
+;; run flycheck
+(flycheck-mode)
+(flycheck-buffer)
+
+(require-package 'flycheck-pos-tip)
+(with-eval-after-load 'flycheck
+  (flycheck-pos-tip-mode))
 
 ;; Ido
 (require-package 'ido-hacks)
@@ -66,6 +74,12 @@
 ;; Python Elpy
 (require-package 'elpy)
 (elpy-enable)
+(setq elpy-rpc-python-command "python3")
+(elpy-use-ipython)
+
+;; Pyenv
+(require-package 'pyenv-mode)
+(pyenv-mode)
 
 ;; Dashboard
 (require-package 'dashboard)
@@ -89,10 +103,13 @@
 ;; Git gutter mode
 (require-package 'git-gutter)
 (global-git-gutter-mode +1)
+(custom-set-variables
+ '(git-gutter:hide-gutter t))
+(custom-set-variables
+ '(git-gutter:update-interval 0))
 
 ;; Virtualenvwrapper
 (require-package 'virtualenvwrapper)
-(venv-initialize-eshell) ;; if you want eshell support
 (setq venv-location "~/.virtualenv/")
 
 ;; Zoom
