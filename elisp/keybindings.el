@@ -26,10 +26,10 @@
 
 
 ;; Set next line to M-n too
-(global-set-key (kbd "M-n") 'next-line)
+;; (global-set-key (kbd "M-n") 'next-line)
 
 ;; Set previus line to M-p too
-(global-set-key (kbd "M-p") 'previous-line)
+;; (global-set-key (kbd "M-p") 'previous-line)
 
 (provide 'keybindings)
 ;;; keybindings.el ends here

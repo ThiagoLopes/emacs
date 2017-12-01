@@ -21,6 +21,11 @@
       (package-refresh-contents))
     (package-install package)))
 
+;;------------------------------------------------------------------------------
+
+;; Use package
+(require-package 'use-package)
+
 ;; Autopair - Automatically pair braces and quotes like in TextMate
 (require-package 'autopair)
 (autopair-global-mode) ;; enable autopair in all buffers
@@ -47,8 +52,13 @@
 ;; Ido
 (require-package 'ido-hacks)
 (require-package 'ido-vertical-mode)
+(require-package 'ido-completing-read+)
 (ido-mode t)
-(setq ido-use-faces t)
+(ido-ubiquitous-mode 1)
+(ido-everywhere 1)
+;; disable ido faces to see flx highlights.
+(setq ido-enable-flex-matching t)
+(setq ido-use-faces nil)
 (setq ido-vertical-define-keys 'C-n-and-C-p-)
 (ido-vertical-mode 1)
 
@@ -122,6 +132,30 @@
 ;; Beacon
 (require-package 'beacon)
 (beacon-mode 1)
+
+;; ;; Helm
+;; (require-package 'helm)
+;; ;; Helm plugins
+;; (require-package 'helm-ls-git)
+
+;; (helm-mode 1)
+;; (global-set-key (kbd "M-x")                          'undefined)
+;; (global-set-key (kbd "M-x")                          'helm-M-x)
+;; (global-set-key (kbd "C-x C-b")                      'helm-buffers-list)
+;; (global-set-key (kbd "M-y")                          'helm-show-kill-ring)
+;; (global-set-key (kbd "C-x C-f")                      'helm-find-files)
+;; (global-set-key (kbd "C-c <SPC>")                    'helm-all-mark-rings)
+;; (global-set-key (kbd "C-x r b") 'helm-filtered-bookmarks)
+
+;; Markdown mode
+(require-package 'markdown-mode)
+(use-package markdown-mode
+  :ensure t
+  :commands (markdown-mode gfm-mode)
+  :mode (("README\\.md\\'" . gfm-mode)
+         ("\\.md\\'" . markdown-mode)
+         ("\\.markdown\\'" . markdown-mode))
+  :init (setq markdown-command "multimarkdown"))
 
 (provide 'base-packages)
 ;;; base-packages ends here

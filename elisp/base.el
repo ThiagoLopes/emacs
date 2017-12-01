@@ -103,7 +103,8 @@
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 
 ;; Set up C-x C-s to C-x s
-(global-set-key (kbd "C-x s") 'save-buffer)
+;; (global-set-key (kbd "C-x s") 'save-buffer)
+
 
 (provide 'base)
 ;;; base ends here

@@ -7,6 +7,9 @@
 ;; Monoaki Alt
 (require-package 'monokai-alt-theme)
 
+;; Aftermoon
+(require-package 'afternoon-theme)
+
 ;; Monokai
 (require-package 'monokai-theme)
 
@@ -24,7 +27,10 @@
 (powerline-default-theme)
 
 ;; Load theme, change your theme
-(load-theme 'doom-molokai t)
+(load-theme 'afternoon t)
+
+;; Change font
+(set-face-attribute 'default nil :family "Hack" :height 100)
 
 (provide 'themes)
 ;;; themes.el ends here
