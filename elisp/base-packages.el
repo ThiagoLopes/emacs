@@ -23,6 +23,9 @@
 
 ;;------------------------------------------------------------------------------
 
+;; Org
+(require-package 'org)
+
 ;; Use package
 (require-package 'use-package)
 
@@ -53,20 +56,29 @@
 (require-package 'ido-hacks)
 (require-package 'ido-vertical-mode)
 (require-package 'ido-completing-read+)
+;; disable ido faces to see flx highlights.
+(setq ido-enable-flex-matching t)
+(setq ido-use-faces t)
+(setq ido-vertical-define-keys 'C-n-and-C-p-)
 (ido-mode t)
 (ido-ubiquitous-mode 1)
 (ido-everywhere 1)
-;; disable ido faces to see flx highlights.
-(setq ido-enable-flex-matching t)
-(setq ido-use-faces nil)
-(setq ido-vertical-define-keys 'C-n-and-C-p-)
 (ido-vertical-mode 1)
 
+;; Smex
+(require-package 'smex) ; Not needed if you use package.el
+(smex-initialize)
+(global-set-key (kbd "M-x") 'smex)
+(global-set-key (kbd "M-X") 'smex-major-mode-commands)
+(global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
 
 ;; Company mode - autocomplete
 (require-package 'company)
 (add-hook 'after-init-hook 'global-company-mode)
 
+;; Auto complete
+(require-package 'auto-complete)
+(ac-config-default)
 
 ;; Magit - Work with Git inside Emacs
 (require-package 'magit)
@@ -85,7 +97,7 @@
 (require-package 'elpy)
 (elpy-enable)
 (setq elpy-rpc-python-command "python3")
-(elpy-use-ipython)
+(elpy-use-cpython "/usr/bin/python3")
 
 ;; Pyenv
 (require-package 'pyenv-mode)
@@ -109,6 +121,11 @@
 ;; FUN NYAN MODE
 (require-package 'nyan-mode)
 (nyan-mode)
+
+;; Changer inner - clone ci vim
+(require-package 'change-inner)
+(global-set-key (kbd "M-i") 'change-inner)
+(global-set-key (kbd "M-o") 'change-outer)
 
 ;; Git gutter mode
 (require-package 'git-gutter)
@@ -156,6 +173,7 @@
          ("\\.md\\'" . markdown-mode)
          ("\\.markdown\\'" . markdown-mode))
   :init (setq markdown-command "multimarkdown"))
+
 
 (provide 'base-packages)
 ;;; base-packages ends here

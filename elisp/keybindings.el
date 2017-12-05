@@ -31,5 +31,10 @@
 ;; Set previus line to M-p too
 ;; (global-set-key (kbd "M-p") 'previous-line)
 
+;; Test Remap
+(eval-after-load "elpy"
+  '(cl-dolist (key '("C-<return>"))
+     (define-key elpy-mode-map (kbd key) nil)))
+
 (provide 'keybindings)
 ;;; keybindings.el ends here
