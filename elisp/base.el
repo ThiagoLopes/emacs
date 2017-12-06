@@ -96,8 +96,9 @@
 (add-hook 'before-save-hook (lambda() (delete-trailing-whitespace)))
 
 ;; Active ibuffer
-(global-set-key (kbd "C-x C-b") 'ibuffer)
-(autoload 'ibuffer "ibuffer" "List buffers." t)
+;; (global-set-key (kbd "C-x C-b") 'ibuffer)
+;; (autoload 'ibuffer "ibuffer" "List buffers." t)
+;; (add-to-list 'ibuffer-never-show-predicates "^\\*")
 
 ;; Set up C-x C-s to C-x s
 ;; (global-set-key (kbd "C-x s") 'save-buffer)

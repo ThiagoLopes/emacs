@@ -106,6 +106,12 @@
                'comint-watch-for-password-prompt comint-output-filter-functions)))
   )
 
+;; PEP8
+(use-package py-autopep8
+  :init
+  (add-hook 'elpy-mode-hook 'py-autopep8-enable-on-save)
+  )
+
 ;; Pyenv
 ;;(require-package 'pyenv-mode)
 ;; (pyenv-mode)
@@ -155,11 +161,16 @@
 ;;  '(git-gutter:update-interval 0))
 
 ;; Zoom
-(use-package zoom
-  :custom
-  (zoom-size '(0.618 . 0.618) "golden ration")
-  (zoom-mode t "enable")
-  )
+;; (use-package zoom
+;;   :custom
+;;   (zoom-size '(0.618 . 0.618) "golden ration")
+;;   (zoom-mode t "enable")
+;;   )
+
+;; Golder ration
+(use-package golden-ratio
+  :config
+  (golden-ratio-mode 1))
 
 ;; Beacon
 (use-package beacon
@@ -222,6 +233,54 @@
          ("\\.markdown\\'" . markdown-mode))
   :init (setq markdown-command "multimarkdown"))
 
+;; Ibuffer
+(use-package ibuffer
+  :init
+  (global-set-key (kbd "C-x C-b") 'ibuffer)
+  :config
+  (setq ibuffer-saved-filter-groups
+        '(("home"
+           ("emacs-config" (or (filename . ".emacs.d")
+                               (filename . "emacs-config")))
+           ("martinowen.net" (filename . "martinowen.net"))
+           ("Org" (or (mode . org-mode)
+                      (filename . "OrgMode")))
+           ("code" (filename . "code"))
+           ("Web Dev" (or (mode . html-mode)
+                          (mode . css-mode)))
+           ("Subversion" (name . "\*svn"))
+           ("Magit" (name . "\*magit"))
+           ("Pytho" (name . "\*py"))
+           ("ERC" (mode . erc-mode))
+           ("Help" (or (name . "\*Help\*")
+                       (name . "\*Apropos\*")
+                       (name . "\*info\*"))))))
+  (add-hook 'ibuffer-mode-hook
+            '(lambda ()
+               (ibuffer-switch-to-saved-filter-groups "home")))
+  (setq ibuffer-show-empty-filter-groups nil)
+  (add-hook 'ibuffer-mode-hook
+            '(lambda ()
+               (ibuffer-auto-mode 1)
+               (ibuffer-switch-to-saved-filter-groups "home")))
+
+  )
+
+;; Buffer move
+(use-package buffer-move
+  :init
+  (bind-key "<C-S-up>" 'buf-move-up)
+  (bind-key "<C-S-down>" 'buf-move-down)
+  (bind-key "<C-S-left>" 'buf-move-left)
+  (bind-key "<C-S-right>" 'buf-move-right))
+
+;; Ace jump
+(use-package ace-jump-mode
+  :config
+  (bind-key "C-c SPC" 'ace-jump-mode)
+  )
+
+;;
 
 (provide 'base-packages)
 ;;; base-packages ends here

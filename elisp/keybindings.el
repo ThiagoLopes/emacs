@@ -43,5 +43,15 @@
   '(cl-dolist (key '("C-<return>"))
      (define-key elpy-mode-map (kbd key) nil)))
 
+;;------------------------------------------------------------------------------
+;; Indente file
+(defun indent-file (file)
+  "prompt for a file and indent it according to its major mode"
+  (interactive "fWhich file do you want to indent: ")
+  (find-file file)
+  ;; uncomment the next line to force the buffer into a c-mode
+  ;; (c-mode)
+  (indent-region (point-min) (point-max)))
+
 (provide 'keybindings)
 ;;; keybindings.el ends here

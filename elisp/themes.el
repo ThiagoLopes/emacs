@@ -5,32 +5,36 @@
 ;;; Code:
 
 ;; Monoaki Alt
-(require-package 'monokai-alt-theme)
+(use-package monokai-alt-theme
+  :disabled)
 
 ;; Aftermoon
-(require-package 'afternoon-theme)
+(use-package afternoon-theme)
 
 ;; Monokai
-(require-package 'monokai-theme)
+(use-package monokai-theme
+  :disabled)
 
 ;; Sanityinc theme
-(require-package 'color-theme-sanityinc-tomorrow)
+(use-package color-theme-sanityinc-tomorrow
+  :disabled)
 
 ;; Doom theme
-(require-package 'doom-themes)
-(setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
-      doom-themes-enable-italic t) ; if nil, italics is universally disabled
-(doom-themes-visual-bell-config)
+(use-package doom-themes
+  :config
+  (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
+        doom-themes-enable-italic t) ; if nil, italics is universally disabled
+  (doom-themes-visual-bell-config)
+  :disabled
+  )
 
 ;; Iniciando powerline
-(require-package 'powerline)
-(powerline-default-theme)
-
-;; Load theme, change your theme
-(load-theme 'afternoon t)
+(use-package powerline
+  :init
+  (powerline-default-theme))
 
 ;; Change font
-(set-face-attribute 'default nil :family "Hack" :height 100)
+(set-face-attribute 'default nil :family "Hack" :height 90)
 
 (provide 'themes)
 ;;; themes.el ends here
