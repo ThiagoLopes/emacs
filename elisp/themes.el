@@ -34,7 +34,7 @@
   (powerline-default-theme))
 
 ;; Change font
-(set-face-attribute 'default nil :family "Hack" :height 90)
+(set-face-attribute 'default nil :family "Hack" :height 100)
 
 (provide 'themes)
 ;;; themes.el ends here

@@ -187,7 +187,11 @@
          ("C-x C-f" . helm-find-files)
          ("C-x f" . helm-recentf)
          ("M-y" . helm-show-kill-ring)
-         ("C-x b" . helm-buffers-list))
+         ("C-x b" . helm-buffers-list)
+         :map helm-find-files-map
+         ("<tab>"         . helm-execute-persistent-action)
+         ("<backspace>" . helm-find-files-up-one-level)
+         )
   ;; :bind (:map helm-map
   ;;             ("M-i" . helm-previous-line)
   ;;             ("M-k" . helm-next-line)
@@ -197,7 +201,9 @@
   ;;             ("M-H" . helm-end-of-buffer))
   :config (progn
             (setq helm-buffers-fuzzy-matching t)
-            (helm-mode 1)))
+            (helm-mode 1)
+            )
+  )
 
 (use-package helm-descbinds
   :after (helm)
