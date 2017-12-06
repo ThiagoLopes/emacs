@@ -7,167 +7,215 @@
 ;;-----PACKAGES-----------------------------------------------------------------
 ;; Package sources
 (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
-             ("org" . "http://orgmode.org/elpa/")
-             ("marmalade" . "http://marmalade-repo.org/packages/")
-             ("melpa" . "http://melpa.org/packages/")))
+                         ("org" . "http://orgmode.org/elpa/")
+                         ("marmalade" . "http://marmalade-repo.org/packages/")
+                         ("melpa" . "http://melpa.org/packages/")))
 (package-initialize)
-
-;; If package isn't installed, fetch it
-(defun require-package (package)
-  (setq-default highlight-tabs t)
-  "Install given PACKAGE."
-  (unless (package-installed-p package)
-    (unless (assoc package package-archive-contents)
-      (package-refresh-contents))
-    (package-install package)))
-
 ;;------------------------------------------------------------------------------
-
-;; Org
-(require-package 'org)
 
 ;; Use package
 (require-package 'use-package)
+(eval-when-compile
+  ;; Following line is not needed if use-package.el is in ~/.emacs.d
+  (require 'use-package))
+(setq use-package-always-ensure t)
+
+;; Org
+(use-package org)
 
 ;; Autopair - Automatically pair braces and quotes like in TextMate
-(require-package 'autopair)
-(autopair-global-mode) ;; enable autopair in all buffers
+(use-package autopair
+  :config
+  (autopair-global-mode)
+  )
 
 ;; Highlight symbol
-(require-package 'highlight-symbol)
-(global-set-key [(control f3)] 'highlight-symbol)
-(global-set-key [f3] 'highlight-symbol-next)
-(global-set-key [(shift f3)] 'highlight-symbol-prev)
-(global-set-key [(meta f3)] 'highlight-symbol-query-replace)
+(use-package highlight-symbol
+  :config
+  (global-set-key [(control f3)] 'highlight-symbol)
+  (global-set-key [f3] 'highlight-symbol-next)
+  (global-set-key [(shift f3)] 'highlight-symbol-prev)
+  (global-set-key [(meta f3)] 'highlight-symbol-query-replace)
+  )
 
 ;; Flyckech Mode
-(require-package 'flycheck)
-;; highlight per-line instead
-(setq flycheck-highlighting-mode 'lines)
-;; run flycheck
-(flycheck-mode)
-(flycheck-buffer)
+(use-package flycheck
+  :ensure t
+  :init
+  (flycheck-mode)
+  (flycheck-buffer)
+  :config
+  (setq flycheck-highlighting-mode 'lines)
+  )
 
-(require-package 'flycheck-pos-tip)
-(with-eval-after-load 'flycheck
-  (flycheck-pos-tip-mode))
-
-;; Ido
-(require-package 'ido-hacks)
-(require-package 'ido-vertical-mode)
-(require-package 'ido-completing-read+)
-;; disable ido faces to see flx highlights.
-(setq ido-enable-flex-matching t)
-(setq ido-use-faces t)
-(setq ido-vertical-define-keys 'C-n-and-C-p-)
-(ido-mode t)
-(ido-ubiquitous-mode 1)
-(ido-everywhere 1)
-(ido-vertical-mode 1)
-
-;; Smex
-(require-package 'smex) ; Not needed if you use package.el
-(smex-initialize)
-(global-set-key (kbd "M-x") 'smex)
-(global-set-key (kbd "M-X") 'smex-major-mode-commands)
-(global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
+(use-package flycheck-pos-tip
+  :after (flycheck)
+  :init
+  (flycheck-pos-tip-mode)
+  )
 
 ;; Company mode - autocomplete
-(require-package 'company)
-(add-hook 'after-init-hook 'global-company-mode)
-
-;; Auto complete
-(require-package 'auto-complete)
-(ac-config-default)
+(use-package company
+  :ensure t
+  :init
+  (setq company-require-match 'never)
+  :config
+  (add-hook 'after-init-hook 'global-company-mode)
+  :bind(:map company-active-map
+             ("TAB" . company-complete-common-or-cycle)
+             ("<tab>" . company-complete-common-or-cycle ))
+  )
 
 ;; Magit - Work with Git inside Emacs
-(require-package 'magit)
+(use-package magit)
 
 ;; Rainbow mode - CSS
-(require-package 'rainbow-mode)
+(use-package rainbow-mode)
 
 ;; Switch window
-(require-package 'switch-window)
-(global-set-key (kbd "C-x o") 'switch-window)
-(setq switch-window-shortcut-style 'qwerty)
-(setq switch-window-qwerty-shortcuts
-      '("a" "s" "d" "f" "j" "k" "l" ";" "w" "e" "i" "o"))
+(use-package switch-window
+  :no-require t
+  :config
+  (bind-key "C-x o" 'switch-window)
+  (setq switch-window-shortcut-style 'qwerty)
+  (setq switch-window-qwerty-shortcuts
+        '("a" "s" "d" "f" "j" "k" "l" ";" "w" "e" "i" "o"))
+  )
 
 ;; Python Elpy
-(require-package 'elpy)
-(elpy-enable)
-(setq elpy-rpc-python-command "python3")
-(elpy-use-cpython "/usr/bin/python3")
+(use-package elpy
+  :ensure t
+  :init
+  (elpy-enable)
+  :config
+  (elpy-use-ipython)
+  (setq python-shell-interpreter "ipython"
+        python-shell-interpreter-args "--simple-prompt --pprint")
+
+  (when (require 'flycheck nil t)
+    (setq elpy-modules (delq 'elpy-module-flymake elpy-modules))
+    (add-hook 'elpy-mode-hook 'flycheck-mode))
+
+  (add-hook 'python-mode-hook
+            (lambda ()
+              (add-to-list (make-local-variable 'company-backends)
+                           '(elpy-company-backend))))
+  (add-hook 'inferior-python-mode-hook
+            (lambda ()
+              (push
+               'comint-watch-for-password-prompt comint-output-filter-functions)))
+  )
 
 ;; Pyenv
-(require-package 'pyenv-mode)
-(pyenv-mode)
+;;(require-package 'pyenv-mode)
+;; (pyenv-mode)
 
 ;; Dashboard
-(require-package 'dashboard)
-(dashboard-setup-startup-hook)
+(use-package dashboard
+  :init
+  (dashboard-setup-startup-hook))
 
 ;; Emmet
-(require-package 'emmet-mode)
-(add-hook 'sgml-mode-hook 'emmet-mode) ;; Auto-start on any markup modes
+(use-package emmet-mode
+  :config
+  (add-hook 'sgml-mode-hook 'emmet-mode)
+  )
 
 ;; Elm
-(require-package 'elm-mode)
+(use-package elm-mode)
 
 ;; NumberLines
 ;;(require-package 'nlinum)
 ;;(global-nlinum-mode)
 
 ;; FUN NYAN MODE
-(require-package 'nyan-mode)
-(nyan-mode)
+(use-package nyan-mode
+  :config
+  (nyan-mode))
 
 ;; Changer inner - clone ci vim
-(require-package 'change-inner)
-(global-set-key (kbd "M-i") 'change-inner)
-(global-set-key (kbd "M-o") 'change-outer)
+(use-package change-inner
+  :init
+  (bind-key "M-i" 'change-inner)
+  )
 
 ;; Git gutter mode
-(require-package 'git-gutter)
-(global-git-gutter-mode +1)
-(custom-set-variables
- '(git-gutter:hide-gutter t))
-(custom-set-variables
- '(git-gutter:update-interval 0))
-
-;; Virtualenvwrapper
-(require-package 'virtualenvwrapper)
-(setq venv-location "~/.virtualenv/")
+(use-package git-gutter
+  :init
+  (global-git-gutter-mode +1)
+  :custom
+  (hide-gutter t "disable if not have changes")
+  (live-update t "update live")
+  )
+;; (require-package 'git-gutter)
+;; (global-git-gutter-mode +1)
+;; (custom-set-variables
+;;  '(git-gutter:hide-gutter t))
+;; (custom-set-variables
+;;  '(git-gutter:update-interval 0))
 
 ;; Zoom
-(require-package 'zoom)
-(custom-set-variables
- '(zoom-size '(0.618 . 0.618)))
-(custom-set-variables
- '(zoom-mode t))
+(use-package zoom
+  :custom
+  (zoom-size '(0.618 . 0.618) "golden ration")
+  (zoom-mode t "enable")
+  )
 
 ;; Beacon
-(require-package 'beacon)
-(beacon-mode 1)
+(use-package beacon
+  :init
+  (beacon-mode 1))
 
-;; ;; Helm
-;; (require-package 'helm)
-;; ;; Helm plugins
-;; (require-package 'helm-ls-git)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; HELM PACKAGES SETTINGS ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; (helm-mode 1)
-;; (global-set-key (kbd "M-x")                          'undefined)
-;; (global-set-key (kbd "M-x")                          'helm-M-x)
-;; (global-set-key (kbd "C-x C-b")                      'helm-buffers-list)
-;; (global-set-key (kbd "M-y")                          'helm-show-kill-ring)
-;; (global-set-key (kbd "C-x C-f")                      'helm-find-files)
-;; (global-set-key (kbd "C-c <SPC>")                    'helm-all-mark-rings)
-;; (global-set-key (kbd "C-x r b") 'helm-filtered-bookmarks)
+(use-package helm
+  :ensure t
+  :bind (("M-x" . helm-M-x)
+         ("C-x C-f" . helm-find-files)
+         ("C-x f" . helm-recentf)
+         ("M-y" . helm-show-kill-ring)
+         ("C-x b" . helm-buffers-list))
+  ;; :bind (:map helm-map
+  ;;             ("M-i" . helm-previous-line)
+  ;;             ("M-k" . helm-next-line)
+  ;;             ("M-I" . helm-previous-page)
+  ;;             ("M-K" . helm-next-page)
+  ;;             ("M-h" . helm-beginning-of-buffer)
+  ;;             ("M-H" . helm-end-of-buffer))
+  :config (progn
+            (setq helm-buffers-fuzzy-matching t)
+            (helm-mode 1)))
+
+(use-package helm-descbinds
+  :after (helm)
+  :ensure t
+  :bind ("C-h b" . helm-descbinds))
+
+(use-package helm-swoop
+  :after (helm)
+  :ensure t
+  :bind (("M-m" . helm-swoop)
+         ("M-M" . helm-swoop-back-to-last-point))
+  :init
+  (bind-key "M-m" 'helm-swoop-from-isearch isearch-mode-map))
+
+(use-package helm-ag
+  :after (helm)
+  :ensure t
+  :bind ("M-p" . helm-do-ag)
+  :commands (helm-ag helm-projectile-ag)
+  :init (setq helm-ag-insert-at-point 'symbol
+              helm-ag-command-option "--path-to-ignore ~/.agignore"))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; END CONFIGURATION FOR HERE ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; Markdown mode
 (require-package 'markdown-mode)
 (use-package markdown-mode
-  :ensure t
   :commands (markdown-mode gfm-mode)
   :mode (("README\\.md\\'" . gfm-mode)
          ("\\.md\\'" . markdown-mode)
