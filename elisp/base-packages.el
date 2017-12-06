@@ -280,7 +280,17 @@
   (bind-key "C-c SPC" 'ace-jump-mode)
   )
 
-;;
+;; Diminish
+(use-package diminish
+  :config
+  (diminish 'git-gutter-mode)
+  (diminish 'flycheck-mode)
+  (diminish 'elpy-mode)
+  (diminish 'golden-ratio-mode)
+  (diminish 'autopair-mode)
+  (diminish 'auto-revert-mode)
+  (diminish 'helm-mode)
+  )
 
 (provide 'base-packages)
 ;;; base-packages ends here
