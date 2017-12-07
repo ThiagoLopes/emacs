@@ -161,7 +161,6 @@
 (use-package helm
   :ensure t
   :bind (("M-x" . helm-M-x)
-         ("C-x C-f" . helm-find-files)
          ("C-x f" . helm-recentf)
          ("M-y" . helm-show-kill-ring)
          ("C-x b" . helm-buffers-list)
@@ -181,6 +180,17 @@
             (helm-mode 1)
             )
   )
+
+(use-package helm-files
+  :bind
+  ("C-x C-f" . helm-find-files)
+  :config
+  (setq helm-ff-skip-boring-files t)
+  (setq helm-ff-file-name-history-use-recentf t)
+  (setq helm-boring-file-regexp-list
+        '("\\.git$" "\\.hg$" "\\.svn$" "\\.CVS$" "\\._darcs$" "\\.la$" "\\.o$" "~$"
+          "\\.so$" "\\.a$" "\\.elc$" "\\.fas$" "\\.fasl$" "\\.pyc$" "\\.pyo$")))
+
 
 (use-package helm-descbinds
   :after (helm)
