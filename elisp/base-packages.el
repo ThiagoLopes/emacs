@@ -92,10 +92,6 @@
   (setq python-shell-interpreter "ipython"
         python-shell-interpreter-args "--simple-prompt --pprint")
 
-  (when (require 'flycheck nil t)
-    (setq elpy-modules (delq 'elpy-module-flymake elpy-modules))
-    (add-hook 'elpy-mode-hook 'flycheck-mode))
-
   (add-hook 'python-mode-hook
             (lambda ()
               (add-to-list (make-local-variable 'company-backends)
@@ -112,10 +108,6 @@
   (add-hook 'elpy-mode-hook 'py-autopep8-enable-on-save)
   )
 
-;; Pyenv
-;;(require-package 'pyenv-mode)
-;; (pyenv-mode)
-
 ;; Dashboard
 (use-package dashboard
   :init
@@ -129,10 +121,6 @@
 
 ;; Elm
 (use-package elm-mode)
-
-;; NumberLines
-;;(require-package 'nlinum)
-;;(global-nlinum-mode)
 
 ;; FUN NYAN MODE
 (use-package nyan-mode
@@ -153,24 +141,13 @@
   (hide-gutter t "disable if not have changes")
   (live-update t "update live")
   )
-;; (require-package 'git-gutter)
-;; (global-git-gutter-mode +1)
-;; (custom-set-variables
-;;  '(git-gutter:hide-gutter t))
-;; (custom-set-variables
-;;  '(git-gutter:update-interval 0))
 
 ;; Zoom
-;; (use-package zoom
-;;   :custom
-;;   (zoom-size '(0.618 . 0.618) "golden ration")
-;;   (zoom-mode t "enable")
-;;   )
-
-;; Golder ration
-(use-package golden-ratio
-  :config
-  (golden-ratio-mode 1))
+(use-package zoom
+  :custom
+  (zoom-size '(0.618 . 0.618) "golden ration")
+  (zoom-mode t "enable")
+  )
 
 ;; Beacon
 (use-package beacon
@@ -248,6 +225,7 @@
         '(("home"
            ("emacs-config" (or (filename . ".emacs.d")
                                (filename . "emacs-config")))
+           ("dired" (mode . dired-mode))
            ("martinowen.net" (filename . "martinowen.net"))
            ("Org" (or (mode . org-mode)
                       (filename . "OrgMode")))
@@ -256,7 +234,7 @@
                           (mode . css-mode)))
            ("Subversion" (name . "\*svn"))
            ("Magit" (name . "\*magit"))
-           ("Pytho" (name . "\*py"))
+           ("Pytho" (name . "\*.py"))
            ("ERC" (mode . erc-mode))
            ("Help" (or (name . "\*Help\*")
                        (name . "\*Apropos\*")
@@ -269,7 +247,17 @@
             '(lambda ()
                (ibuffer-auto-mode 1)
                (ibuffer-switch-to-saved-filter-groups "home")))
+  )
 
+;; Ibuffer VC
+(use-package ibuffer-vc
+  :after
+  (ibuffer)
+  :init
+  (add-hook 'ibuffer-hook
+            (lambda ()
+              (ibuffer-vc-set-filter-groups-by-vc-root)
+              (ibuffer-do-sort-by-alphabetic)))
   )
 
 ;; Buffer move
@@ -297,6 +285,36 @@
   (diminish 'auto-revert-mode)
   (diminish 'helm-mode)
   )
+
+;; Web Mode
+(use-package web-mode
+  :mode (("\\.html\\'" . web-mode)
+         ("\\.html\\.erb\\'" . web-mode)
+         ("\\.mustache\\'" . web-mode)
+         ("\\.jinja\\'" . web-mode)
+         ("\\.php\\'" . web-mode))
+  :init
+  (setq web-mode-markup-indent-offset 2)
+  (setq web-mode-code-indent-offset 2)
+  (setq web-mode-css-indent-offset 2)
+
+  (setq web-mode-enable-auto-pairing t)
+  (setq web-mode-enable-auto-expanding t)
+  (setq web-mode-enable-css-colorization t)
+  :config
+  (progn
+    (setq web-mode-engines-alist
+          '(("\\.jinja\\'"  . "django")))))
+
+
+(use-package web-beautify
+  :commands (web-beautify-css
+             web-beautify-css-buffer
+             web-beautify-html
+             web-beautify-html-buffer
+             web-beautify-js
+             web-beautify-js-buffer))
+
 
 (provide 'base-packages)
 ;;; base-packages ends here
