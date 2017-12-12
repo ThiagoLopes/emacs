@@ -138,8 +138,8 @@
   :init
   (global-git-gutter-mode +1)
   :custom
-  (hide-gutter t "disable if not have changes")
-  (live-update t "update live")
+  (git-gutter:hide-gutter t "disable if not have changes")
+  (git-gutter:live-update t "update live")
   )
 
 ;; Zoom
@@ -162,11 +162,12 @@
   :ensure t
   :bind (("M-x" . helm-M-x)
          ("C-x f" . helm-recentf)
+         ("C-x C-f" . helm-find-files)
          ("M-y" . helm-show-kill-ring)
          ("C-x b" . helm-buffers-list)
          :map helm-find-files-map
          ("<tab>"         . helm-execute-persistent-action)
-         ("<backspace>" . helm-find-files-up-one-level)
+         ("C-<backspace>" . helm-find-files-up-one-level)
          )
   ;; :bind (:map helm-map
   ;;             ("M-i" . helm-previous-line)
@@ -179,18 +180,13 @@
             (setq helm-buffers-fuzzy-matching t)
             (helm-mode 1)
             )
-  )
-
-(use-package helm-files
-  :bind
-  ("C-x C-f" . helm-find-files)
-  :config
   (setq helm-ff-skip-boring-files t)
   (setq helm-ff-file-name-history-use-recentf t)
   (setq helm-boring-file-regexp-list
         '("\\.git$" "\\.hg$" "\\.svn$" "\\.CVS$" "\\._darcs$" "\\.la$" "\\.o$" "~$"
-          "\\.so$" "\\.a$" "\\.elc$" "\\.fas$" "\\.fasl$" "\\.pyc$" "\\.pyo$")))
+          "\\.so$" "\\.a$" "\\.elc$" "\\.fas$" "\\.fasl$" "\\.pyc$" "\\.pyo$"))
 
+  )
 
 (use-package helm-descbinds
   :after (helm)
@@ -260,15 +256,15 @@
   )
 
 ;; Ibuffer VC
-(use-package ibuffer-vc
-  :after
-  (ibuffer)
-  :init
-  (add-hook 'ibuffer-hook
-            (lambda ()
-              (ibuffer-vc-set-filter-groups-by-vc-root)
-              (ibuffer-do-sort-by-alphabetic)))
-  )
+;; (use-package ibuffer-vc
+;;   :after
+;;   (ibuffer)
+;;   :init
+;;   (add-hook 'ibuffer-hook
+;;             (lambda ()
+;;               (ibuffer-vc-set-filter-groups-by-vc-root)
+;;               (ibuffer-do-sort-by-alphabetic)))
+;;   )
 
 ;; Buffer move
 (use-package buffer-move
@@ -308,13 +304,30 @@
   (setq web-mode-code-indent-offset 2)
   (setq web-mode-css-indent-offset 2)
 
+  (setq web-mode-script-padding 1)
+  (setq web-mode-style-padding 1)
+
   (setq web-mode-enable-auto-pairing t)
   (setq web-mode-enable-auto-expanding t)
   (setq web-mode-enable-css-colorization t)
+
+  (setq web-mode-enable-block-face t)
+  (setq web-mode-enable-current-element-highlight t)
+  (setq web-mode-enable-current-column-highlight t)
+
+  (setq web-mode-extra-auto-pairs
+        '(("erb"  . (("beg" "end")))
+          ("php"  . (("beg" "end")
+                     ("beg" "end")))
+          ))
   :config
   (progn
     (setq web-mode-engines-alist
-          '(("\\.jinja\\'"  . "django")))))
+          '(("\\.jinja\\'"  . "django"))))
+  (setq web-mode-ac-sources-alist
+        '(("css" . (ac-source-css-property))
+          ("html" . (ac-source-words-in-buffer ac-source-abbrev))))
+  )
 
 
 (use-package web-beautify
@@ -325,6 +338,13 @@
              web-beautify-js
              web-beautify-js-buffer))
 
+;; Persistent undo
+(use-package undohist)
+(undohist-initialize)
+;;; 永続化を無視するファイル名の正規表現
+(setq undohist-ignored-files
+      '("~/.emacs.tmp/")
+      )
 
 (provide 'base-packages)
 ;;; base-packages ends here
