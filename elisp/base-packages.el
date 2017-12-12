@@ -346,5 +346,10 @@
       '("~/.emacs.tmp/")
       )
 
+;; hl todo
+(use-package hl-todo
+  :init
+  (global-hl-todo-mode))
+
 (provide 'base-packages)
 ;;; base-packages ends here
