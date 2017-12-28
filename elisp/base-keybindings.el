@@ -57,5 +57,5 @@
 (global-set-key (kbd "M-a") 'backward-paragraph)
 (global-set-key (kbd "M-e") 'forward-paragraph)
 
-(provide 'keybindings)
+(provide 'base-keybindings)
 ;;; keybindings.el ends here

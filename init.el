@@ -16,9 +16,11 @@
 (add-to-list 'load-path (concat user-emacs-directory "elisp"))
 
 (require 'base)
-(require 'keybindings)
+(require 'base-keybindings)
 (require 'base-packages)
-;;(require 'setup-ivy)
-(require 'themes)
+(require 'base-themes)
+(require 'lang-javascript)
+(require 'lang-python)
+(require 'lang-web)
 
 ;;; init.el ends here

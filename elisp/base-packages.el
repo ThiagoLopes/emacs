@@ -4,30 +4,74 @@
 ;; Started in May 2017.
 
 ;;; Code:
+
 ;;-----PACKAGES-----------------------------------------------------------------
 ;; Package sources
 (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
-                         ("org" . "http://orgmode.org/elpa/")
-                         ("marmalade" . "http://marmalade-repo.org/packages/")
-                         ("melpa" . "http://melpa.org/packages/")))
+                         ("melpa" . "http://melpa.org/packages/")
+                         ("marmalade" . "http://marmalade-repo.org/packages/")))
+
 (package-initialize)
 ;;------------------------------------------------------------------------------
 
 ;; Use package
 (require-package 'use-package)
 (eval-when-compile
-  ;; Following line is not needed if use-package.el is in ~/.emacs.d
   (require 'use-package))
 (setq use-package-always-ensure t)
 
+;; Avy
+(use-package avy
+  :bind
+  ("C-c SPC" . avy-goto-char))
+
+;; Counsel
+(use-package counsel
+  :bind
+  ("M-x" . counsel-M-x)
+  ("C-x C-m" . counsel-M-x)
+  ("C-x C-f" . counsel-find-file)
+  ("C-x c k" . counsel-yank-pop)
+  ("M-y" . counsel-yank-pop))
+
+(use-package counsel-projectile
+  :bind
+  ("C-x v" . counsel-projectile)
+  ("C-x c p" . counsel-projectile-ag)
+  :config
+  (counsel-projectile-on))
+
+(use-package swiper-helm
+  :bind
+  ("C-s" . swiper)
+)
+
+;; Ivy
+(use-package ivy
+  :bind
+  ("C-x C-r" . ivy-resume)
+  :config
+  (ivy-mode 1)
+  (setq ivy-use-virtual-buffers nil)
+  (define-key read-expression-map (kbd "C-r") 'counsel-expression-history))
+
+;; Number Lines
+(use-package hlinum
+  :config
+  (hlinum-activate))
+
+(use-package linum
+  :config
+  ;; (setq linum-format " %3d ")
+  (global-linum-mode nil))
+
+;; Company
+(use-package company
+  :config
+  (add-hook 'after-init-hook 'global-company-mode))
+
 ;; Org
 (use-package org)
-
-;; Autopair - Automatically pair braces and quotes like in TextMate
-(use-package autopair
-  :config
-  (autopair-global-mode)
-  )
 
 ;; Highlight symbol
 (use-package highlight-symbol
@@ -38,12 +82,15 @@
   (global-set-key [(meta f3)] 'highlight-symbol-query-replace)
   )
 
+;; Ediff
+(use-package ediff
+  :config
+  (setq ediff-window-setup-function 'ediff-setup-windows-plain)
+  (setq-default ediff-highlight-all-diffs 'nil)
+  (setq ediff-diff-options "-w"))
+
 ;; Flyckech Mode
 (use-package flycheck
-  :ensure t
-  :init
-  (flycheck-mode)
-  (flycheck-buffer)
   :config
   (setq flycheck-highlighting-mode 'lines)
   )
@@ -54,20 +101,9 @@
   (flycheck-pos-tip-mode)
   )
 
-;; Company mode - autocomplete
-(use-package company
-  :ensure t
-  :init
-  (setq company-require-match 'never)
-  :config
-  (add-hook 'after-init-hook 'global-company-mode)
-  :bind(:map company-active-map
-             ("TAB" . company-complete-common-or-cycle)
-             ("<tab>" . company-complete-common-or-cycle ))
-  )
-
 ;; Magit - Work with Git inside Emacs
 (use-package magit)
+(use-package magit-popup)
 
 ;; Rainbow mode - CSS
 (use-package rainbow-mode)
@@ -82,34 +118,10 @@
         '("a" "s" "d" "f" "j" "k" "l" ";" "w" "e" "i" "o"))
   )
 
-;; Python Elpy
-(use-package elpy
-  :ensure t
-  :init
-  (elpy-enable)
-  :config
-  (elpy-use-ipython)
-  (setq python-shell-interpreter "ipython"
-        python-shell-interpreter-args "--simple-prompt --pprint")
-
-  (add-hook 'python-mode-hook
-            (lambda ()
-              (add-to-list (make-local-variable 'company-backends)
-                           '(elpy-company-backend))))
-  (add-hook 'inferior-python-mode-hook
-            (lambda ()
-              (push
-               'comint-watch-for-password-prompt comint-output-filter-functions)))
-  )
-
-;; PEP8
-(use-package py-autopep8
-  :init
-  (add-hook 'elpy-mode-hook 'py-autopep8-enable-on-save)
-  )
-
 ;; Dashboard
 (use-package dashboard
+  :config
+  (add-hook 'prog-mode-hook (lambda () (set (make-local-variable 'mouse-1-click-follows-link) nil)))
   :init
   (dashboard-setup-startup-hook))
 
@@ -134,13 +146,17 @@
   )
 
 ;; Git gutter mode
-(use-package git-gutter
+(use-package git-gutter+
   :init
-  (global-git-gutter-mode +1)
-  :custom
-  (git-gutter:hide-gutter t "disable if not have changes")
-  (git-gutter:live-update t "update live")
+  (global-git-gutter+-mode +1)
+  :config
+  (setq git-gutter+-hide-gutter t)
   )
+
+(use-package git-gutter-fringe+
+  :init
+  (setq git-gutter+-toggle-fringe t)
+)
 
 ;; Zoom
 (use-package zoom
@@ -153,65 +169,6 @@
 (use-package beacon
   :init
   (beacon-mode 1))
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; HELM PACKAGES SETTINGS ;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(use-package helm
-  :ensure t
-  :bind (("M-x" . helm-M-x)
-         ("C-x f" . helm-recentf)
-         ("C-x C-f" . helm-find-files)
-         ("M-y" . helm-show-kill-ring)
-         ("C-x b" . helm-buffers-list)
-         :map helm-find-files-map
-         ("<tab>"         . helm-execute-persistent-action)
-         ("C-<backspace>" . helm-find-files-up-one-level)
-         )
-  ;; :bind (:map helm-map
-  ;;             ("M-i" . helm-previous-line)
-  ;;             ("M-k" . helm-next-line)
-  ;;             ("M-I" . helm-previous-page)
-  ;;             ("M-K" . helm-next-page)
-  ;;             ("M-h" . helm-beginning-of-buffer)
-  ;;             ("M-H" . helm-end-of-buffer))
-  :config (progn
-            (setq helm-buffers-fuzzy-matching t)
-            (helm-mode 1)
-            )
-  (setq helm-ff-skip-boring-files t)
-  (setq helm-ff-file-name-history-use-recentf t)
-  (setq helm-boring-file-regexp-list
-        '("\\.git$" "\\.hg$" "\\.svn$" "\\.CVS$" "\\._darcs$" "\\.la$" "\\.o$" "~$"
-          "\\.so$" "\\.a$" "\\.elc$" "\\.fas$" "\\.fasl$" "\\.pyc$" "\\.pyo$"))
-
-  )
-
-(use-package helm-descbinds
-  :after (helm)
-  :ensure t
-  :bind ("C-h b" . helm-descbinds))
-
-(use-package helm-swoop
-  :after (helm)
-  :ensure t
-  :bind (("M-m" . helm-swoop)
-         ("M-M" . helm-swoop-back-to-last-point))
-  :init
-  (bind-key "M-m" 'helm-swoop-from-isearch isearch-mode-map))
-
-(use-package helm-ag
-  :after (helm)
-  :ensure t
-  :bind ("M-p" . helm-do-ag)
-  :commands (helm-ag helm-projectile-ag)
-  :init (setq helm-ag-insert-at-point 'symbol
-              helm-ag-command-option "--path-to-ignore ~/.agignore"))
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; END CONFIGURATION FOR HERE ;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; Markdown mode
 (require-package 'markdown-mode)
@@ -255,17 +212,6 @@
                (ibuffer-switch-to-saved-filter-groups "home")))
   )
 
-;; Ibuffer VC
-;; (use-package ibuffer-vc
-;;   :after
-;;   (ibuffer)
-;;   :init
-;;   (add-hook 'ibuffer-hook
-;;             (lambda ()
-;;               (ibuffer-vc-set-filter-groups-by-vc-root)
-;;               (ibuffer-do-sort-by-alphabetic)))
-;;   )
-
 ;; Buffer move
 (use-package buffer-move
   :init
@@ -273,70 +219,6 @@
   (bind-key "<C-S-down>" 'buf-move-down)
   (bind-key "<C-S-left>" 'buf-move-left)
   (bind-key "<C-S-right>" 'buf-move-right))
-
-;; Ace jump
-(use-package ace-jump-mode
-  :config
-  (bind-key "C-c SPC" 'ace-jump-mode)
-  )
-
-;; Diminish
-(use-package diminish
-  :config
-  (diminish 'git-gutter-mode)
-  (diminish 'flycheck-mode)
-  (diminish 'elpy-mode)
-  (diminish 'golden-ratio-mode)
-  (diminish 'autopair-mode)
-  (diminish 'auto-revert-mode)
-  (diminish 'helm-mode)
-  )
-
-;; Web Mode
-(use-package web-mode
-  :mode (("\\.html\\'" . web-mode)
-         ("\\.html\\.erb\\'" . web-mode)
-         ("\\.mustache\\'" . web-mode)
-         ("\\.jinja\\'" . web-mode)
-         ("\\.php\\'" . web-mode))
-  :init
-  (setq web-mode-markup-indent-offset 2)
-  (setq web-mode-code-indent-offset 2)
-  (setq web-mode-css-indent-offset 2)
-
-  (setq web-mode-script-padding 1)
-  (setq web-mode-style-padding 1)
-
-  (setq web-mode-enable-auto-pairing t)
-  (setq web-mode-enable-auto-expanding t)
-  (setq web-mode-enable-css-colorization t)
-
-  (setq web-mode-enable-block-face t)
-  (setq web-mode-enable-current-element-highlight t)
-  (setq web-mode-enable-current-column-highlight t)
-
-  (setq web-mode-extra-auto-pairs
-        '(("erb"  . (("beg" "end")))
-          ("php"  . (("beg" "end")
-                     ("beg" "end")))
-          ))
-  :config
-  (progn
-    (setq web-mode-engines-alist
-          '(("\\.jinja\\'"  . "django"))))
-  (setq web-mode-ac-sources-alist
-        '(("css" . (ac-source-css-property))
-          ("html" . (ac-source-words-in-buffer ac-source-abbrev))))
-  )
-
-
-(use-package web-beautify
-  :commands (web-beautify-css
-             web-beautify-css-buffer
-             web-beautify-html
-             web-beautify-html-buffer
-             web-beautify-js
-             web-beautify-js-buffer))
 
 ;; Persistent undo
 (use-package undohist)
@@ -350,6 +232,40 @@
 (use-package hl-todo
   :init
   (global-hl-todo-mode))
+
+;; Recentf
+(use-package recentf
+  :config
+  (setq recentf-save-file (recentf-expand-file-name "~/.emacs.d/private/cache/recentf"))
+  (recentf-mode 1))
+
+;; Smartparens
+(use-package smartparens
+  :init
+  (setq smartparens-global-mode t)
+  :config
+  (setq electric-pair-mode t)
+  (setq electric-quote-mode t)
+)
+
+;; Smex
+;; (use-package smex)
+
+;; Yasnippet
+(use-package yasnippet
+  :config
+  (yas-global-mode 1))
+
+(use-package yasnippet-snippets)
+
+;; Undo-tree
+(use-package undo-tree
+  :config
+  ;; Remember undo history
+  (setq
+   undo-tree-auto-save-history nil
+   undo-tree-history-directory-alist `(("." . "~/.emacs-backup/undo")))
+  (global-undo-tree-mode 1))
 
 (provide 'base-packages)
 ;;; base-packages ends here

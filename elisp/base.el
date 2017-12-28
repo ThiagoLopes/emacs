@@ -14,8 +14,8 @@
 ;; Save history command
 (savehist-mode 1)
 
-;; Hl Line
-;; (global-hl-line-mode 1)
+
+(global-hl-line-mode +1)
 
 ;; Python indentation
 (setq python-indent 4)
@@ -31,11 +31,6 @@
 (setq default-process-coding-system '(utf-8-unix . utf-8-unix))
 
 ;; ;; Emacs customizations
-
-;; (setq-default highlight-tags t)
-
-(setq-default show-trailing-whitespace t)
-
 (setq confirm-kill-emacs                  'y-or-n-p
       confirm-nonexistent-file-or-buffer  t
       save-interprogram-paste-before-kill t
@@ -58,14 +53,6 @@
       x-select-enable-clipboard          t
       use-package-always-ensure          t)
 
-
-;; Bookmarks
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; (setq                                   ;;
-;;  ;; persistent bookmarks                        ;;
-;;  bookmark-save-flag                      t                  ;;
-;;  bookmark-default-file              (concat temp-dir "/bookmarks")) ;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; Backups enabled, use nil to disable
 (setq backup-directory-alist '(("." . "~/.emacs-backup")))
@@ -94,6 +81,9 @@
 ;; Remove useless whitespace before saving a file
 (add-hook 'before-save-hook 'whitespace-cleanup)
 (add-hook 'before-save-hook (lambda() (delete-trailing-whitespace)))
+
+;; Show whitesapces
+(setq-default show-trailing-whitespace t)
 
 (provide 'base)
 ;;; base ends here
