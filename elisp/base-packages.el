@@ -67,8 +67,21 @@
 
 ;; Company
 (use-package company
+  :init
+  (add-hook 'after-init-hook 'global-company-mode)
   :config
-  (add-hook 'after-init-hook 'global-company-mode))
+  (setq company-tooltip-limit 10)
+  (setq company-idle-delay 0.2)
+  (setq company-echo-delay 0)
+  (setq company-minimum-prefix-length 3)
+  (setq company-require-match nil)
+  (setq company-selection-wrap-around t)
+  (setq company-tooltip-align-annotations t)
+  (setq company-tooltip-flip-when-above t)
+  (setq company-transformers '(company-sort-by-occurrence)) ; weight by frequency
+  :diminish
+  company-mode
+  )
 
 ;; Org
 (use-package org)
@@ -183,34 +196,11 @@
 (use-package ibuffer
   :init
   (global-set-key (kbd "C-x C-b") 'ibuffer)
-  :config
-  (setq ibuffer-saved-filter-groups
-        '(("home"
-           ("emacs-config" (or (filename . ".emacs.d")
-                               (filename . "emacs-config")))
-           ("dired" (mode . dired-mode))
-           ("martinowen.net" (filename . "martinowen.net"))
-           ("Org" (or (mode . org-mode)
-                      (filename . "OrgMode")))
-           ("code" (filename . "code"))
-           ("Web Dev" (or (mode . html-mode)
-                          (mode . css-mode)))
-           ("Subversion" (name . "\*svn"))
-           ("Magit" (name . "\*magit"))
-           ("Pytho" (name . "\*.py"))
-           ("ERC" (mode . erc-mode))
-           ("Help" (or (name . "\*Help\*")
-                       (name . "\*Apropos\*")
-                       (name . "\*info\*"))))))
-  (add-hook 'ibuffer-mode-hook
-            '(lambda ()
-               (ibuffer-switch-to-saved-filter-groups "home")))
-  (setq ibuffer-show-empty-filter-groups nil)
-  (add-hook 'ibuffer-mode-hook
-            '(lambda ()
-               (ibuffer-auto-mode 1)
-               (ibuffer-switch-to-saved-filter-groups "home")))
-  )
+  (add-hook 'ibuffer-hook
+                  (lambda ()
+                    (ibuffer-vc-set-filter-groups-by-vc-root)
+                    (unless (eq ibuffer-sorting-mode 'alphabetic)
+                      (ibuffer-do-sort-by-alphabetic)))))
 
 ;; Buffer move
 (use-package buffer-move
@@ -266,6 +256,24 @@
    undo-tree-auto-save-history nil
    undo-tree-history-directory-alist `(("." . "~/.emacs-backup/undo")))
   (global-undo-tree-mode 1))
+
+(use-package dired-sidebar
+  :bind (("C-x C-n" . dired-sidebar-toggle-sidebar))
+  :ensure t
+  :commands (dired-sidebar-toggle-sidebar)
+  :config
+  (use-package all-the-icons-dired
+    ;; M-x all-the-icons-install-fonts
+    :ensure t
+    :commands (all-the-icons-dired-mode)))
+
+;; (use-package projectile
+;;   :init
+;;   (projectile-mode t)
+
+(use-package telephone-line
+  :init
+  (telephone-line-mode 1))
 
 (provide 'base-packages)
 ;;; base-packages ends here
