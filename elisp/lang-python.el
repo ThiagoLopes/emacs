@@ -59,5 +59,12 @@
   :config
   (setq venv-location "~/.virtualenv"))
 
+(use-package jedi
+  :config
+  (add-hook 'python-mode-hook 'jedi:setup)
+  (setq jedi:complete-on-dot t))
+
+(use-package company-jedi)
+
 (provide 'lang-python)
 ;;; base-python.el ends here
