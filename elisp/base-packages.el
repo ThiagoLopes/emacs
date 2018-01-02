@@ -275,5 +275,13 @@
   :init
   (telephone-line-mode 1))
 
+;; NVM USE
+(use-package nvm
+  :config
+  (nvm-use "9.0.0"))
+
+;; Ido mode :D
+(ido-mode t)
+
 (provide 'base-packages)
 ;;; base-packages ends here

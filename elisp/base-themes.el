@@ -24,7 +24,7 @@
 (use-package spacemacs-theme
   :defer t
   :init
-  (load-theme 'spacemacs-light t))
+  (load-theme 'spacemacs-dark t))
 
 ;; Change font
 (set-face-attribute 'default nil :family "Hack" :height 90)
