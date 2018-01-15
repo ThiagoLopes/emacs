@@ -56,14 +56,9 @@
   (define-key read-expression-map (kbd "C-r") 'counsel-expression-history))
 
 ;; Number Lines
-(use-package hlinum
-  :config
-  (hlinum-activate))
-
-(use-package linum
-  :config
-  ;; (setq linum-format " %3d ")
-  (global-linum-mode nil))
+(use-package nlinum
+  :init
+  (nlinum-mode))
 
 ;; Company
 (use-package company
