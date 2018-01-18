@@ -112,6 +112,10 @@
 ;; Magit - Work with Git inside Emacs
 (use-package magit)
 (use-package magit-popup)
+(use-package magit-gitflow
+  :config
+  (add-hook 'magit-mode-hook 'turn-on-magit-gitflow))
+
 
 ;; Rainbow mode - CSS
 (use-package rainbow-mode)
