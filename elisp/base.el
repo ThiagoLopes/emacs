@@ -3,7 +3,6 @@
 ;;; Base com configurações básicas
 
 ;;; Code:
-
 ;; Change tab width and change tabs to spaces
 (setq-default tab-width 4)
 (setq-default indent-tabs-mode nil)
@@ -11,10 +10,28 @@
 ;; Set undo tree
 (setq undo-tree-history-directory-alist '(("." . "~/.emacs-backup/undo")))
 
+;; Set backups
+(setq backup-directory-alist '(("." . "~/.emacs.d/backups")))
+
+;; Disk space is cheap. Save lots.
+(setq delete-old-versions -1)
+(setq version-control t)
+(setq vc-make-backup-files t)
+(setq auto-save-file-name-transforms '((".*" "~/.emacs.d/auto-save-list/" t)))
+
 ;; Save history command
+(setq savehist-file "~/.emacs.d/savehist")
 (savehist-mode 1)
+(setq history-length t)
+(setq history-delete-duplicates t)
+(setq savehist-save-minibuffer-history 1)
+(setq savehist-additional-variables
+      '(kill-ring
+        search-ring
+        regexp-search-ring))
 
 
+;; enable hl-line
 (global-hl-line-mode +1)
 
 ;; Python indentation
@@ -31,8 +48,7 @@
 (setq default-process-coding-system '(utf-8-unix . utf-8-unix))
 
 ;; ;; Emacs customizations
-(setq confirm-kill-emacs                  'y-or-n-p
-      confirm-nonexistent-file-or-buffer  t
+(setq confirm-nonexistent-file-or-buffer  t
       save-interprogram-paste-before-kill t
       mouse-yank-at-point                 t
       require-final-newline               t
@@ -54,29 +70,23 @@
       use-package-always-ensure          t)
 
 
-;; Backups enabled, use nil to disable
-(setq backup-directory-alist '(("." . "~/.emacs-backup")))
-
-(setq
- history-length                     1000
- backup-inhibited                   nil
- make-backup-files                  t
- auto-save-default                  t
- make-backup-files                  t
- create-lockfiles                   nil
-)
+(setq history-length                     1000
+      backup-inhibited                   nil
+      make-backup-files                  t
+      auto-save-default                  t
+      make-backup-files                  t
+      create-lockfiles                   nil)
 
 (fset 'yes-or-no-p 'y-or-n-p)
 (global-auto-revert-mode t)
 
 ;; Disable toolbar & menubar
 (menu-bar-mode -1)
-(when (fboundp 'tool-bar-mode)
-  (tool-bar-mode -1))
-(when (  fboundp 'scroll-bar-mode)
-  (scroll-bar-mode -1))
+(tool-bar-mode -1)
+(scroll-bar-mode -1)
 
-(show-paren-mode 1)
+;; Time in the modeline
+(display-time-mode 1)
 
 ;; Remove useless whitespace before saving a file
 (add-hook 'before-save-hook 'whitespace-cleanup)
@@ -84,6 +94,39 @@
 
 ;; Show whitesapces
 (setq-default show-trailing-whitespace t)
+
+;; Show collumn number
+(column-number-mode 1)
+
+;; Setup `hippie-expand' expand functions
+(setq hippie-expand-try-functions-list '(try-expand-dabbrev
+                                         try-expand-dabbrev-all-buffers
+                                         try-expand-dabbrev-from-kill
+                                         try-complete-file-name-partially
+                                         try-complete-file-name
+                                         try-expand-all-abbrevs
+                                         try-expand-list
+                                         try-expand-line
+                                         try-complete-lisp-symbol-partially
+                                         try-complete-lisp-symbol))
+
+;; display the current column in mode-line
+(setq column-number-mode t)
+
+;; set default width to 100 columns
+(setq-default fill-column 79)
+
+(setq frame-title-format
+      "ｅｍａｃｓ  安ェ殴ど依挨虞")
+
+;;Enable show-paren-mode
+(show-paren-mode)
+
+;;Disable splash message, start *scratch* buffer by default
+(setq initial-buffer-choice
+      t)
+(setq initial-scratch-message
+"")
 
 (provide 'base)
 ;;; base ends here
