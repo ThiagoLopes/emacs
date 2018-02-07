@@ -1,88 +1,128 @@
 ;; Emacs configuration file
-;; Forked from: Auralcat
+;; Forked from: Auralcat, Sacha Chua's
 ;; Author: Thiago Lopes
 ;; Started in May 2017.
 
 ;;; Code:
-
-;;-----PACKAGES-----------------------------------------------------------------
-;; Package sources
-(setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
-                         ("melpa" . "http://melpa.org/packages/")
-                         ("marmalade" . "http://marmalade-repo.org/packages/")))
-
-(package-initialize)
-;;------------------------------------------------------------------------------
-
 ;; Use package
 (require-package 'use-package)
 (eval-when-compile
-  (require 'use-package))
-(setq use-package-always-ensure t)
+  (require 'use-package)
+  (use-package auto-compile
+    :config (auto-compile-on-load-mode))
+  (setq load-prefer-newer t)
+  (setq use-package-always-ensure t)
+  )
+
+;; Better default
+(use-package better-defaults
+  :defer t)
+
+;; Dash
+(use-package dash
+  :defer t)
+
+;; Winner
+(use-package winner
+  :defer t)
+
+;; Smart Mode line
+(use-package smart-mode-line
+  :defer t)
+
+;; MiniBuffer
+;; (use-package miniedit
+;;   :commands minibuffer-edit
+;;   :init (miniedit-install))
+
+;; Which-key
+(use-package which-key
+  :defer t
+  :init
+  (which-key-mode)
+  :config
+  (which-key-setup-side-window-bottom)
+  )
+
+;; Smartcan
+(use-package smartscan
+  :defer t
+  :config (global-smartscan-mode t))
 
 ;; Avy
 (use-package avy
+  :defer t
   :bind
   ("C-c SPC" . avy-goto-char))
 
-;; Counsel
-(use-package counsel
-  :bind
-  ("M-x" . counsel-M-x)
-  ("C-x C-m" . counsel-M-x)
-  ("C-x C-f" . counsel-find-file)
-  ("C-x c k" . counsel-yank-pop)
-  ("M-y" . counsel-yank-pop))
+;; Helm
+;; (use-package helm
+;;   :ensure t
+;;   :diminish helm-mode
+;;   :init
+;;   (setq helm-autoresize-max-height 30
+;;         helm-display-header-line nil
+;;         helm-always-two-windows t
+;;         helm-split-window-inside-p t
+;;         helm-move-to-line-cycle-in-source t
+;;         helm-ff-search-library-in-sexp t
+;;         helm-ff-file-name-history-use-recentf t
+;;         helm-comp-read-mode-line ""
+;;         helm-read-file-name-mode-line-string ""
+;;         helm-mode-line-string "")
+;;   ;; enable fuzzy matching
+;;   (setq helm-buffers-fuzzy-matching t
+;;         helm-completion-in-region-fuzzy-match t
+;;         helm-M-x-fuzzy-match t
+;;         helm-apropos-fuzzy-match t
+;;         helm-imenu-fuzzy-match t
+;;         helm-lisp-fuzzy-completion t
+;;         helm-locate-fuzzy-match t
+;;         helm-mode-fuzzy-match t
+;;         helm-recentf-fuzzy-match t
+;;         helm-semantic-fuzzy-match t)
+;;   :config
+;;   (require 'helm-config)
+;;   (helm-mode 1)
+;;   (helm-autoresize-mode 1))
 
-(use-package counsel-projectile
-  :bind
-  ("C-x v" . counsel-projectile)
-  ("C-x c p" . counsel-projectile-ag)
-  :config
-  (counsel-projectile-on))
+;; fuzzier matching for helm
+;; (use-package helm-flx
+;;   :ensure t
+;;   :after helm
+;;   :config
+;; (helm-flx-mode +1))
+
+;; Counsel
+;; (use-package counsel
+;;   :config
+;;   (setq ivy-use-virtual-buffers t)
+;;   (setq enable-recursive-minibuffers t)
+;;   :bind
+;;   ("M-x" . counsel-M-x)
+;;   ("C-x C-m" . counsel-M-x)
+;;   ("C-x C-f" . counsel-find-file)
+;;   ("M-y" . counsel-yank-pop))
+
+;; (use-package counsel-projectile
+;;   :defer t
+;;   :bind
+;;   ("C-x v" . counsel-projectile)
+;;   ("C-x c p" . counsel-projectile-ag))
 
 (use-package swiper-helm
+  :defer t
   :bind
   ("C-s" . swiper)
-)
-
-;; Ivy
-(use-package ivy
-  :bind
-  ("C-x C-r" . ivy-resume)
-  :config
-  (ivy-mode 1)
-  (setq ivy-use-virtual-buffers nil)
-  (define-key read-expression-map (kbd "C-r") 'counsel-expression-history))
-
-;; Number Lines
-(use-package nlinum
-  :init
-  (nlinum-mode))
-
-;; Company
-(use-package company
-  :init
-  (add-hook 'after-init-hook 'global-company-mode)
-  :config
-  (setq company-tooltip-limit 10)
-  (setq company-idle-delay 0.2)
-  (setq company-echo-delay 0)
-  (setq company-minimum-prefix-length 3)
-  (setq company-require-match nil)
-  (setq company-selection-wrap-around t)
-  (setq company-tooltip-align-annotations t)
-  (setq company-tooltip-flip-when-above t)
-  (setq company-transformers '(company-sort-by-occurrence)) ; weight by frequency
-  :diminish
-  company-mode
   )
 
 ;; Org
-(use-package org)
+(use-package org
+  :defer t)
 
 ;; Highlight symbol
 (use-package highlight-symbol
+  :defer t
   :config
   (global-set-key [(control f3)] 'highlight-symbol)
   (global-set-key [f3] 'highlight-symbol-next)
@@ -91,38 +131,46 @@
   )
 
 ;; Ediff
-(use-package ediff
-  :config
-  (setq ediff-window-setup-function 'ediff-setup-windows-plain)
-  (setq-default ediff-highlight-all-diffs 'nil)
-  (setq ediff-diff-options "-w"))
+;; (use-package ediff
+;;   :config
+;;   (setq ediff-window-setup-function 'ediff-setup-windows-plain)
+;;   (setq-default ediff-highlight-all-diffs 'nil)
+;;   (setq ediff-diff-options "-w"))
 
 ;; Flyckech Mode
 (use-package flycheck
+  :defer t
   :config
+  (add-hook 'after-init-hook #'global-flycheck-mode)
+  :init
+  (global-flycheck-mode)
   (setq flycheck-highlighting-mode 'lines)
   )
 
 (use-package flycheck-pos-tip
   :after (flycheck)
+  :defer t
   :init
   (flycheck-pos-tip-mode)
   )
 
 ;; Magit - Work with Git inside Emacs
-(use-package magit)
-(use-package magit-popup)
+(use-package magit
+  :defer t
+  )
+(use-package magit-popup
+  :after (magit))
+
 (use-package magit-gitflow
   :config
-  (add-hook 'magit-mode-hook 'turn-on-magit-gitflow))
-
-
-;; Rainbow mode - CSS
-(use-package rainbow-mode)
+  (add-hook 'magit-mode-hook 'turn-on-magit-gitflow)
+  :after
+  (magit))
 
 ;; Switch window
 (use-package switch-window
   :no-require t
+  :defer t
   :config
   (bind-key "C-x o" 'switch-window)
   (setq switch-window-shortcut-style 'qwerty)
@@ -130,48 +178,57 @@
         '("a" "s" "d" "f" "j" "k" "l" ";" "w" "e" "i" "o"))
   )
 
-;; Dashboard
-(use-package dashboard
-  :config
-  (add-hook 'prog-mode-hook (lambda () (set (make-local-variable 'mouse-1-click-follows-link) nil)))
-  :init
-  (dashboard-setup-startup-hook))
+;; ;; Dashboard
+;; (use-package dashboard
+;;   :config
+;;   (add-hook 'prog-mode-hook (lambda () (set (make-local-variable 'mouse-1-click-follows-link) nil)))
+;;   :init
+;;   (dashboard-setup-startup-hook))
 
-;; Emmet
-(use-package emmet-mode
-  :config
-  (add-hook 'sgml-mode-hook 'emmet-mode)
-  )
-
-;; Elm
-(use-package elm-mode)
+;; ;; Elm
+;; (use-package elm-mode)
 
 ;; FUN NYAN MODE
 (use-package nyan-mode
+  :defer t
   :config
   (nyan-mode))
 
 ;; Changer inner - clone ci vim
 (use-package change-inner
+  :defer t
   :init
   (bind-key "M-i" 'change-inner)
   )
 
 ;; Git gutter mode
-(use-package git-gutter+
+(use-package git-gutter
+  :ensure t
+  :diminish git-gutter-mode
   :init
-  (global-git-gutter+-mode +1)
+  (setq git-gutter:window-width 1
+        git-gutter:update-interval 2
+        git-gutter:modified-sign "│"
+        git-gutter:added-sign "│"
+        git-gutter:deleted-sign "│")
   :config
   (setq git-gutter+-hide-gutter t)
-  )
+  (set-face-foreground 'git-gutter:modified "#ffb86c") ; dracula rainbow-5
+  (set-face-foreground 'git-gutter:added "#50fa7b") ; dracula rainbow-6
+  (set-face-foreground 'git-gutter:deleted "#ff5555") ; dracula rainbow-9
+  (add-to-list 'git-gutter:update-hooks 'focus-in-hook)
+  (add-hook 'magit-post-refresh-hook 'git-gutter:update-all-windows)
+  (global-git-gutter-mode t))
 
 (use-package git-gutter-fringe+
+  :defer t
   :init
   (setq git-gutter+-toggle-fringe t)
-)
+  )
 
 ;; Zoom
 (use-package zoom
+  :defer t
   :custom
   (zoom-size '(0.618 . 0.618) "golden ration")
   (zoom-mode t "enable")
@@ -179,108 +236,159 @@
 
 ;; Beacon
 (use-package beacon
+  :defer t
   :init
   (beacon-mode 1))
 
-;; Markdown mode
-(require-package 'markdown-mode)
-(use-package markdown-mode
-  :commands (markdown-mode gfm-mode)
-  :mode (("README\\.md\\'" . gfm-mode)
-         ("\\.md\\'" . markdown-mode)
-         ("\\.markdown\\'" . markdown-mode))
-  :init (setq markdown-command "multimarkdown"))
-
-;; Ibuffer
-(use-package ibuffer
+;; Clean up obsolete buffers
+(use-package midnight
+  :defer t
   :init
-  (global-set-key (kbd "C-x C-b") 'ibuffer)
-  (add-hook 'ibuffer-hook
-                  (lambda ()
-                    (ibuffer-vc-set-filter-groups-by-vc-root)
-                    (unless (eq ibuffer-sorting-mode 'alphabetic)
-                      (ibuffer-do-sort-by-alphabetic)))))
+  (midnight-mode))
 
-;; Buffer move
-(use-package buffer-move
-  :init
-  (bind-key "<C-S-up>" 'buf-move-up)
-  (bind-key "<C-S-down>" 'buf-move-down)
-  (bind-key "<C-S-left>" 'buf-move-left)
-  (bind-key "<C-S-right>" 'buf-move-right))
+;; ;; Ibuffer
+;; (use-package ibuffer
+;;   :init
+;;   (global-set-key (kbd "C-x C-b") 'ibuffer)
+;;   (add-hook 'ibuffer-hook
+;;             (lambda ()
+;;               (ibuffer-vc-set-filter-groups-by-vc-root)
+;;               (unless (eq ibuffer-sorting-mode 'alphabetic)
+;;                 (ibuffer-do-sort-by-alphabetic)))))
 
 ;; Persistent undo
-(use-package undohist)
-(undohist-initialize)
+(use-package undohist
+  :defer t
+  :config
+  (undohist-initialize)
 ;;; 永続化を無視するファイル名の正規表現
-(setq undohist-ignored-files
-      '("~/.emacs.tmp/")
-      )
+  (setq undohist-ignored-files
+        '("~/.emacs.tmp/")
+        ))
 
 ;; hl todo
 (use-package hl-todo
+  :defer t
   :init
   (global-hl-todo-mode))
 
-;; Recentf
-(use-package recentf
-  :config
-  (setq recentf-save-file (recentf-expand-file-name "~/.emacs.d/private/cache/recentf"))
-  (recentf-mode 1))
+;; ;; Recentf
+;; (use-package recentf
+;;   :config
+;;   (setq recentf-save-file (recentf-expand-file-name "~/.emacs.d/private/cache/recentf"))
+;;   (recentf-mode 1))
 
 ;; Smartparens
 (use-package smartparens
+  :defer t
   :init
   (setq smartparens-global-mode t)
   :config
   (setq electric-pair-mode t)
   (setq electric-quote-mode t)
-)
+  )
 
 ;; Smex
-;; (use-package smex)
+(use-package smex
+  :defer t)
 
-;; Yasnippet
-(use-package yasnippet
-  :config
-  (yas-global-mode 1))
+;; ;; Yasnippet
+;; (use-package yasnippet
+;;   :diminish yas-minor-mode
+;;   :init
+;;   (yas-global-mode)
+;;   :config
+;;   (progn
+;;     (yas-global-mode)
+;;     (add-hook 'hippie-expand-try-functions-list 'yas-hippie-try-expand)
+;;     (setq yas-key-syntaxes '("w_" "w_." "^ "))
+;;     (setq yas-installed-snippets-dir "~/elisp/yasnippet-snippets")
+;;     (setq yas-expand-only-for-last-commands nil)
+;;     (yas-global-mode 1)
+;;     (bind-key "\t" 'hippie-expand yas-minor-mode-map)
+;;     (add-to-list 'yas-prompt-functions 'shk-yas/helm-prompt)))
 
-(use-package yasnippet-snippets)
+
+;; (use-package yasnippet-snippets)
 
 ;; Undo-tree
-(use-package undo-tree
-  :config
-  ;; Remember undo history
-  (setq
-   undo-tree-auto-save-history nil
-   undo-tree-history-directory-alist `(("." . "~/.emacs-backup/undo")))
-  (global-undo-tree-mode 1))
+;; (use-package undo-tree
+;;   :defer t
+;;   :diminish undo-tree-mode
+;;   :config
+;;   (progn
+;;     (global-undo-tree-mode)
+;;     (setq undo-tree-visualizer-timestamps t)
+;;     (setq undo-tree-visualizer-diff t)))
+;; ;; Remember undo history
+;; (setq
+;;  undo-tree-auto-save-history nil
+;;  undo-tree-history-directory-alist `(("." . "~/.emacs-backup/undo")))
+;; (global-undo-tree-mode 1)
 
-(use-package dired-sidebar
-  :bind (("C-x C-n" . dired-sidebar-toggle-sidebar))
-  :ensure t
-  :commands (dired-sidebar-toggle-sidebar)
-  :config
-  (use-package all-the-icons-dired
-    ;; M-x all-the-icons-install-fonts
-    :ensure t
-    :commands (all-the-icons-dired-mode)))
-
-;; (use-package projectile
-;;   :init
-;;   (projectile-mode t)
-
-(use-package telephone-line
-  :init
-  (telephone-line-mode 1))
+;; (use-package dired-sidebar
+;;   :bind (("C-x C-n" . dired-sidebar-toggle-sidebar))
+;;   :ensure t
+;;   :commands (dired-sidebar-toggle-sidebar)
+;;   :config
+;;   (use-package all-the-icons-dired
+;;     ;; M-x all-the-icons-install-fonts
+;;     :ensure t
+;;     :commands (all-the-icons-dired-mode)))
 
 ;; NVM USE
 (use-package nvm
+  :defer t
   :config
   (nvm-use "9.0.0"))
 
 ;; Ido mode :D
 (ido-mode t)
+
+;; Sublimity
+(use-package sublimity
+  :defer t
+  :init
+  (sublimity-mode)
+  :config
+  (require 'sublimity-scroll))
+
+;; enhanced `list-packages'
+(use-package paradox
+  :ensure t
+  :commands paradox-list-packages
+  :init
+  (setq paradox-github-token t)
+  :config
+  (evilified-state-evilify paradox-menu-mode paradox-menu-mode-map))
+
+;; show argument list/type information in the modeline
+(use-package eldoc
+  :defer t
+  :diminish eldoc-mode)
+
+;; in-buffer completion
+;; (use-package company
+;;   :ensure t
+;;   :diminish company-mode
+;;   :init
+;;   (setq company-minimum-prefix-length 2
+;;         company-selection-wrap-around t
+;;         company-tooltip-align-annotations t)
+;;   :config
+;; (add-hook 'after-init-hook 'global-company-mode))
+
+;; Autocomplete
+(use-package auto-complete
+  :defer t
+  :config
+  (ac-config-default))
+
+(use-package rainbow-delimiters
+  :config
+  (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
+
+(use-package ztree)
 
 (provide 'base-packages)
 ;;; base-packages ends here
