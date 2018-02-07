@@ -54,6 +54,20 @@
   (indent-region (point-min) (point-max)))
 
 ;;------------------------------------------------------------------------------
+
+
+;; Kill region
+(defadvice kill-region (before slick-cut activate compile)
+  "When called interactively with no active region, kill a single line instead."
+  (interactive
+    (if mark-active (list (region-beginning) (region-end))
+      (list (line-beginning-position)
+            (line-beginning-position 2)))))
+
+;; Pop to mark
+(bind-key "C-x p" 'pop-to-mark-command)
+(setq set-mark-command-repeat-pop t)
+
 (global-set-key (kbd "M-a") 'backward-paragraph)
 (global-set-key (kbd "M-e") 'forward-paragraph)
 
