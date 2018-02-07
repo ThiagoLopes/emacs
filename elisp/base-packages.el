@@ -376,5 +376,7 @@
 (use-package ztree
   :defer t)
 
+(use-package esup)
+
 (provide 'base-packages)
 ;;; base-packages ends here
