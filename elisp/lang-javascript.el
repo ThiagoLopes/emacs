@@ -1,51 +1,23 @@
 ;; js2-mode
 ;; https://github.com/mooz/js2-mode
+
 (use-package js2-mode
-  :bind (:map js2-mode-map
-              (("C-x C-e" . js-send-last-sexp)
-               ("C-M-x" . js-send-last-sexp-and-go)
-               ("C-c C-b" . js-send-buffer-and-go)
-               ("C-c C-l" . js-load-file-and-go)))
-  :mode
-  ("\\.js$" . js2-mode)
-  ("\\.json$" . js2-jsx-mode)
+  :commands js2-mode
+  :init
+  (progn
+    (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
+    (setq-default js2-basic-offset 2)
+    (add-to-list 'interpreter-mode-alist (cons "node" 'js2-mode)))
   :config
-  (custom-set-variables '(js2-strict-inconsistent-return-warning nil))
-  (custom-set-variables '(js2-strict-missing-semi-warning nil))
+  (progn
+    (js2-imenu-extras-setup)
+    (bind-key "C-x C-e" 'js-send-last-sexp js2-mode-map)
+    (bind-key "C-M-x" 'js-send-last-sexp-and-go js2-mode-map)
+    (bind-key "C-c b" 'js-send-buffer js2-mode-map)
+    (bind-key "C-c d" 'my/insert-or-flush-debug js2-mode-map)
+    (bind-key "C-c C-b" 'js-send-buffer-and-go js2-mode-map)
+    (bind-key "C-c w" 'my/copy-javascript-region-or-buffer js2-mode-map)))
 
-  (setq js-indent-level 2)
-  (setq js2-indent-level 2)
-  (setq js2-basic-offset 2)
-
-  ;; tern :- IDE like features for javascript and completion
-  ;; http://ternjs.net/doc/manual.html#emacs
-  (use-package tern
-    :config
-    (defun my-js-mode-hook ()
-      "Hook for `js-mode'."
-      (set (make-local-variable 'company-backends)
-           '((company-tern company-files))))
-    (add-hook 'js2-mode-hook 'my-js-mode-hook)
-    (add-hook 'js2-mode-hook 'company-mode))
-
-  (add-hook 'js2-mode-hook 'tern-mode)
-
-  ;; company backend for tern
-  ;; http://ternjs.net/doc/manual.html#emacs
-  (use-package company-tern)
-
-  ;; Run a JavaScript interpreter in an inferior process window
-  ;; https://github.com/redguardtoo/js-comint
-  (use-package js-comint
-    :config
-    (setq inferior-js-program-command "node"))
-
-  ;; js2-refactor :- refactoring options for emacs
-  ;; https://github.com/magnars/js2-refactor.el
-  (use-package js2-refactor :defer t
-    :diminish js2-refactor-mode
-    :config
-    (js2r-add-keybindings-with-prefix "C-c j r"))
-  (add-hook 'js2-mode-hook 'js2-refactor-mode))
+(add-to-list 'auto-mode-alist '("\\.js\\'\\|\\.json\\'" . js2-mode))
 
 (provide 'lang-javascript)
