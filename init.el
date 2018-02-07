@@ -46,7 +46,7 @@
 (require 'base-themes)
 ;; (require 'lang-javascript)
 (require 'lang-python)
-(require 'lang-web)
+(require 'lang-html)
 
 ;;Print welcome message
 (princ (cl-concatenate 'string
