@@ -21,7 +21,7 @@
 (use-package elpy
   :defer t
   :config
-  (elpy-enable))
+  (elpy-mode))
 
 (use-package py-autopep8
   :defer t)
