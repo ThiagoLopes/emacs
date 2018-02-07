@@ -4,7 +4,6 @@
 ;; Started in May 2017.
 
 ;;; Code:
-;; Use package
 (require-package 'use-package)
 (eval-when-compile
   (require 'use-package)
@@ -212,12 +211,10 @@
 
 ;; Zoom
 (use-package zoom
-  :defer 1
-  :init
-  (zoom-mode t "enable")
-  )
+  :defer 1)
 
 (custom-set-variables
+ '(zoom-mode t)
  '(zoom-size '(0.618 . 0.618)))
 
 ;; Beacon
@@ -243,7 +240,6 @@
 
 ;; Persistent undo
 (use-package undohist
-  :defer t
   :config
   (undohist-initialize)
 ;;; 永続化を無視するファイル名の正規表現
