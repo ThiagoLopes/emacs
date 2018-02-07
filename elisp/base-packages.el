@@ -194,7 +194,6 @@
 
 ;; Git gutter mode
 (use-package git-gutter
-  :ensure t
   :diminish git-gutter-mode
   :init
   (setq git-gutter:window-width 1
@@ -211,19 +210,15 @@
   (add-hook 'magit-post-refresh-hook 'git-gutter:update-all-windows)
   (global-git-gutter-mode t))
 
-(use-package git-gutter-fringe+
-  :defer 4
-  :init
-  (setq git-gutter+-toggle-fringe t)
-  )
-
 ;; Zoom
 (use-package zoom
   :defer 1
-  :custom
-  (zoom-size '(0.618 . 0.618) "golden ration")
+  :init
   (zoom-mode t "enable")
   )
+
+(custom-set-variables
+ '(zoom-size '(0.618 . 0.618)))
 
 ;; Beacon
 (use-package beacon
