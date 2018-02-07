@@ -324,11 +324,12 @@
 (ido-mode t)
 
 ;; Sublimity
-(use-package sublimity
-  :init
-  (sublimity-mode)
-  :config
-  (require 'sublimity-scroll))
+;; (use-package sublimity
+;;   :init
+;;   (sublimity-mode)
+;;   :config
+;;   (require 'sublimity-scroll))
+
 
 ;; enhanced `list-packages'
 (use-package paradox
