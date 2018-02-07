@@ -33,9 +33,7 @@
   :defer t)
 
 (use-package virtualenvwrapper
-  :defer t
-  :init
-  (venv-initialize-interactive-shells)
+  :defer 3
   :config
   (setq venv-location "~/.virtualenv"))
 

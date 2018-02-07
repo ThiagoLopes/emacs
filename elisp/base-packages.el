@@ -15,20 +15,16 @@
   )
 
 ;; Better default
-(use-package better-defaults
-  :defer t)
+(use-package better-defaults)
 
 ;; Dash
-(use-package dash
-  :defer t)
+(use-package dash)
 
 ;; Winner
-(use-package winner
-  :defer t)
+(use-package winner)
 
 ;; Smart Mode line
-(use-package smart-mode-line
-  :defer t)
+(use-package smart-mode-line)
 
 ;; MiniBuffer
 ;; (use-package miniedit
@@ -38,9 +34,8 @@
 ;; Which-key
 (use-package which-key
   :defer t
-  :init
-  (which-key-mode)
   :config
+  (which-key-mode)
   (which-key-setup-side-window-bottom)
   )
 
@@ -51,7 +46,7 @@
 
 ;; Avy
 (use-package avy
-  :defer t
+  :defer 2
   :bind
   ("C-c SPC" . avy-goto-char))
 
@@ -111,18 +106,17 @@
 ;;   ("C-x c p" . counsel-projectile-ag))
 
 (use-package swiper-helm
-  :defer t
   :bind
   ("C-s" . swiper)
   )
 
 ;; Org
 (use-package org
-  :defer t)
+  :defer 2)
 
 ;; Highlight symbol
 (use-package highlight-symbol
-  :defer t
+  :defer 2
   :config
   (global-set-key [(control f3)] 'highlight-symbol)
   (global-set-key [f3] 'highlight-symbol-next)
@@ -139,24 +133,22 @@
 
 ;; Flyckech Mode
 (use-package flycheck
-  :defer t
+  :defer 2
   :config
-  (add-hook 'after-init-hook #'global-flycheck-mode)
-  :init
   (global-flycheck-mode)
+  (add-hook 'after-init-hook #'global-flycheck-mode)
   (setq flycheck-highlighting-mode 'lines)
   )
 
 (use-package flycheck-pos-tip
   :after (flycheck)
-  :defer t
-  :init
+  :config
   (flycheck-pos-tip-mode)
   )
 
 ;; Magit - Work with Git inside Emacs
 (use-package magit
-  :defer t
+  :defer 2
   )
 (use-package magit-popup
   :after (magit))
@@ -169,7 +161,6 @@
 
 ;; Switch window
 (use-package switch-window
-  :no-require t
   :defer t
   :config
   (bind-key "C-x o" 'switch-window)
@@ -221,14 +212,14 @@
   (global-git-gutter-mode t))
 
 (use-package git-gutter-fringe+
-  :defer t
+  :defer 4
   :init
   (setq git-gutter+-toggle-fringe t)
   )
 
 ;; Zoom
 (use-package zoom
-  :defer t
+  :defer 1
   :custom
   (zoom-size '(0.618 . 0.618) "golden ration")
   (zoom-mode t "enable")
@@ -236,7 +227,6 @@
 
 ;; Beacon
 (use-package beacon
-  :defer t
   :init
   (beacon-mode 1))
 
@@ -268,7 +258,6 @@
 
 ;; hl todo
 (use-package hl-todo
-  :defer t
   :init
   (global-hl-todo-mode))
 
@@ -280,7 +269,6 @@
 
 ;; Smartparens
 (use-package smartparens
-  :defer t
   :init
   (setq smartparens-global-mode t)
   :config
@@ -289,8 +277,7 @@
   )
 
 ;; Smex
-(use-package smex
-  :defer t)
+(use-package smex)
 
 ;; ;; Yasnippet
 ;; (use-package yasnippet
@@ -338,7 +325,7 @@
 
 ;; NVM USE
 (use-package nvm
-  :defer t
+  :defer 3
   :config
   (nvm-use "9.0.0"))
 
@@ -347,7 +334,6 @@
 
 ;; Sublimity
 (use-package sublimity
-  :defer t
   :init
   (sublimity-mode)
   :config
@@ -364,7 +350,6 @@
 
 ;; show argument list/type information in the modeline
 (use-package eldoc
-  :defer t
   :diminish eldoc-mode)
 
 ;; in-buffer completion
@@ -388,7 +373,8 @@
   :config
   (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
 
-(use-package ztree)
+(use-package ztree
+  :defer t)
 
 (provide 'base-packages)
 ;;; base-packages ends here
