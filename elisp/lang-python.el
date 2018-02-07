@@ -4,24 +4,18 @@
 
 ;;; Code:
 
-;; (use-package python
-;;   :defer t
-;;   :mode ("\\.py" . python-mode)
-;;   :config
-;;   (use-package elpy
-;;     :init
-;;     (add-to-list 'auto-mode-alist '("\\.py$" . python-mode))
-;;     :bind (:map elpy-mode-map
-;;                 ("M-." . elpy-goto-definition)
-;;                 ("M-," . pop-tag-mark)))
-;;   (elpy-enable)
-;;   )
-
-
-(use-package elpy
+(use-package python
   :defer t
+  :mode ("\\.py" . python-mode)
   :config
-  (elpy-mode))
+  (use-package elpy
+    :init
+    (add-to-list 'auto-mode-alist '("\\.py$" . python-mode))
+    :bind (:map elpy-mode-map
+                ("M-." . elpy-goto-definition)
+                ("M-," . pop-tag-mark)))
+  (elpy-enable)
+  )
 
 (use-package py-autopep8
   :defer t)
