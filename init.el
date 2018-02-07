@@ -3,8 +3,6 @@
 ;;; This is my init file
 
 ;;; Code:
-
-
 ;; Make startup faster by reducing the frequency of garbage
 ;; collection.  The default is 800 kilobytes.  Measured in bytes.
 (setq gc-cons-threshold (* 50 1000 1000))
@@ -16,13 +14,17 @@
 
 ;;-----PACKAGES-----------------------------------------------------------------
 ;; Package sources
+(require 'package)
+(setq package-enable-at-startup nil)
+(add-to-list 'package-archives
+             '("melpa" . "https://melpa.org/packages/"))
+
 (package-initialize)
-(unless (assoc-default "melpa" package-archives)
-  (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t))
-(unless (assoc-default "melpa" package-archives)
-  (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t))
-(unless (assoc-default "melpa" package-archives)
-  (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/") t))
+
+;; Bootstrap `use-package'
+(unless (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package))
 ;;------------------------------------------------------------------------------
 
 ;;Record startup timestamp
@@ -35,10 +37,6 @@
 (add-to-list 'load-path (concat user-emacs-directory "elisp"))
 ;; (add-to-list 'load-path ".orgmode/")
 
-(setq gc-cons-threshold 64000000)
-(add-hook 'after-init-hook #'(lambda ()
-                               ;; restore after startup
-                               (setq gc-cons-threshold 800000)))
 
 (require 'base)
 (require 'base-keybindings)
