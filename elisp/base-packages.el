@@ -204,5 +204,9 @@
 
 (use-package esup)
 
+(use-package undo-tree
+  :init
+  (global-undo-tree-mode))
+
 (provide 'base-packages)
 ;;; base-packages ends here
