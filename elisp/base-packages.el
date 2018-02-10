@@ -178,12 +178,6 @@
 ;; ;; Elm
 ;; (use-package elm-mode)
 
-;; FUN NYAN MODE
-(use-package nyan-mode
-  :defer t
-  :config
-  (nyan-mode))
-
 ;; Changer inner - clone ci vim
 (use-package change-inner
   :defer t
@@ -237,15 +231,6 @@
 ;;               (ibuffer-vc-set-filter-groups-by-vc-root)
 ;;               (unless (eq ibuffer-sorting-mode 'alphabetic)
 ;;                 (ibuffer-do-sort-by-alphabetic)))))
-
-;; Persistent undo
-(use-package undohist
-  :config
-  (undohist-initialize)
-;;; 永続化を無視するファイル名の正規表現
-  (setq undohist-ignored-files
-        '("~/.emacs.tmp/")
-        ))
 
 ;; hl todo
 (use-package hl-todo
