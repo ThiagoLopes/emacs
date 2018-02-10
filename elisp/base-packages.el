@@ -190,11 +190,6 @@
 (use-package eldoc
   :diminish eldoc-mode)
 
-;; Autocomplete
-(use-package auto-complete
-  :config
-  (ac-config-default))
-
 (use-package rainbow-delimiters
   :config
   (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
@@ -207,6 +202,39 @@
 (use-package undo-tree
   :init
   (global-undo-tree-mode))
+
+;; yasnippet
+(use-package yasnippet
+  :defer t)
+(use-package yasnippet-snippets
+  :defer t)
+
+;; Company
+(use-package company
+  :ensure t
+  :init (global-company-mode)
+  :config
+  (progn
+    ;; Use Company for completion
+    (bind-key [remap completion-at-point] #'company-complete company-mode-map)
+
+    (setq company-tooltip-align-annotations t
+          ;; Easy navigation to candidates with M-<n>
+          company-show-numbers t)
+    (setq company-dabbrev-downcase nil))
+  :diminish company-mode)
+
+(use-package company-quickhelp          ; Documentation popups for Company
+  :ensure t
+  :defer t
+  :init (add-hook 'global-company-mode-hook #'company-quickhelp-mode))
+
+;; Counsel
+(use-package counsel
+  :bind
+  (("M-y" . counsel-yank-pop)
+   :map ivy-minibuffer-map
+   ("M-y" . ivy-next-line)))
 
 (provide 'base-packages)
 ;;; base-packages ends here
