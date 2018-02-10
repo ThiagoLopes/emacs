@@ -25,11 +25,6 @@
 ;; Smart Mode line
 (use-package smart-mode-line)
 
-;; MiniBuffer
-;; (use-package miniedit
-;;   :commands minibuffer-edit
-;;   :init (miniedit-install))
-
 ;; Which-key
 (use-package which-key
   :defer t
@@ -49,61 +44,6 @@
   :bind
   ("C-c SPC" . avy-goto-char))
 
-;; Helm
-;; (use-package helm
-;;   :ensure t
-;;   :diminish helm-mode
-;;   :init
-;;   (setq helm-autoresize-max-height 30
-;;         helm-display-header-line nil
-;;         helm-always-two-windows t
-;;         helm-split-window-inside-p t
-;;         helm-move-to-line-cycle-in-source t
-;;         helm-ff-search-library-in-sexp t
-;;         helm-ff-file-name-history-use-recentf t
-;;         helm-comp-read-mode-line ""
-;;         helm-read-file-name-mode-line-string ""
-;;         helm-mode-line-string "")
-;;   ;; enable fuzzy matching
-;;   (setq helm-buffers-fuzzy-matching t
-;;         helm-completion-in-region-fuzzy-match t
-;;         helm-M-x-fuzzy-match t
-;;         helm-apropos-fuzzy-match t
-;;         helm-imenu-fuzzy-match t
-;;         helm-lisp-fuzzy-completion t
-;;         helm-locate-fuzzy-match t
-;;         helm-mode-fuzzy-match t
-;;         helm-recentf-fuzzy-match t
-;;         helm-semantic-fuzzy-match t)
-;;   :config
-;;   (require 'helm-config)
-;;   (helm-mode 1)
-;;   (helm-autoresize-mode 1))
-
-;; fuzzier matching for helm
-;; (use-package helm-flx
-;;   :ensure t
-;;   :after helm
-;;   :config
-;; (helm-flx-mode +1))
-
-;; Counsel
-;; (use-package counsel
-;;   :config
-;;   (setq ivy-use-virtual-buffers t)
-;;   (setq enable-recursive-minibuffers t)
-;;   :bind
-;;   ("M-x" . counsel-M-x)
-;;   ("C-x C-m" . counsel-M-x)
-;;   ("C-x C-f" . counsel-find-file)
-;;   ("M-y" . counsel-yank-pop))
-
-;; (use-package counsel-projectile
-;;   :defer t
-;;   :bind
-;;   ("C-x v" . counsel-projectile)
-;;   ("C-x c p" . counsel-projectile-ag))
-
 (use-package swiper-helm
   :bind
   ("C-s" . swiper)
@@ -122,13 +62,6 @@
   (global-set-key [(shift f3)] 'highlight-symbol-prev)
   (global-set-key [(meta f3)] 'highlight-symbol-query-replace)
   )
-
-;; Ediff
-;; (use-package ediff
-;;   :config
-;;   (setq ediff-window-setup-function 'ediff-setup-windows-plain)
-;;   (setq-default ediff-highlight-all-diffs 'nil)
-;;   (setq ediff-diff-options "-w"))
 
 ;; Flyckech Mode
 (use-package flycheck
@@ -167,16 +100,6 @@
   (setq switch-window-qwerty-shortcuts
         '("a" "s" "d" "f" "j" "k" "l" ";" "w" "e" "i" "o"))
   )
-
-;; ;; Dashboard
-;; (use-package dashboard
-;;   :config
-;;   (add-hook 'prog-mode-hook (lambda () (set (make-local-variable 'mouse-1-click-follows-link) nil)))
-;;   :init
-;;   (dashboard-setup-startup-hook))
-
-;; ;; Elm
-;; (use-package elm-mode)
 
 ;; Changer inner - clone ci vim
 (use-package change-inner
@@ -222,26 +145,10 @@
   :init
   (midnight-mode))
 
-;; ;; Ibuffer
-;; (use-package ibuffer
-;;   :init
-;;   (global-set-key (kbd "C-x C-b") 'ibuffer)
-;;   (add-hook 'ibuffer-hook
-;;             (lambda ()
-;;               (ibuffer-vc-set-filter-groups-by-vc-root)
-;;               (unless (eq ibuffer-sorting-mode 'alphabetic)
-;;                 (ibuffer-do-sort-by-alphabetic)))))
-
 ;; hl todo
 (use-package hl-todo
   :init
   (global-hl-todo-mode))
-
-;; ;; Recentf
-;; (use-package recentf
-;;   :config
-;;   (setq recentf-save-file (recentf-expand-file-name "~/.emacs.d/private/cache/recentf"))
-;;   (recentf-mode 1))
 
 ;; Smartparens
 (use-package smartparens
@@ -253,51 +160,11 @@
   )
 
 ;; Smex
-(use-package smex)
-
-;; ;; Yasnippet
-;; (use-package yasnippet
-;;   :diminish yas-minor-mode
-;;   :init
-;;   (yas-global-mode)
-;;   :config
-;;   (progn
-;;     (yas-global-mode)
-;;     (add-hook 'hippie-expand-try-functions-list 'yas-hippie-try-expand)
-;;     (setq yas-key-syntaxes '("w_" "w_." "^ "))
-;;     (setq yas-installed-snippets-dir "~/elisp/yasnippet-snippets")
-;;     (setq yas-expand-only-for-last-commands nil)
-;;     (yas-global-mode 1)
-;;     (bind-key "\t" 'hippie-expand yas-minor-mode-map)
-;;     (add-to-list 'yas-prompt-functions 'shk-yas/helm-prompt)))
-
-
-;; (use-package yasnippet-snippets)
-
-;; Undo-tree
-;; (use-package undo-tree
-;;   :defer t
-;;   :diminish undo-tree-mode
-;;   :config
-;;   (progn
-;;     (global-undo-tree-mode)
-;;     (setq undo-tree-visualizer-timestamps t)
-;;     (setq undo-tree-visualizer-diff t)))
-;; ;; Remember undo history
-;; (setq
-;;  undo-tree-auto-save-history nil
-;;  undo-tree-history-directory-alist `(("." . "~/.emacs-backup/undo")))
-;; (global-undo-tree-mode 1)
-
-;; (use-package dired-sidebar
-;;   :bind (("C-x C-n" . dired-sidebar-toggle-sidebar))
-;;   :ensure t
-;;   :commands (dired-sidebar-toggle-sidebar)
-;;   :config
-;;   (use-package all-the-icons-dired
-;;     ;; M-x all-the-icons-install-fonts
-;;     :ensure t
-;;     :commands (all-the-icons-dired-mode)))
+(use-package smex
+  :init
+  (smex-initialize)
+  :bind
+  ("M-x" . smex))
 
 ;; NVM USE
 (use-package nvm
@@ -306,15 +173,9 @@
   (nvm-use "9.0.0"))
 
 ;; Ido mode :D
+(setq ido-enable-flex-matching t)
+(setq ido-everywhere t)
 (ido-mode t)
-
-;; Sublimity
-;; (use-package sublimity
-;;   :init
-;;   (sublimity-mode)
-;;   :config
-;;   (require 'sublimity-scroll))
-
 
 ;; enhanced `list-packages'
 (use-package paradox
@@ -329,20 +190,8 @@
 (use-package eldoc
   :diminish eldoc-mode)
 
-;; in-buffer completion
-;; (use-package company
-;;   :ensure t
-;;   :diminish company-mode
-;;   :init
-;;   (setq company-minimum-prefix-length 2
-;;         company-selection-wrap-around t
-;;         company-tooltip-align-annotations t)
-;;   :config
-;; (add-hook 'after-init-hook 'global-company-mode))
-
 ;; Autocomplete
 (use-package auto-complete
-  :defer t
   :config
   (ac-config-default))
 
