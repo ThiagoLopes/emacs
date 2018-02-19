@@ -3,6 +3,7 @@
 
 (use-package js2-mode
   :commands js2-mode
+  :mode "\\.js?\\'"
   :init
   (progn
     (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))

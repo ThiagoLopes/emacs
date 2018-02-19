@@ -13,9 +13,6 @@
   (setq use-package-always-ensure t)
   )
 
-;; Better default
-(use-package better-defaults)
-
 ;; Dash
 (use-package dash)
 

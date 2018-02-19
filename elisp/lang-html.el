@@ -66,6 +66,7 @@
 ;; Emmet
 (use-package emmet-mode
   :defer t
+  :mode "\\.html?\\'"
   :config
   (add-hook 'sgml-mode-hook 'emmet-mode)
   )
