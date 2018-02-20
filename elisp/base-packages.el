@@ -209,7 +209,8 @@
 ;; Company
 (use-package company
   :ensure t
-  :init (global-company-mode)
+  :init
+  (global-company-mode)
   :config
   (progn
     ;; Use Company for completion
