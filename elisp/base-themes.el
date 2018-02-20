@@ -34,7 +34,8 @@
 (use-package dracula-theme
   :ensure t
   :config
-  (load-theme 'dracula t))
+  (load-theme 'dracula t)
+  :disabled)
 
 ;; Change font
 ;; (set-face-attribute 'default nil :family "Hack" :height 90)
@@ -46,6 +47,8 @@
 ;;      :size 10
 ;;      :weight normal
 ;;      :width normal)))
+
+(use-package melancholy-theme)
 
 (use-package powerline
   :config
