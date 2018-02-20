@@ -234,5 +234,13 @@
    :map ivy-minibuffer-map
    ("M-y" . ivy-next-line)))
 
+;; ag
+(use-package ag)
+
+;; fill collumn
+(use-package fill-column-indicator)
+(defun column-indicator()
+  (fci-mode))
+
 (provide 'base-packages)
 ;;; base-packages ends here
