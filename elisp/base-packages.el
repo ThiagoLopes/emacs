@@ -51,13 +51,13 @@
   :defer 2)
 
 ;; Highlight symbol
-(use-package highlight-symbol
+(use-package symbol-overlay
   :defer 2
   :config
-  (global-set-key [(control f3)] 'highlight-symbol)
-  (global-set-key [f3] 'highlight-symbol-next)
-  (global-set-key [(shift f3)] 'highlight-symbol-prev)
-  (global-set-key [(meta f3)] 'highlight-symbol-query-replace)
+  (global-set-key [(control f3)] 'symbol-overlay-put)
+  (global-set-key [f3] 'symbol-overlay-jump-next)
+  (global-set-key [(shift f3)] 'symbol-overlay-jump-prev)
+  ;; (global-set-key [(meta f3)] 'highlight-symbol-query-replace)
   )
 
 ;; Flyckech Mode
