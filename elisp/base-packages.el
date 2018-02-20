@@ -121,7 +121,9 @@
   (set-face-foreground 'git-gutter:deleted "#ff5555") ; dracula rainbow-9
   (add-to-list 'git-gutter:update-hooks 'focus-in-hook)
   (add-hook 'magit-post-refresh-hook 'git-gutter:update-all-windows)
-  (global-git-gutter-mode t))
+  (global-git-gutter-mode t)
+  (custom-set-variables '(git-gutter:hide-gutter t))
+  )
 
 ;; Zoom
 (use-package zoom
