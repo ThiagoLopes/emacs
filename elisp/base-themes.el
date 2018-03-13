@@ -48,7 +48,9 @@
 ;;      :weight normal
 ;;      :width normal)))
 
-(use-package melancholy-theme)
+(use-package zenburn-theme
+  :disabled)
+
 
 (use-package powerline
   :config
@@ -56,8 +58,8 @@
   (setq powerline-default-separator
         'slant))
 
+(use-package soothe-theme)
+(set-frame-font "Menlo:pixelsize=14")
 
-
-
-  (provide 'base-themes)
+(provide 'base-themes)
 ;;; themes.el ends here
