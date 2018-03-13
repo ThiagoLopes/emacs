@@ -24,7 +24,6 @@
 
 ;; Which-key
 (use-package which-key
-  :defer t
   :config
   (which-key-mode)
   (which-key-setup-side-window-bottom)
