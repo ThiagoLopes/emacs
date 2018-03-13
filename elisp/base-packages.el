@@ -168,7 +168,7 @@
 (use-package nvm
   :defer 3
   :config
-  (nvm-use "9.0.0"))
+  (nvm-use "9.6.1"))
 
 ;; Ido mode :D
 (setq ido-enable-flex-matching t)
