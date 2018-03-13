@@ -128,14 +128,5 @@
 (setq initial-scratch-message
       "")
 
-;; remove lateral margin
-(setf (cdr (assq 'continuation fringe-indicator-alist))
-      '(nil nil) ;; no continuation indicators
-      ;; '(nil right-curly-arrow) ;; right indicator only
-      ;; '(left-curly-arrow nil) ;; left indicator only
-      ;; '(left-curly-arrow right-curly-arrow) ;; default
-      )
-
-
 (provide 'base)
 ;;; base ends here
