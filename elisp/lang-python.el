@@ -11,6 +11,8 @@
   (use-package elpy
     :init
     (add-to-list 'auto-mode-alist '("\\.py$" . python-mode))
+    :config
+    (setq eldoc-idle-delay 1)
     :bind (:map elpy-mode-map
                 ("M-." . elpy-goto-definition)
                 ("M-," . pop-tag-mark)))
