@@ -21,8 +21,8 @@
 
 ;; Sanityinc
 (use-package color-theme-sanityinc-tomorrow
-  :defer t
-  :disabled)
+  :config
+  (load-theme 'sanityinc-tomorrow-night t))
 
 ;; Spacemacs
 (use-package spacemacs-theme
@@ -51,14 +51,12 @@
 (use-package zenburn-theme
   :disabled)
 
-
 (use-package powerline
   :config
   (powerline-center-theme)
   (setq powerline-default-separator
         'slant))
 
-(use-package soothe-theme)
 (set-frame-font "Menlo:pixelsize=14")
 
 (provide 'base-themes)
