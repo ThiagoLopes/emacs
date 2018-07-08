@@ -22,23 +22,28 @@
 ;; Sanityinc
 (use-package color-theme-sanityinc-tomorrow
   :config
-  (load-theme 'sanityinc-tomorrow-night t))
+  :disabled)
 
 ;; Spacemacs
 (use-package spacemacs-theme
   :defer t
   :init
-  :disabled
-  (load-theme 'spacemacs-dark t))
+  :disabled)
 
 (use-package dracula-theme
   :ensure t
   :config
-  (load-theme 'dracula t)
   :disabled)
 
 (use-package zenburn-theme
   :disabled)
+
+(use-package atom-one-dark-theme
+  :ensure t
+  :disabled)
+
+(use-package zenburn-theme
+  :ensure t)
 
 (use-package powerline
   :config
