@@ -12,7 +12,6 @@
 
 (global-set-key (kbd "<C-return>") 'newline-without-break-of-line)
 
-;;------------------------------------------------------------------------------
 ;; Move to beginning of line or indentation
 (defun back-to-indentation-or-beginning () (interactive)
        (if (= (point) (progn (back-to-indentation) (point)))
@@ -20,13 +19,12 @@
 
 (global-set-key (kbd "C-a") (quote back-to-indentation-or-beginning))
 
-;;------------------------------------------------------------------------------
+;; Kill other buffers
 (defun kill-other-buffers ()
   "Kill all other buffers."
   (interactive)
   (mapc 'kill-buffer (delq (current-buffer) (buffer-list))))
 
-;;------------------------------------------------------------------------------
 ;; Function use for install packages
 ;; If package isn't installed, fetch it
 (defun require-package (package)
@@ -37,13 +35,11 @@
       (package-refresh-contents))
     (package-install package)))
 
-;;------------------------------------------------------------------------------
 ;; Test Remap
 (eval-after-load "elpy"
   '(cl-dolist (key '("C-<return>"))
      (define-key elpy-mode-map (kbd key) nil)))
 
-;;------------------------------------------------------------------------------
 ;; Indente file
 (defun indent-file (file)
   "prompt for a file and indent it according to its major mode"
@@ -52,8 +48,6 @@
   ;; uncomment the next line to force the buffer into a c-mode
   ;; (c-mode)
   (indent-region (point-min) (point-max)))
-
-;;------------------------------------------------------------------------------
 
 
 ;; Kill region
