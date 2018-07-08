@@ -37,17 +37,6 @@
   (load-theme 'dracula t)
   :disabled)
 
-;; Change font
-;; (set-face-attribute 'default nil :family "Hack" :height 90)
-
-;; (use-package spacemacs-fonts-support
-;;   :config
-;;   (spacemacs/set-default-font
-;;    '("Hack"
-;;      :size 10
-;;      :weight normal
-;;      :width normal)))
-
 (use-package zenburn-theme
   :disabled)
 
@@ -57,7 +46,7 @@
   (setq powerline-default-separator
         'slant))
 
-(set-frame-font "Menlo:pixelsize=14")
+(set-frame-font "Hack:pixelsize=12")
 
 (provide 'base-themes)
 ;;; themes.el ends here
