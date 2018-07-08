@@ -248,6 +248,10 @@
   :ensure t
   :defer t)
 
+;; symon
+(use-package symon
+  :defer t)
+
 ;;
 (use-package auto-package-update
    :ensure t
