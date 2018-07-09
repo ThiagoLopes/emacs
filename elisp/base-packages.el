@@ -13,6 +13,14 @@
   (setq use-package-always-ensure t)
   )
 
+;; Disable mouse
+(use-package disable-mouse
+  :defer t)
+
+;; Diminish
+(use-package diminish
+  :defer t)
+
 ;; Dash
 (use-package dash)
 
@@ -61,17 +69,18 @@
 
 ;; Flyckech Mode
 (use-package flycheck
-  :defer 2
+  :defer 1
   :config
   (global-flycheck-mode)
   (add-hook 'after-init-hook #'global-flycheck-mode)
   (setq flycheck-highlighting-mode 'lines)
   )
 
-(use-package flycheck-pos-tip
+(use-package flycheck-popup-tip
   :after (flycheck)
   :config
-  (flycheck-pos-tip-mode)
+  (add-hook 'flycheck-mode-hook 'flycheck-popup-tip-mode)
+  (flycheck-popup-tip-mode)
   )
 
 ;; Magit - Work with Git inside Emacs
@@ -89,7 +98,6 @@
 
 ;; Switch window
 (use-package switch-window
-  :defer t
   :config
   (bind-key "C-x o" 'switch-window)
   (setq switch-window-shortcut-style 'qwerty)
@@ -111,17 +119,14 @@
   (setq git-gutter:window-width 1
         git-gutter:update-interval 2
         git-gutter:modified-sign "│"
-        git-gutter:added-sign "│"
-        git-gutter:deleted-sign "│")
+        ;; git-gutter:added-sign "│"
+        git-gutter:deleted-sign "│"
+        )
   :config
-  (setq git-gutter+-hide-gutter t)
-  (set-face-foreground 'git-gutter:modified "#ffb86c") ; dracula rainbow-5
-  (set-face-foreground 'git-gutter:added "#50fa7b") ; dracula rainbow-6
-  (set-face-foreground 'git-gutter:deleted "#ff5555") ; dracula rainbow-9
   (add-to-list 'git-gutter:update-hooks 'focus-in-hook)
   (add-hook 'magit-post-refresh-hook 'git-gutter:update-all-windows)
-  (global-git-gutter-mode t)
   (custom-set-variables '(git-gutter:hide-gutter t))
+  (global-git-gutter-mode +1)
   )
 
 ;; Zoom
@@ -236,7 +241,8 @@
    ("M-y" . ivy-next-line)))
 
 ;; ag
-(use-package ag)
+(use-package ag
+  :defer t)
 
 ;; fill collumn
 (use-package fill-column-indicator)
@@ -254,11 +260,11 @@
 
 ;;
 (use-package auto-package-update
-   :ensure t
-   :config
-   (setq auto-package-update-delete-old-versions t
-         auto-package-update-interval 4)
-   (auto-package-update-maybe))
+  :ensure t
+  :config
+  (setq auto-package-update-delete-old-versions t
+        auto-package-update-interval 4)
+  (auto-package-update-maybe))
 
 (provide 'base-packages)
 ;;; base-packages ends here
