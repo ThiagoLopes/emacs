@@ -266,5 +266,9 @@
         auto-package-update-interval 4)
   (auto-package-update-maybe))
 
+;; yaml
+(use-package yaml-mode
+  :defer t)
+
 (provide 'base-packages)
 ;;; base-packages ends here
