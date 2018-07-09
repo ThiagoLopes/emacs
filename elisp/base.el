@@ -32,7 +32,7 @@
 
 
 ;; enable hl-line
-(global-hl-line-mode +1)
+(global-hl-line-mode t)
 
 ;; Python indentation
 (setq python-indent 4)
@@ -84,6 +84,10 @@
 (menu-bar-mode -1)
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
+(setq use-file-dialog nil)
+(setq use-dialog-box nil)
+(setq inhibit-startup-screen t)
+
 
 ;; Time in the modeline
 (display-time-mode 1)
@@ -99,6 +103,7 @@
 (column-number-mode 1)
 
 ;; Setup `hippie-expand' expand functions
+(global-set-key (kbd "M-/") 'hippie-expand)
 (setq hippie-expand-try-functions-list '(try-expand-dabbrev
                                          try-expand-dabbrev-all-buffers
                                          try-expand-dabbrev-from-kill
@@ -123,10 +128,24 @@
 (show-paren-mode)
 
 ;;Disable splash message, start *scratch* buffer by default
-(setq initial-buffer-choice
-      t)
-(setq initial-scratch-message
-      "")
+;; (setq initial-buffer-choice
+;; t)
+;; (setq initial-scratch-message
+;; "")
+
+
+;; Uniquify
+(require 'uniquify)
+(setq uniquify-buffer-name-style 'reverse)
+(setq uniquify-separator " • ")
+(setq uniquify-after-kill-buffer-p t)
+(setq uniquify-ignore-buffers-re "^\\*")
+
+
+;; Spell if enabled
+(when *spell-check-support-enabled*
+  (require 'init-spelling))
+
 
 (provide 'base)
 ;;; base ends here
