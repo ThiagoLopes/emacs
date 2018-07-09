@@ -4,24 +4,30 @@
 
 ;;; Code:
 
-;; Monoaki Alt
-(use-package monokai-alt-theme
-  :defer t
-  :disabled)
+;;------------------------------------------------------------------------------
+;; Toggle between light and dark
+;;------------------------------------------------------------------------------
+(defun light ()
+  "Activate a light color theme."
+  (interactive)
+  (setq custom-enabled-themes '(sanityinc-tomorrow-day))
+  (reapply-themes))
+
+(defun dark ()
+  "Activate a dark color theme."
+  (interactive)
+  (setq custom-enabled-themes '(sanityinc-tomorrow-bright))
+  (reapply-themes))
+
+
+(use-package dimmer
+  :config
+  (setq-default dimmer-fraction 0.3)
+  (add-hook 'after-init-hook 'dimmer-mode))
 
 ;; Aftermoon
 (use-package afternoon-theme
   :defer t
-  :disabled)
-
-;; Monokai
-(use-package monokai-theme
-  :defer t
-  :disabled)
-
-;; Sanityinc
-(use-package color-theme-sanityinc-tomorrow
-  :config
   :disabled)
 
 ;; Spacemacs
@@ -30,20 +36,11 @@
   :init
   :disabled)
 
-(use-package dracula-theme
-  :ensure t
-  :config
-  :disabled)
-
-(use-package zenburn-theme
-  :disabled)
+(use-package zenburn-theme)
 
 (use-package atom-one-dark-theme
   :ensure t
   :disabled)
-
-(use-package zenburn-theme
-  :ensure t)
 
 (use-package powerline
   :config
@@ -51,7 +48,14 @@
   (setq powerline-default-separator
         'slant))
 
+(use-package color-theme-sanityinc-solarized
+  :defer t)
+(use-package color-theme-sanityinc-tomorrow
+  :defer 5)
+
+
 (set-frame-font "Hack:pixelsize=12")
+
 
 (provide 'base-themes)
 ;;; themes.el ends here
