@@ -50,20 +50,12 @@
   :ensure t
   :disabled)
 
-(use-package powerline
-  :config
-  (powerline-center-theme)
-  (setq powerline-default-separator
-        'slant))
-
 (use-package color-theme-sanityinc-solarized
   :defer t)
 (use-package color-theme-sanityinc-tomorrow
   :defer 5)
 
-
 (set-frame-font "Hack:pixelsize=12")
-
 
 (provide 'base-themes)
 ;;; themes.el ends here
