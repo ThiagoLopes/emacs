@@ -30,7 +30,7 @@
 
 ;;Record startup timestamp
 (defvar super-emacs/invokation-time
-(current-time))
+  (current-time))
 
 (add-to-list 'load-path (concat user-emacs-directory "elisp"))
 ;; (add-to-list 'load-path ".orgmode/")
@@ -47,6 +47,7 @@
 (require 'lang-javascript)
 (require 'lang-python)
 (require 'lang-html)
+(require 'lang-go)
 
 ;;Print welcome message
 (princ (cl-concatenate 'string
