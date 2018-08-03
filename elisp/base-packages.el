@@ -14,8 +14,7 @@
   )
 
 ;; Disable mouse
-(use-package disable-mouse
-  :defer t)
+(use-package disable-mouse)
 
 ;; Diminish
 (use-package diminish
@@ -169,12 +168,6 @@
   :bind
   ("M-x" . smex))
 
-;; NVM USE
-(use-package nvm
-  :defer 3
-  :config
-  (nvm-use "default"))
-
 ;; Ido mode :D
 (setq ido-enable-flex-matching t)
 (setq ido-everywhere t)
@@ -269,6 +262,25 @@
 ;; yaml
 (use-package yaml-mode
   :defer t)
+
+;; All The Icons
+(use-package all-the-icons :ensure t)
+
+;; NeoTree
+(use-package neotree
+  :ensure t
+  :init
+  (setq neo-theme (if (display-graphic-p) 'icons 'arrow)))
+
+;; Powerline
+(use-package spaceline
+  :ensure t
+  :init
+  (setq powerline-default-separator 'slant)
+  :config
+  (spaceline-emacs-theme)
+  (spaceline-toggle-minor-modes-off)
+  (spaceline-toggle-buffer-size-off))
 
 (provide 'base-packages)
 ;;; base-packages ends here
