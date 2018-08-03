@@ -31,12 +31,6 @@
         regexp-search-ring))
 
 
-;; enable hl-line
-(global-hl-line-mode t)
-
-;; Python indentation
-(setq python-indent 4)
-
 ;; Configurando UTF-8
 ;; UTF-8 please
 (set-charset-priority 'unicode)
@@ -70,7 +64,7 @@
       use-package-always-ensure          t)
 
 
-(setq history-length                     1000
+(setq history-length                     999
       backup-inhibited                   nil
       make-backup-files                  t
       auto-save-default                  t
@@ -125,7 +119,7 @@
       "ｅｍａｃｓ  安ェ殴ど依挨虞")
 
 ;;Enable show-paren-mode
-(show-paren-mode)
+(show-paren-mode 1)
 
 ;;Disable splash message, start *scratch* buffer by default
 ;; (setq initial-buffer-choice
@@ -145,6 +139,28 @@
 ;; Spell if enabled
 (when *spell-check-support-enabled*
   (require 'init-spelling))
+
+;; PATH
+(let ((path (shell-command-to-string ". ~/.zshrc; echo -n $PATH")))
+  (setenv "PATH" path)
+  (setq exec-path
+        (append
+         (split-string-and-unquote path ":")
+         exec-path)))
+
+
+;; Some term enhancement
+(defadvice term-sentinel (around my-advice-term-sentinel (proc msg))
+  (if (memq (process-status proc) '(signal exit))
+      (let ((buffer (process-buffer proc)))
+        ad-do-it
+        (kill-buffer buffer))
+    ad-do-it))
+(ad-activate 'term-sentinel)
+
+(defadvice ansi-term (before force-bash)
+  (interactive (list "/bin/zsh")))
+(ad-activate 'ansi-term)
 
 
 (provide 'base)
