@@ -7,6 +7,7 @@
 ;; Python indentation
 (setq python-indent 4)
 
+
 (use-package python
   :defer t
   :mode ("\\.py" . python-mode)
