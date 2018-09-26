@@ -10,6 +10,8 @@
 auto-save-list
 tramp
 .\#*
+.savehist/
+.undo/
 
 # Org-mode
 .org-id-locations
