@@ -28,10 +28,10 @@
 ;; Configs
 (add-to-list 'load-path (concat user-emacs-directory "elisp"))
 (require 'base)
+(require 'base-utils)
 (require 'base-keybindings)
 (require 'base-packages)
 (require 'base-themes)
-(require 'base-utils)
 (require 'base-exec-path)
 (require 'lang-javascript)
 (require 'lang-python)
