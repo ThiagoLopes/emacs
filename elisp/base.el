@@ -14,7 +14,7 @@
 (setq delete-old-versions -1)
 
 ;; Save history command
-(setq savehist-file "~/.emacs.d/savehist")
+(setq savehist-file "~/.emacs.d/tmp/savehist")
 (savehist-mode 1)
 (setq history-length t)
 (setq history-delete-duplicates t)
@@ -117,6 +117,14 @@
 (setq uniquify-separator " • ")
 (setq uniquify-after-kill-buffer-p t)
 (setq uniquify-ignore-buffers-re "^\\*")
+
+;; Set a margin in scroll
+(setq scroll-margin 10
+   scroll-step 1
+   next-line-add-newlines nil
+   scroll-conservatively 10000
+   scroll-preserve-screen-position 1)
+
 
 (provide 'base)
 ;;; base ends here

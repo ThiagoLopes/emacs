@@ -105,5 +105,18 @@
   (newline-and-indent)
   (forward-line -1)
   (indent-according-to-mode))
+
+
+(defun join-region (beg end)
+  "Join all the lines in the region."
+  (interactive "r")
+  (if mark-active
+      (let ((beg (region-beginning))
+            (end (copy-marker (region-end))))
+        (goto-char beg)
+        (while (< (point) end)
+          (join-line 1)))))
+
+
 (provide 'base-utils)
 ;;; base-utils ends here
