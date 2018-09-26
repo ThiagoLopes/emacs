@@ -14,8 +14,8 @@
 (setq delete-old-versions -1)
 
 ;; Save history command
-(setq savehist-file "~/.emacs.d/tmp/savehist")
 (savehist-mode 1)
+(setq savehist-file "~/.emacs.d/savehist")
 (setq history-length t)
 (setq history-delete-duplicates t)
 (setq savehist-save-minibuffer-history 1)
