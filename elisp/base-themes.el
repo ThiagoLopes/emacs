@@ -4,9 +4,11 @@
 
 ;;; Code:
 
-;;------------------------------------------------------------------------------
+(set-face-attribute 'default nil :font "Hack 10")
+(setq-default line-spacing 4)
+(setq-default frame-title-format "%b (%f)")
+
 ;; Toggle between light and dark
-;;------------------------------------------------------------------------------
 ;; Ensure that themes will be applied even if they have not been customized
 (defun reapply-themes ()
   "Forcibly load the themes listed in `custom-enabled-themes'."
@@ -18,44 +20,16 @@
 (defun light ()
   "Activate a light color theme."
   (interactive)
-  (setq custom-enabled-themes '(sanityinc-tomorrow-day))
+  (setq custom-enabled-themes '(tsdh-light))
   (reapply-themes))
 
 (defun night ()
   "Activate a dark color theme."
   (interactive)
-  (setq custom-enabled-themes '(sanityinc-tomorrow-bright))
+  (setq custom-enabled-themes '(tsdh-dark))
   (reapply-themes))
 
-
-(use-package dimmer
-  :config
-  (setq-default dimmer-fraction 0.3)
-  (add-hook 'after-init-hook 'dimmer-mode))
-
-;; Aftermoon
-(use-package afternoon-theme
-  :defer t
-  :disabled)
-
-;; Spacemacs
-(use-package spacemacs-theme
-  :defer t
-  :init
-  :disabled)
-
 (use-package zenburn-theme)
-
-(use-package atom-one-dark-theme
-  :ensure t
-  :disabled)
-
-(use-package color-theme-sanityinc-solarized
-  :defer t)
-(use-package color-theme-sanityinc-tomorrow
-  :defer 5)
-
-(set-frame-font "Hack:pixelsize=12")
 
 (provide 'base-themes)
 ;;; themes.el ends here

@@ -12,7 +12,15 @@
 (global-set-key (kbd "s-<") 'previous-buffer)
 (global-set-key (kbd "s->") 'next-buffer)
 
+;; FIXME
+;; (global-set-key (kbd "s-z") 'undo-tree-undo)
+;; (global-set-key (kbd "s-Z") 'undo-tree-redo)
 
+(global-set-key (kbd "C-x-b") 'ivy-switch-buffer)
+
+(global-set-key (kbd "C-s") 'swiper)
+
+(global-set-key (kbd "M-i") 'change-inner)
 
 ;; Remap C-<return> to smart-open-line
 (eval-after-load "elpy"
