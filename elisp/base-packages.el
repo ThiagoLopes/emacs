@@ -14,7 +14,8 @@
   )
 
 ;; Disable mouse
-(use-package disable-mouse)
+(use-package disable-mouse
+  :defer t)
 
 ;; Diminish
 (use-package diminish
