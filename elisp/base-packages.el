@@ -32,7 +32,7 @@
 
 (use-package expand-region
   :config
-  (global-set-key (kbd "M-S-^ M-S-@") 'er/expand-region))
+  (global-set-key (kbd "M-@") 'er/expand-region))
 
 (use-package move-text
   :config
@@ -196,7 +196,7 @@
 
 (use-package spaceline
   :init
-  (setq powerline-default-separator 'slant)
+  ;; (setq powerline-default-separator 'slant)
   :config
   (spaceline-emacs-theme)
   (spaceline-toggle-minor-modes-off)

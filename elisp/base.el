@@ -79,6 +79,9 @@
 (delete-selection-mode 1)
 (global-unset-key (kbd "s-p"))
 (global-hl-line-mode nil)
+(set-face-attribute 'default nil :font "Hack 10")
+;; (setq-default line-spacing 4)
+(setq-default frame-title-format "%b (%f)")
 
 ;; Time in the modeline
 (display-time-mode 1)

@@ -7,7 +7,6 @@
 
 (global-set-key (kbd "C-<return>") 'smart-open-line)
 (global-set-key (kbd "C-M-<return>") 'smart-open-line-above)
-;; (global-set-key (kbd "<C-return>") 'newline-without-break-of-line)
 
 (global-set-key (kbd "C-<") 'previous-buffer)
 (global-set-key (kbd "C->") 'next-buffer)

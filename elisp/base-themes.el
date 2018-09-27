@@ -1,12 +1,8 @@
 ;;; package --- Main init file
 ;;; Commentary:
-;;; This is my init file
+;;; File with themes
 
 ;;; Code:
-
-(set-face-attribute 'default nil :font "Hack 10")
-(setq-default line-spacing 4)
-(setq-default frame-title-format "%b (%f)")
 
 ;; Toggle between light and dark
 ;; Ensure that themes will be applied even if they have not been customized
