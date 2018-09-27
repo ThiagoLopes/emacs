@@ -1,9 +1,12 @@
 ;; Simple script
 
 (setq js-indent-level 2)
-(use-package js2-mode)
-(use-package typescript-mode)
-(use-package prettier-js)
+(use-package js2-mode
+  :mode ("\\.js\\'"))
+(use-package typescript-mode
+  :mode ("\\.ts\\'"))
+(use-package prettier-js
+  :mode ("\\.js\\'"))
 
 (setq css-indent-offset 2)
 (use-package rainbow-mode)
@@ -17,9 +20,11 @@
   :config
   (add-hook 'sgml-mode-hook 'emmet-mode))
 
-(use-package elm-mode)
+(use-package elm-mode
+  :mode ("\\.elm\\'"))
 
-(use-package go-mode)
+(use-package go-mode
+  :mode ("\\.go\\'"))
 
 (setq python-indent 4)
 (use-package python

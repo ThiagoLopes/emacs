@@ -13,8 +13,8 @@
 (global-set-key (kbd "C->") 'next-buffer)
 
 ;; FIXME
-;; (global-set-key (kbd "s-z") 'undo-tree-undo)
-;; (global-set-key (kbd "s-Z") 'undo-tree-redo)
+(global-set-key (kbd "M-/") 'undo-tree-undo)
+(global-set-key (kbd "M--") 'undo-tree-redo)
 
 (global-set-key (kbd "C-x C-b") 'ivy-switch-buffer)
 

@@ -52,7 +52,7 @@
       minibuffer-prompt-properties
       '(read-only t point-entered minibuffer-avoid-prompt face minibuffer-prompt)
       ;; highlight-nonselected-windows   t
-      ;; fringes-outside-margins          t
+      ;; fringes-outside-margins         t
       x-select-enable-clipboard          t
       use-package-always-ensure          t)
 
@@ -66,7 +66,7 @@
       sentence-end-double-space nil     ; Sentences should end in one space, come on!
       confirm-kill-emacs 'y-or-n-p      ; y and n instead of yes and no when quitting
       help-window-select t              ; select help window so it's easy to quit it with 'q'
-)
+      )
 
 
 ;; UI
@@ -96,7 +96,7 @@
 ;; Save and kill
 (global-set-key (kbd "s-q") 'save-buffers-kill-emacs) ;; quit
 
-;; ;; Setup `hippie-expand' expand functions
+;; Setup `hippie-expand' expand functions
 ;; (global-set-key (kbd "M-/") 'hippie-expand)
 ;; (setq hippie-expand-try-functions-list '(try-expand-dabbrev
 ;;                                          try-expand-dabbrev-all-buffers
@@ -121,10 +121,10 @@
 
 ;; Set a margin in scroll
 (setq scroll-margin 10
-   scroll-step 1
-   next-line-add-newlines nil
-   scroll-conservatively 10000
-   scroll-preserve-screen-position 1)
+      scroll-step 1
+      next-line-add-newlines nil
+      scroll-conservatively 10000
+      scroll-preserve-screen-position 1)
 
 
 (provide 'base)

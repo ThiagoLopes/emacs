@@ -51,7 +51,8 @@
 
 (use-package swiper)
 
-(use-package org)
+(use-package org
+  :defer 2)
 
 (use-package symbol-overlay
   :defer 2
@@ -90,7 +91,8 @@
   (add-hook 'flycheck-mode-hook 'flycheck-popup-tip-mode)
   (flycheck-popup-tip-mode))
 
-(use-package magit)
+(use-package magit
+  :defer 1)
 
 (use-package magit-popup
   :after (magit))
@@ -106,6 +108,7 @@
 
 (use-package git-gutter
   :diminish git-gutter-mode
+  :defer 1
   :init
   (setq git-gutter:window-width 1
         git-gutter:update-interval 2
@@ -136,6 +139,7 @@
   (midnight-mode))
 
 (use-package hl-todo
+  :defer 2
   :config
   (global-hl-todo-mode))
 
@@ -151,9 +155,11 @@
   :config
   (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
 
-(use-package yasnippet)
+(use-package yasnippet
+  :defer 1)
 
-(use-package yasnippet-snippets)
+(use-package yasnippet-snippets
+  :defer 2)
 
 (use-package company
   :config
@@ -179,18 +185,22 @@
         auto-package-update-interval 4)
   (auto-package-update-maybe))
 
-(use-package yaml-mode)
-(use-package markdown-mode)
-(use-package haml-mode)
-(use-package json-mode)
+(use-package yaml-mode
+  :mode ("\\.yaml\\'"))
+(use-package markdown-mode
+  :mode ("\\.md\\'"))
+(use-package haml-mode
+  :mode ("\\.haml\\'"))
+(use-package json-mode
+  :mode ("\\.json\\'"))
 
-;; (use-package spaceline
-;;   :init
-;;   (setq powerline-default-separator 'slant)
-;;   :config
-;;   (spaceline-emacs-theme)
-;;   (spaceline-toggle-minor-modes-off)
-;;   (spaceline-toggle-buffer-size-off))
+(use-package spaceline
+  :init
+  (setq powerline-default-separator 'slant)
+  :config
+  (spaceline-emacs-theme)
+  (spaceline-toggle-minor-modes-off)
+  (spaceline-toggle-buffer-size-off))
 
 (provide 'base-packages)
 ;;; base-packages ends here
