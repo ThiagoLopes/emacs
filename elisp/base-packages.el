@@ -1,5 +1,5 @@
 ;; Emacs configuration file
-n;; Forked from: Auralcat, Sacha Chua's
+;; Forked from: Auralcat, Sacha Chua's
 ;; Author: Thiago Lopes
 ;; Started in May 2017.
 
@@ -8,10 +8,6 @@ n;; Forked from: Auralcat, Sacha Chua's
   :config
   (which-key-mode)
   (setq which-key-idle-delay 0.5))
-
-(use-package simpleclip
-  :config
-  (simpleclip-mode 1))
 
 (use-package dimmer
   :config
@@ -36,7 +32,7 @@ n;; Forked from: Auralcat, Sacha Chua's
 
 (use-package expand-region
   :config
-  (global-set-key (kbd "^@'") 'er/expand-region))
+  (global-set-key (kbd "M-S-^ M-S-@") 'er/expand-region))
 
 (use-package move-text
   :config
@@ -51,7 +47,7 @@ n;; Forked from: Auralcat, Sacha Chua's
   (setq ivy-initial-inputs-alist nil)
   (setq ivy-re-builders-alist
       '((swiper . ivy--regex-plus)
-        (t      . ivy--regex-fuzzy)))   ;; enable fuzzy searching everywhere except for Swiper
+        (t      . ivy--regex-fuzzy))))
 
 (use-package swiper)
 
@@ -66,10 +62,9 @@ n;; Forked from: Auralcat, Sacha Chua's
   (global-set-key [(meta f3)] 'highlight-symbol-query-replace))
 
 (use-package counsel
-  :bind
-  ("M-y" . counsel-yank-pop)
-  :map ivy-minibuffer-map
-  ("M-y" . ivy-next-line)
+  :bind (("M-y" . counsel-yank-pop)
+         :map ivy-minibuffer-map
+         ("M-y" . ivy-next-line))
   :config
   (global-set-key (kbd "M-x") 'counsel-M-x)
   (global-set-key (kbd "C-x C-f") 'counsel-find-file))
@@ -81,7 +76,7 @@ n;; Forked from: Auralcat, Sacha Chua's
 (use-package ivy-rich
   :config
   (ivy-rich-mode 1)
-  (setq ivy-rich-path-style 'abbrev)) ;; To abbreviate paths using abbreviate-file-name (e.g. replace “/home/username” with “~”
+  (setq ivy-rich-path-style 'abbrev))
 
 (use-package flycheck
   :config
@@ -167,7 +162,7 @@ n;; Forked from: Auralcat, Sacha Chua's
   (setq company-minimum-prefix-length 1)
   (add-hook 'after-init-hook 'global-company-mode))
 
-(use-package company-quickhelp          ; Documentation popups for Company
+(use-package company-quickhelp
   :after
   (company)
   :init

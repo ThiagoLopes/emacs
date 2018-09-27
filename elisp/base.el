@@ -56,6 +56,7 @@
       x-select-enable-clipboard          t
       use-package-always-ensure          t)
 
+
 (setq inhibit-startup-message t         ; Don't show the startup message
       inhibit-startup-screen t          ; or screen
       cursor-in-non-selected-windows t  ; Hide the cursor in inactive windows
