@@ -136,8 +136,9 @@
 (use-package exec-path-from-shell
   :defer 1
   :config
-  (setq exec-path-from-shell-check-startup-files nil)
-  (exec-path-from-shell-initialize))
+  (progn
+    (setq exec-path-from-shell-check-startup-files nil)
+    (exec-path-from-shell-initialize)))
 
 (use-package midnight
   :config
