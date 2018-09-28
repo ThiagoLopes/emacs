@@ -31,6 +31,7 @@
 (bind-key "C-x p" 'pop-to-mark-command)
 (setq set-mark-command-repeat-pop t)
 
+(define-key ivy-minibuffer-map (kbd "RET") #'ivy-alt-done)
 
 (provide 'base-keybindings)
 ;;; keybindings.el ends here

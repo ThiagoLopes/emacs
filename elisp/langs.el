@@ -31,7 +31,7 @@
 (use-package go-mode
   :mode ("\\.go\\'"))
 
-(setq python-indent 4)
+(setq-default python-indent 4)
 (use-package python
   :defer 1
   :mode ("\\.py\\'" . python-mode))
@@ -46,6 +46,7 @@
 (use-package py-yapf)
 (use-package py-isort)
 (use-package virtualenvwrapper
+  :disabled
   :config
   (setq venv-location "~/.virtualenvs"))
 
