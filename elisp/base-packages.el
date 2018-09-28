@@ -80,6 +80,7 @@
   (setq ivy-rich-path-style 'abbrev))
 
 (use-package flycheck
+  :defer 1
   :config
   (global-flycheck-mode)
   (add-hook 'after-init-hook #'global-flycheck-mode)
@@ -132,7 +133,11 @@
   :config
   (beacon-mode t))
 
-(use-package exec-path-from-shell)
+(use-package exec-path-from-shell
+  :defer 1
+  :config
+  (setq exec-path-from-shell-check-startup-files nil)
+  (exec-path-from-shell-initialize))
 
 (use-package midnight
   :config

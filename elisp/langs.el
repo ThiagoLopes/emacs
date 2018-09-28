@@ -1,6 +1,7 @@
 ;; Simple script
 
-(setq js-indent-level 2)
+(setq-default js2-basic-offset 2
+              js-indent-level 2)
 (use-package js2-mode
   :mode ("\\.js\\'"))
 (use-package typescript-mode
@@ -8,9 +9,13 @@
 (use-package prettier-js
   :mode ("\\.js\\'"))
 
-(setq css-indent-offset 2)
+(setq-default css-indent-offset 2
+              web-mode-css-indent-offset 2)
 (use-package rainbow-mode)
 
+(setq-default web-mode-markup-indent-offset 2
+              web-mode-code-indent-offset 2
+              web-mode-attr-indent-offset 2)
 (use-package web-mode
   :mode ("\\.html\\'")
   :config
@@ -28,15 +33,16 @@
 
 (setq python-indent 4)
 (use-package python
-  :mode ("\\.py" . python-mode)
-  :config
-  (use-package elpy
-    :init
-    (add-to-list 'auto-mode-alist '("\\.py$" . python-mode))
-    :bind (:map elpy-mode-map
-                ("M-." . elpy-goto-definition)
-                ("M-," . pop-tag-mark)))
-  (elpy-enable))
+  :defer 1
+  :mode ("\\.py\\'" . python-mode))
+(use-package elpy
+  :after python
+  :init
+  (elpy-enable)
+  (add-to-list 'auto-mode-alist '("\\.py$" . python-mode))
+  :bind (:map elpy-mode-map
+              ("M-." . elpy-goto-definition)
+              ("M-," . pop-tag-mark)))
 (use-package py-yapf)
 (use-package py-isort)
 (use-package virtualenvwrapper
