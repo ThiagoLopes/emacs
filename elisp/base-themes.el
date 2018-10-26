@@ -25,7 +25,9 @@
   (setq custom-enabled-themes '(tsdh-dark))
   (reapply-themes))
 
-(use-package zenburn-theme)
+(use-package zenburn-theme
+  :disabled)
+(use-package sexy-monochrome-theme)
 
 (provide 'base-themes)
 ;;; themes.el ends here
