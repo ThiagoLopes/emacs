@@ -57,10 +57,8 @@
 (use-package symbol-overlay
   :defer 2
   :config
-  (global-set-key [(control f3)] 'symbol-overlay-put)
-  (global-set-key [f3] 'symbol-overlay-jump-next)
-  (global-set-key [(shift f3)] 'symbol-overlay-jump-prev)
-  (global-set-key [(meta f3)] 'highlight-symbol-query-replace))
+  (global-set-key (kbd "<f9>") 'symbol-overlay-put)
+  (global-set-key (kbd "C-x <f9>") 'symbol-overlay-jump-next))
 
 (use-package counsel
   :bind (("M-y" . counsel-yank-pop)
@@ -162,9 +160,11 @@
   (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
 
 (use-package yasnippet
+  :disabled
   :defer 1)
 
 (use-package yasnippet-snippets
+  :disabled
   :defer 2)
 
 (use-package company
@@ -207,6 +207,9 @@
   (spaceline-emacs-theme)
   (spaceline-toggle-minor-modes-off)
   (spaceline-toggle-buffer-size-off))
+
+(use-package projectile)
+
 
 (provide 'base-packages)
 ;;; base-packages ends here
