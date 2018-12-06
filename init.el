@@ -5,32 +5,41 @@
 ;;; Code:
 
 ;;-----PACKAGES-----------------------------------------------------------------
+;; BOM!
+(setq gc-cons-threshold 50000000)
+
+(add-hook 'emacs-startup-hook 'my/set-gc-threshold)
+(defun my/set-gc-threshold ()
+  "Reset `gc-cons-threshold' to its default value."
+  (setq gc-cons-threshold 800000))
 ;; Package sources
-(require 'package)
-(setq package-enable-at-startup nil)
-(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
-(add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
-(add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/"))
-(package-initialize)
+(let ((file-name-handler-alist nil))
+  (require 'package)
+  (setq package-enable-at-startup nil)
+  (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
+  (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
+  (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/"))
+  (package-initialize)
 
-(unless (package-installed-p 'use-package)
-  (package-refresh-contents)
-  (package-install 'use-package))
+  (unless (package-installed-p 'use-package)
+    (package-refresh-contents)
+    (package-install 'use-package))
 
-(eval-when-compile
-  (require 'use-package))
+  (eval-when-compile
+    (require 'use-package))
 
-(setq use-package-always-ensure t)
-(setq gc-cons-threshold (* 50 1000 1000))
-(setq gc-cons-threshold (* 2 1000 1000))
-;;------------------------------------------------------------------------------
-;; Add base(s)
-(add-to-list 'load-path (concat user-emacs-directory "elisp"))
-(require 'base)
-(require 'base-packages)
-(require 'base-utils)
-(require 'base-keybindings)
-(require 'base-themes)
+  (setq use-package-always-ensure t)
+  (setq gc-cons-threshold (* 50 1000 1000))
+  (setq gc-cons-threshold (* 2 1000 1000))
+  ;;------------------------------------------------------------------------------
+  ;; Add base(s)
+  (add-to-list 'load-path (concat user-emacs-directory "elisp"))
+  (require 'base)
+  (require 'base-packages)
+  (require 'base-utils)
+  (require 'base-keybindings)
+  (require 'base-themes)
 
-(require 'langs)
+  (require 'langs)
+  )
 ;;; init.el ends here
