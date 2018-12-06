@@ -199,8 +199,12 @@
   (spaceline-toggle-minor-modes-off)
   (spaceline-toggle-buffer-size-off))
 
-(use-package projectile)
-
+(use-package projectile
+  :init
+  (projectile-mode t)
+  :config
+  (define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
+  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map))
 
 (provide 'base-packages)
 ;;; base-packages ends here
