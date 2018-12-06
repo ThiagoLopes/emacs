@@ -159,14 +159,6 @@
   :config
   (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
 
-(use-package yasnippet
-  :disabled
-  :defer 1)
-
-(use-package yasnippet-snippets
-  :disabled
-  :defer 2)
-
 (use-package company
   :config
   (setq company-idle-delay 0.1)
