@@ -12,6 +12,9 @@ tramp
 .\#*
 .savehist/
 .undo/
+.last-package-update-day
+savehist
+
 
 # Org-mode
 .org-id-locations
