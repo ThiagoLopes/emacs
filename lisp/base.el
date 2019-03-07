@@ -33,9 +33,6 @@
 (prefer-coding-system        'utf-8)   ; with sugar on top
 (setq default-process-coding-system '(utf-8-unix . utf-8-unix))
 
-;; Disable blink cursor
-(blink-cursor-mode 0)
-
 ;; Backup
 (setq make-backup-files nil) ; stop creating backup~ files
 (setq auto-save-default nil) ; stop creating #autosave# files
@@ -70,21 +67,17 @@
 
 
 ;; UI
-(setq use-file-dialog nil)
-(setq use-dialog-box nil)(menu-bar-mode -1)
-(tool-bar-mode -1)
-(scroll-bar-mode -1)
-(fset 'yes-or-no-p 'y-or-n-p)      ; y and n instead of yes and no everywhere else
+(menu-bar-mode -1)
+;; (fset 'yes-or-no-p 'y-or-n-p)      ; y and n instead of yes and no everywhere else
 (global-auto-revert-mode t)
 (delete-selection-mode 1)
 (global-unset-key (kbd "s-p"))
 (global-hl-line-mode nil)
-(set-face-attribute 'default nil :font "Hack 10")
+(condition-case nil
+    (set-face-attribute 'default nil :font "Hack 10")
+  (error nil))
 ;; (setq-default line-spacing 4)
 (setq-default frame-title-format "%b (%f)")
-
-;; Time in the modeline
-(display-time-mode 1)
 
 ;; Remove useless whitespace before saving a file
 (add-hook 'before-save-hook 'whitespace-cleanup)
@@ -99,36 +92,69 @@
 ;; Save and kill
 (global-set-key (kbd "s-q") 'save-buffers-kill-emacs) ;; quit
 
-;; Setup `hippie-expand' expand functions
-;; (global-set-key (kbd "M-/") 'hippie-expand)
-;; (setq hippie-expand-try-functions-list '(try-expand-dabbrev
-;;                                          try-expand-dabbrev-all-buffers
-;;                                          try-expand-dabbrev-from-kill
-;;                                          try-complete-file-name-partially
-;;                                          try-complete-file-name
-;;                                          try-expand-all-abbrevs
-;;                                          try-expand-list
-;;                                          try-expand-line
-;;                                          try-complete-lisp-symbol-partially
-;;                                          try-complete-lisp-symbol))
-
 ;;Enable show-paren-mode
 (show-paren-mode 1)
 
-;; Uniquify
-(require 'uniquify)
-(setq uniquify-buffer-name-style 'reverse)
-(setq uniquify-separator " • ")
-(setq uniquify-after-kill-buffer-p t)
-(setq uniquify-ignore-buffers-re "^\\*")
+;;----------------------------------------------------------------------------
+;; Suppress GUI features
+;;----------------------------------------------------------------------------
+(setq use-file-dialog nil)
+(setq use-dialog-box nil)
+(setq inhibit-startup-screen t)
 
-;; Set a margin in scroll
-(setq scroll-margin 10
-      scroll-step 1
-      next-line-add-newlines nil
-      scroll-conservatively 10000
-      scroll-preserve-screen-position 1)
+;;----------------------------------------------------------------------------
+;; Window size and features
+;;----------------------------------------------------------------------------
+(when (fboundp 'tool-bar-mode)
+  (tool-bar-mode -1))
+(when (fboundp 'set-scroll-bar-mode)
+  (set-scroll-bar-mode nil))
 
+;; I generally prefer to hide the menu bar, but doing this on OS X
+;; simply makes it update unreliably in GUI frames, so we make an
+;; exception.
+
+(let ((no-border '(internal-border-width . 0)))
+  (add-to-list 'default-frame-alist no-border)
+  (add-to-list 'initial-frame-alist no-border))
+
+(defun sanityinc/adjust-opacity (frame incr)
+  "Adjust the background opacity of FRAME by increment INCR."
+  (unless (display-graphic-p frame)
+    (error "Cannot adjust opacity of this frame"))
+  (let* ((oldalpha (or (frame-parameter frame 'alpha) 100))
+         ;; The 'alpha frame param became a pair at some point in
+         ;; emacs 24.x, e.g. (100 100)
+         (oldalpha (if (listp oldalpha) (car oldalpha) oldalpha))
+         (newalpha (+ incr oldalpha)))
+    (when (and (<= frame-alpha-lower-limit newalpha) (>= 100 newalpha))
+      (modify-frame-parameters frame (list (cons 'alpha newalpha))))))
+
+;; TODO: use seethru package instead?
+(global-set-key (kbd "M-C-8") (lambda () (interactive) (sanityinc/adjust-opacity nil -2)))
+(global-set-key (kbd "M-C-9") (lambda () (interactive) (sanityinc/adjust-opacity nil 2)))
+(global-set-key (kbd "M-C-7") (lambda () (interactive) (modify-frame-parameters nil `((alpha . 100)))))
+
+(setq frame-title-format
+      '((:eval (if (buffer-file-name)
+                   (abbreviate-file-name (buffer-file-name))
+                 "%b"))))
+
+;; Non-zero values for `line-spacing' can mess up ansi-term and co,
+;; so we zero it explicitly in those cases.
+(add-hook 'term-mode-hook
+          (lambda ()
+            (setq line-spacing 0)))
+
+
+;; Change global font size easily
+
+(require-package 'default-text-scale)
+(add-hook 'after-init-hook 'default-text-scale-mode)
+
+
+
+(require-package 'disable-mouse)
 
 (provide 'base)
 ;;; base ends here

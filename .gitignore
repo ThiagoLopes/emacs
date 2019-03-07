@@ -1,81 +1,57 @@
-# Created by https://www.gitignore.io/api/emacs
-
-### Emacs ###
-# -*- mode: gitignore; -*-
-*~
-\#*\#
+/url/cache
 /.emacs.desktop
-/.emacs.desktop.lock
+/auto-save-list
+/network-security.data
+/.session
+/session.*
+/custom.el
 *.elc
-auto-save-list
-tramp
-.\#*
-.savehist/
-.undo/
-.last-package-update-day
+CVS
+.svn
+*~
+.cvsignore
+.*.lock
+/tramp
+/TODO
+/.org-id-locations
+cookies
+/newsticker
+\#*
+/elpa
+/elpa-*
+site-lisp/package/
+/swank
+/.mc-lists.el
+/var
+/.sqli_history
+/frame-restore-parameters
+/.achievements
+/.bookmarks.el
+/history
+/helm-adaptive-history
+/thumbs/
+/emms/
+/.smex-items
+/image-dired/
+/eshell
+/.cask/
+/.sx/
+/org-clock-save.el
+/ditaa*.jar
+/ido.last
+/recentf
+/viper
+/projectile-bookmarks.eld
+/anaconda-mode/
+/.historian
+/.uptimes.el
+/rake.cache
+/plantuml.jar
+/magithub
+.cache/
+/forge-database.sqlite
+/transient
 savehist
-
-
-# Org-mode
-.org-id-locations
-*_archive
-
-# flymake-mode
-*_flymake.*
-
-# eshell files
-/eshell/history
-/eshell/lastdir
-
-# elpa packages
-/elpa/
-
-# reftex files
-*.rel
-
-# AUCTeX auto folder
-/auto/
-
-# cask packages
-.cask/
-dist/
-
-# Flycheck
-flycheck_*.el
-
-# server auth directory
-/server/
-
-# projectiles files
-.projectile
-projectile-bookmarks.eld
-
-# directory configuration
-.dir-locals.el
-
-# saveplace
-places
-
-# url cache
-url/cache/
-
-# cedet
-ede-projects.el
-
-# smex
-smex-items
-
-# company-statistics
-company-statistics-cache.el
-
-# anaconda-mode
-anaconda-mode/
-
-# more things
 .custom.el
-ac-comphist.dat
-ido.last
-network-security.data
-recentf
-
-# End of https://www.gitignore.io/api/emacs
+.last-package-update-day
+.smex-items

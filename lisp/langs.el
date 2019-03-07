@@ -33,21 +33,15 @@
 
 (setq-default python-indent 4)
 (use-package python
-  :defer 1
-  :mode ("\\.py\\'" . python-mode))
+  :defer 1)
 (use-package elpy
   :after python
   :init
   (elpy-enable)
   (add-to-list 'auto-mode-alist '("\\.py$" . python-mode))
+  (highlight-indentation-mode 'nil)
   :bind (:map elpy-mode-map
               ("M-." . elpy-goto-definition)
               ("M-," . pop-tag-mark)))
-(use-package py-yapf)
-(use-package py-isort)
-(use-package virtualenvwrapper
-  :disabled
-  :config
-  (setq venv-location "~/.virtualenvs"))
 
 (provide 'langs)
