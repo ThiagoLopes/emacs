@@ -103,11 +103,9 @@
 
 (require-package 'htmlize)
 
-
 (when (maybe-require-package 'uptimes)
   (setq-default uptimes-keep-count 200)
   (add-hook 'after-init-hook (lambda () (require 'uptimes))))
-
 
 ;;----------------------------------------------------------------------------
 ;; Allow access from emacsclient
@@ -124,12 +122,10 @@
 (when (file-exists-p custom-file)
   (load custom-file))
 
-
 ;;----------------------------------------------------------------------------
 ;; Locales (setting them earlier in this file doesn't work in X)
 ;;----------------------------------------------------------------------------
 (require 'base-locales)
-
 
 ;;----------------------------------------------------------------------------
 ;; Allow users to provide an optional "base-local" containing personal settings
@@ -137,11 +133,8 @@
 (require 'base-local nil t)
 
 ;; MY CONFIGS
-
 (require 'base-packages)
 (require 'base-utils)
 (require 'base-keybindings)
-
-;; (require 'langs)
 
 ;;; init.el ends here
