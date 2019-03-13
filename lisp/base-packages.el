@@ -65,5 +65,7 @@
 (when (maybe-require-package 'ace-jump-mode)
   (global-set-key (kbd "C-c SPC") 'ace-jump-mode))
 
+(when (maybe-require-package 'evil))
+
 (provide 'base-packages)
 ;;; base-packages ends here
