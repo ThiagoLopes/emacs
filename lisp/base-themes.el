@@ -40,6 +40,11 @@
   (after-load 'dimmer
     (advice-add 'frame-set-background-mode :after (lambda (&rest args) (dimmer-process-all)))))
 
+;;------------------------------------------------------------------------------
+;; Mode line
+;;------------------------------------------------------------------------------
+(when (maybe-require-package 'telephone-line)
+  (telephone-line-mode 1))
 
 (provide 'base-themes)
 ;;; init-themes.el ends here
