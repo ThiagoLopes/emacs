@@ -12,7 +12,8 @@
 (when (maybe-require-package 'anaconda-mode)
   (after-load 'python
     (add-hook 'python-mode-hook 'anaconda-mode)
-    (add-hook 'python-mode-hook 'anaconda-eldoc-mode))
+    (add-hook 'python-mode-hook 'anaconda-eldoc-mode)
+    (add-hook 'python-mode-hook #'(lambda () (modify-syntax-entry ?_ "w"))))
   (when (maybe-require-package 'company-anaconda)
     (after-load 'company
       (after-load 'python
