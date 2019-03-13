@@ -54,10 +54,16 @@
 
 (when (maybe-require-package 'highlight-indent-guides)
   (add-hook 'prog-mode-hook 'highlight-indent-guides-mode)
-  (setq highlight-indent-guides-method 'fill))
+  (setq highlight-indent-guides-auto-odd-face-perc 15)
+  (setq highlight-indent-guides-auto-even-face-perc 15)
+  (setq highlight-indent-guides-auto-character-face-perc 30)
+  (setq highlight-indent-guides-method (quote character)))
 
 (when (maybe-require-package 'counsel)
   (global-set-key (kbd "M-y") 'counsel-yank-pop ))
+
+(when (maybe-require-package 'ace-jump-mode)
+  (global-set-key (kbd "C-c SPC") 'ace-jump-mode))
 
 (provide 'base-packages)
 ;;; base-packages ends here

@@ -95,6 +95,7 @@
 (require 'base-sql)
 (require 'base-rust)
 (require 'base-yaml)
+(require 'base-go)
 
 (require 'base-paredit)
 (require 'base-lisp)
