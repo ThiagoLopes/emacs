@@ -315,6 +315,8 @@ With arg N, insert N newlines."
 (after-load 'guide-key
   (diminish 'guide-key-mode))
 
+;; Sanatize forward
+(global-set-key (kbd "M-f") 'forward-to-word)
 
 (provide 'base-editing-utils)
 ;;; init-editing-utils.el ends here
