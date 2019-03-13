@@ -47,11 +47,6 @@
 
 (when (maybe-require-package 'ag))
 
-(when (maybe-require-package 'spaceline)
-  (spaceline-emacs-theme)
-  (spaceline-toggle-minor-modes-off)
-  (spaceline-toggle-buffer-size-off))
-
 (when (maybe-require-package 'highlight-indent-guides)
   (add-hook 'prog-mode-hook 'highlight-indent-guides-mode)
   (setq highlight-indent-guides-auto-odd-face-perc 15)
