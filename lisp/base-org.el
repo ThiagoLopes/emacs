@@ -348,5 +348,13 @@ typical word processor."
 
 (when (maybe-require-package 'ox-twbs))
 
+
+
+(setq org-html-htmlize-output-type 'inline-css)
+(setq org-html-htmlize-output-type nil)
+(setq org-html-htmlize-output-type 'css)
+
+
+
 (provide 'base-org)
 ;;; init-org.el ends here
