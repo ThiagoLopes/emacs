@@ -318,5 +318,12 @@ With arg N, insert N newlines."
 ;; Sanatize forward
 (global-set-key (kbd "M-f") 'forward-to-word)
 
+;;----------------------------------------------------------------------------
+;; Centered cursor
+;;----------------------------------------------------------------------------
+
+(when (maybe-require-package 'centered-cursor-mode)
+  (centered-cursor-mode t))
+
 (provide 'base-editing-utils)
 ;;; init-editing-utils.el ends here
