@@ -354,7 +354,29 @@ typical word processor."
 (setq org-html-htmlize-output-type nil)
 (setq org-html-htmlize-output-type 'css)
 
+;; org brain
+(when (maybe-require-package 'org-brain)
+  (setq org-brain-path (file-truename "~/Documents/Orgs/brain"))
+  (setq org-id-track-globally t)
+  (setq org-id-locations-file "~/.emacs.d/.org-id-locations")
+  (push '("b" "Brain" plain (function org-brain-goto-end)
+          "* %i%?" :empty-lines 1)
+        org-capture-templates)
+  (setq org-brain-visualize-default-choices 'all)
+  (setq org-brain-title-max-length 12))
+
 
 
+;; Configure faces to org
+(font-lock-add-keywords 'org-mode
+                        '(("^ *\\([-]\\) "
+                           (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•"))))))
+
+(when (maybe-require-package 'org-bullets)
+  (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
+
+(when (maybe-require-package 'ox-ioslide))
+
+
 (provide 'base-org)
 ;;; init-org.el ends here
