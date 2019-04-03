@@ -261,6 +261,9 @@ typical word processor."
             )))))
 
 
+(setq org-agenda-files
+      (list "~/Documents/Orgs/todo.org"))
+
 (add-hook 'org-agenda-mode-hook 'hl-line-mode)
 
 
