@@ -353,9 +353,8 @@ typical word processor."
 
 
 
-(setq org-html-htmlize-output-type 'inline-css)
-(setq org-html-htmlize-output-type nil)
 (setq org-html-htmlize-output-type 'css)
+(setq org-src-fontify-natively t)
 
 ;; org brain
 (when (maybe-require-package 'org-brain)
