@@ -323,7 +323,8 @@ With arg N, insert N newlines."
 ;;----------------------------------------------------------------------------
 
 (when (maybe-require-package 'centered-cursor-mode)
-  (centered-cursor-mode t))
+  (after-load 'centered-cursor-mode
+    (global-centered-cursor-mode)))
 
 (provide 'base-editing-utils)
 ;;; init-editing-utils.el ends here
