@@ -90,6 +90,7 @@
   (after-load 'js2-mode
     (add-hook 'js2-mode-hook 'add-node-modules-path)))
 
+(setq-default typescript-indent-level 2)
 
 (provide 'base-javascript)
 ;;; init-javascript.el ends here
