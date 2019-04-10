@@ -46,5 +46,12 @@
 (when (maybe-require-package 'telephone-line)
   (telephone-line-mode 1))
 
+;;------------------------------------------------------------------------------
+;; Themes
+;;------------------------------------------------------------------------------
+(when (maybe-require-package 'night-owl-theme))
+(when (maybe-require-package 'dracula-theme))
+(when (maybe-require-package 'apropospriate-theme))
+
 (provide 'base-themes)
 ;;; init-themes.el ends here
