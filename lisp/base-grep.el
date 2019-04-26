@@ -14,17 +14,15 @@
            (maybe-require-package 'ag))
   (require-package 'wgrep-ag)
   (setq-default ag-highlight-search t)
-  (global-set-key (kbd "M-?") 'ag-project))
+  (global-set-key (kbd "C-M-?") 'counsel-ag))
 
 (when (and (executable-find "rg")
            (maybe-require-package 'rg))
   (maybe-require-package 'deadgrep)
   (global-set-key (kbd "M-?") 'rg-project))
 
-(when (and (executable-find "fzf")
-           (maybe-require-package 'fzf))
-  (global-set-key (kbd "C-?") 'fzf))
-
+(when (and (executable-find "fzf"))
+  (global-set-key (kbd "C-?") 'counsel-fzf))
 
 (provide 'base-grep)
 ;;; init-grep.el ends here
