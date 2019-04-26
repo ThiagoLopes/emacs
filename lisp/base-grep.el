@@ -23,7 +23,7 @@
 
 (when (and (executable-find "fzf")
            (maybe-require-package 'fzf))
-  (global-set-key (kbd "C-p") 'fzf))
+  (global-set-key (kbd "C-?") 'fzf))
 
 
 (provide 'base-grep)
