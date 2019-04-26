@@ -21,6 +21,10 @@
   (maybe-require-package 'deadgrep)
   (global-set-key (kbd "M-?") 'rg-project))
 
+(when (and (executable-find "fzf")
+           (maybe-require-package 'fzf))
+  (global-set-key (kbd "C-p") 'fzf))
+
 
 (provide 'base-grep)
 ;;; init-grep.el ends here
