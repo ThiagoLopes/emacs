@@ -379,6 +379,9 @@ typical word processor."
 
 (when (maybe-require-package 'ox-ioslide))
 
+;; Images
+(setq org-startup-with-inline-images t)
+
 
 (provide 'base-org)
 ;;; init-org.el ends here

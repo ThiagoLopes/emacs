@@ -324,6 +324,7 @@ With arg N, insert N newlines."
 
 (when (maybe-require-package 'centered-cursor-mode)
   (after-load 'centered-cursor-mode
+    (centered-cursor-mode)
     (global-centered-cursor-mode)))
 
 (provide 'base-editing-utils)

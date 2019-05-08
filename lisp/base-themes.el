@@ -4,9 +4,12 @@
 
 (require-package 'color-theme-sanityinc-solarized)
 (require-package 'color-theme-sanityinc-tomorrow)
+(require-package 'zenburn-theme)
+(require-package 'white-theme)
+(require-package 'alect-themes)
 
 ;; If you don't customize it, this is the theme you get.
-(setq-default custom-enabled-themes '(sanityinc-tomorrow-bright))
+(setq-default custom-enabled-themes '(alect-light-alt))
 
 ;; Ensure that themes will be applied even if they have not been customized
 (defun reapply-themes ()
