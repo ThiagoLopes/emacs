@@ -7,9 +7,11 @@
 (require-package 'zenburn-theme)
 (require-package 'white-theme)
 (require-package 'alect-themes)
+(require-package 'doom-themes)
+(require-package 'monokai-theme)
 
 ;; If you don't customize it, this is the theme you get.
-(setq-default custom-enabled-themes '(alect-light-alt))
+(setq-default custom-enabled-themes '(monokai))
 
 ;; Ensure that themes will be applied even if they have not been customized
 (defun reapply-themes ()
