@@ -58,5 +58,8 @@
 (when (maybe-require-package 'dracula-theme))
 (when (maybe-require-package 'apropospriate-theme))
 
+(when (maybe-require-package 'highlight-numbers)
+  (highlight-numbers-mode))
+
 (provide 'base-themes)
 ;;; init-themes.el ends here
