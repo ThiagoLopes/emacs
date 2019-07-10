@@ -59,7 +59,7 @@
 (when (maybe-require-package 'apropospriate-theme))
 
 (when (maybe-require-package 'highlight-numbers)
-  (highlight-numbers-mode))
+  (highlight-numbers-mode 1))
 
 (provide 'base-themes)
 ;;; init-themes.el ends here
