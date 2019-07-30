@@ -11,9 +11,6 @@
 (global-set-key (kbd "C-<") 'previous-buffer)
 (global-set-key (kbd "C->") 'next-buffer)
 
-(global-set-key (kbd "M-/") 'undo-tree-undo)
-(global-set-key (kbd "M--") 'undo-tree-redo)
-
 (global-set-key (kbd "C-x C-b") 'ivy-switch-buffer)
 
 (global-set-key (kbd "C-s") 'swiper)
