@@ -75,7 +75,8 @@ instead."
       (interactive (list (thing-at-point 'symbol)))
       (swiper sym))
 
-    (define-key ivy-mode-map (kbd "M-s /") 'sanityinc/swiper-at-point)))
+    (define-key ivy-mode-map (kbd "M-s /") 'sanityinc/swiper-at-point)
+    (global-set-key (kbd "C-s") 'swiper)))
 
 
 (when (maybe-require-package 'ivy-xref)
