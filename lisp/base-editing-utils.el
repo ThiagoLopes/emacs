@@ -43,7 +43,6 @@
 
 
 ;; Huge files
-
 (require-package 'vlf)
 
 (defun ffap-vlf ()
@@ -317,15 +316,14 @@ With arg N, insert N newlines."
 
 ;; Sanatize forward
 (global-set-key (kbd "M-f") 'forward-to-word)
+(global-set-key (kbd "M-b") 'backward-to-word)
 
-;;----------------------------------------------------------------------------
-;; Centered cursor
-;;----------------------------------------------------------------------------
+;; Sanatize paragraph navegation
+(global-set-key (kbd "M-a") 'backward-paragraph)
+(global-set-key (kbd "M-e") 'forward-paragraph)
 
-(when (maybe-require-package 'centered-cursor-mode)
-  (after-load 'centered-cursor-mode
-    (centered-cursor-mode)
-    (global-centered-cursor-mode)))
+;; Sanatize C-a
+(global-set-key (kbd "C-a") (quote back-to-indentation-or-beginning))
 
 (provide 'base-editing-utils)
 ;;; init-editing-utils.el ends here
