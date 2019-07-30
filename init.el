@@ -67,7 +67,6 @@
 (require 'base-recentf)
 (require 'base-smex)
 (require 'base-ivy)
-;; (require 'base-helm)
 (require 'base-hippie-expand)
 (require 'base-company)
 (require 'base-windows)
