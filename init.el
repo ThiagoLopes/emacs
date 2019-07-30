@@ -98,6 +98,7 @@
 
 (require 'base-paredit)
 (require 'base-lisp)
+(require 'base-scheme)
 (require 'base-misc)
 
 (require-package 'htmlize)
