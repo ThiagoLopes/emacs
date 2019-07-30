@@ -21,5 +21,10 @@
   (when (maybe-require-package 'virtualenvwrapper))
   (when (maybe-require-package 'pytest)))
 
+;; If installed elpy
+(eval-after-load "elpy"
+  '(cl-dolist (key '("C-<return>"))
+     (define-key elpy-mode-map (kbd key) nil)))
+
 (provide 'base-python)
 ;;; init-python.el ends here
