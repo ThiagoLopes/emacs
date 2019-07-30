@@ -7,7 +7,14 @@
   (add-hook hook 'turn-on-elisp-slime-nav-mode))
 (add-hook 'emacs-lisp-mode-hook (lambda () (setq mode-name "ELisp")))
 
-(defvar tips (string-join '("- Open projectile menu - C-c p p") "\n"))
+(defvar tips (string-join '(
+                            "- Open projectile menu | C-c p p"
+                            "- Fast split windon    | <F7>"
+                            "- Open new line on top | C-o"
+                            "- Open new line        | C-<RET>"
+                            "- Search using AG      | M-?"
+                            "- Swiper at point      | M-a /"
+                            ) "\n"))
 
 (setq-default initial-scratch-message
               (concat ";; Happy hacking, " user-login-name " - Emacs ♥ you!\n\n" tips))
