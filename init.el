@@ -135,6 +135,5 @@
 ;; MY CONFIGS
 (require 'base-packages)
 (require 'base-utils)
-(require 'base-keybindings)
 
 ;;; init.el ends here
