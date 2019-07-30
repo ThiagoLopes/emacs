@@ -18,7 +18,8 @@
     (after-load 'company
       (after-load 'python
         (push 'company-anaconda company-backends))))
-  (when (maybe-require-package 'virtualenvwrapper)))
+  (when (maybe-require-package 'virtualenvwrapper))
+  (when (maybe-require-package 'pytest)))
 
 (provide 'base-python)
 ;;; init-python.el ends here
