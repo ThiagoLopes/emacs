@@ -1,4 +1,4 @@
-;;; init-themes.el --- Defaults for themes -*- lexical-binding: t -*-
+;;; base-themes.el --- Defaults for themes -*- lexical-binding: t -*-
 ;;; Commentary:
 ;;; Code:
 
@@ -12,6 +12,8 @@
 
 ;; If you don't customize it, this is the theme you get.
 (setq-default custom-enabled-themes '(monokai))
+(defvar dark-theme '(doom-one))
+(defvar light-theme '(doom-one-light))
 
 ;; Ensure that themes will be applied even if they have not been customized
 (defun reapply-themes ()
@@ -29,13 +31,13 @@
 (defun light ()
   "Activate a light color theme."
   (interactive)
-  (setq custom-enabled-themes '(sanityinc-tomorrow-day))
+  (setq custom-enabled-themes light-theme)
   (reapply-themes))
 
 (defun dark ()
   "Activate a dark color theme."
   (interactive)
-  (setq custom-enabled-themes '(sanityinc-tomorrow-bright))
+  (setq custom-enabled-themes dark-theme)
   (reapply-themes))
 
 (when (maybe-require-package 'dimmer)
@@ -54,12 +56,8 @@
 ;;------------------------------------------------------------------------------
 ;; Themes
 ;;------------------------------------------------------------------------------
-(when (maybe-require-package 'night-owl-theme))
-(when (maybe-require-package 'dracula-theme))
-(when (maybe-require-package 'apropospriate-theme))
-
 (when (maybe-require-package 'highlight-numbers)
   (highlight-numbers-mode 1))
 
 (provide 'base-themes)
-;;; init-themes.el ends here
+;;; base-themes.el ends here
