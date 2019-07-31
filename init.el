@@ -1,11 +1,13 @@
-;;; package --- Main init file
+;;; init.el --- Load the full configuration -*- lexical-binding: t -*-
 ;;; Commentary:
-;;; This is my init file
 
 ;; This file bootstraps the configuration, which is divided into
 ;; a number of other files.
+;; Forkend from purcell https://github.com/purcell/emacs.d/
+;; Highly modified
 
 ;;; Code:
+
 ;; Produce backtraces when errors occur
 (setq debug-on-error nil)
 
@@ -38,7 +40,7 @@
 ;; Bootstrap config init
 ;;----------------------------------------------------------------------------
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
-(require 'base-utils)
+(require 'base-utils) ;; customized
 (require 'base-elpa)
 (require 'base-exec-path) ;; configure $PATH
 
@@ -56,9 +58,9 @@
 (require-package 'command-log-mode)
 
 (require 'base-frame-hooks)
-(require 'base-themes)
+(require 'base-themes) ;; customized
 
-(require 'base)
+(require 'base) ;; customized
 
 (require 'base-dired)
 (require 'base-isearch)
