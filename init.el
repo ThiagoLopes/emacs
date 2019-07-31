@@ -38,7 +38,7 @@
 ;; Bootstrap config init
 ;;----------------------------------------------------------------------------
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
-(require 'new-base-utils)
+(require 'base-utils)
 (require 'base-elpa)
 (require 'base-exec-path) ;; configure $PATH
 
@@ -137,6 +137,5 @@
 
 ;; MY CONFIGS
 (require 'base-packages)
-(require 'base-utils)
 
 ;;; init.el ends here
