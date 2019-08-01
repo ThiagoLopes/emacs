@@ -103,15 +103,31 @@
 (require 'base-elm)
 (require 'base-sql)
 (require 'base-rust)
+(require 'base-toml)
 (require 'base-yaml)
 (require 'base-go)
 
+;; Lisp/Scheme
 (require 'base-paredit)
 (require 'base-lisp)
+(require 'base-slime)
+(require 'base-clojure)
+(require 'base-clojure-cider)
+(require 'base-common-lisp)
 (require 'base-scheme)
+
+(when *spell-check-support-enabled*
+  (require 'base-spelling))
+
 (require 'base-misc)
 
+(require 'base-folding)
+
+;; Simple packages load
 (require-package 'htmlize)
+(require-package 'gnuplot)
+(require-package 'lua-mode)
+(maybe-require-package 'dotenv-mode)
 
 (when (maybe-require-package 'uptimes)
   (setq-default uptimes-keep-count 200)
