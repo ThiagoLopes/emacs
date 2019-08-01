@@ -8,7 +8,7 @@
 (setq use-file-dialog nil)
 (setq use-dialog-box nil)
 (setq inhibit-startup-screen t)
-
+(menu-bar-mode -1) ;; HACK custom
 
 ;;----------------------------------------------------------------------------
 ;; Window size and features
@@ -43,6 +43,7 @@
 (global-set-key (kbd "M-C-7") (lambda () (interactive) (modify-frame-parameters nil `((alpha . 100)))))
 
 
+;; or (setq-default frame-title-format "%b (%f)")
 (setq frame-title-format
       '((:eval (if (buffer-file-name)
                    (abbreviate-file-name (buffer-file-name))

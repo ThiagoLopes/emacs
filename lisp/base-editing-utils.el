@@ -12,6 +12,18 @@
 (maybe-require-package 'list-unicode-display)
 
 ;;----------------------------------------------------------------------------
+;; UTF-8 please
+;; HACK CUSTOMIZED
+;;----------------------------------------------------------------------------
+(set-charset-priority 'unicode)
+(setq locale-coding-system   'utf-8)   ; pretty
+(set-terminal-coding-system  'utf-8)   ; pretty
+(set-keyboard-coding-system  'utf-8)   ; pretty
+(set-selection-coding-system 'utf-8)   ; please
+(prefer-coding-system        'utf-8)   ; with sugar on top
+(setq default-process-coding-system '(utf-8-unix . utf-8-unix))
+
+;;----------------------------------------------------------------------------
 ;; Some basic preferences
 ;;----------------------------------------------------------------------------
 (setq-default
@@ -24,14 +36,27 @@
  ediff-split-window-function 'split-window-horizontally
  ediff-window-setup-function 'ediff-setup-windows-plain
  indent-tabs-mode nil
+ tab-width 4 ;; HACK
  make-backup-files nil
+ ;; auto-save-default nil ;; HACK
+ ;; create-lockfiles nil ;; HACK
  mouse-yank-at-point t
  save-interprogram-paste-before-kill t
+ confirm-nonexistent-file-or-buffer  t ;; HACK
+ visible-bell                        nil ;; HACK
+ require-final-newline               t ;; HACK
+ ring-bell-function                  'ignore ;; HACK
+ select-enable-clipboard             t ;; HACK
  scroll-preserve-screen-position 'always
  set-mark-command-repeat-pop t
  tooltip-delay 1.5
  truncate-lines nil
- truncate-partial-width-windows nil)
+ truncate-partial-width-windows nil
+ sentence-end-double-space nil     ; Sentences should end in one space, come on! HACK
+ help-window-select t              ; select help window so it's easy to quit it with 'q' HACK
+ confirm-kill-emacs 'y-or-n-p      ; y and n instead of yes and no HACK
+ initial-major-mode 'org-mode      ; HACK
+ )
 
 (add-hook 'after-init-hook 'global-auto-revert-mode)
 (setq global-auto-revert-non-file-buffers t

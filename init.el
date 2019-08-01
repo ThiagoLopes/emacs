@@ -61,8 +61,6 @@
 (require 'base-themes) ;; customized
 (require 'base-gui-frames)
 
-(require 'base) ;; customized
-
 (require 'base-dired)
 (require 'base-isearch)
 (require 'base-grep)

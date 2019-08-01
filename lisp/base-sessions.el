@@ -31,6 +31,8 @@
 ;; Restore histories and registers after saving
 ;;----------------------------------------------------------------------------
 (setq-default history-length 1000)
+(setq-default savehist-file "~/.emacs.d/savehist") ;; HACK custom
+(setq-default history-delete-duplicates t) ;; HACK custom
 (add-hook 'after-init-hook 'savehist-mode)
 
 (require-package 'session)

@@ -183,6 +183,11 @@
         (while (< (point) end)
           (join-line 1)))))
 
+;;----------------------------------------------------------------------------
+;; Save and quit
+;; HACK
+;;----------------------------------------------------------------------------
+(global-set-key (kbd "s-q") 'save-buffers-kill-emacs) ;; quit
 
 (provide 'base-utils)
 ;;; base-utils.el ends here

@@ -59,5 +59,14 @@
 (when (maybe-require-package 'highlight-numbers)
   (highlight-numbers-mode 1))
 
+;;------------------------------------------------------------------------------
+;; Set font
+;; Good fonts to code - Hack, Iosevka, Terminus, PragmataPro
+;;------------------------------------------------------------------------------
+(condition-case nil
+    (set-face-attribute 'default nil :font "Iosevka SS08")
+  (error nil))
+
+
 (provide 'base-themes)
 ;;; base-themes.el ends here

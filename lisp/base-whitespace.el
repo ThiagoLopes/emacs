@@ -2,7 +2,8 @@
 ;;; Commentary:
 ;;; Code:
 
-(setq-default show-trailing-whitespace nil)
+                                        ; (setq-default show-trailing-whitespace nil)
+(setq-default show-trailing-whitespace t)
 
 
 ;;; Whitespace
@@ -17,6 +18,7 @@
 
 (require-package 'whitespace-cleanup-mode)
 (add-hook 'after-init-hook 'global-whitespace-cleanup-mode)
+(add-hook 'before-save-hook (lambda() (delete-trailing-whitespace))) ;; HACK custom
 (after-load 'whitespace-cleanup-mode
   (diminish 'whitespace-cleanup-mode))
 
