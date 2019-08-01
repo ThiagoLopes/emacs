@@ -141,4 +141,5 @@
 ;; MY CONFIGS
 (require 'base-packages)
 
+(provide 'init)
 ;;; init.el ends here
