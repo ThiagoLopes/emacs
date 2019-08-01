@@ -9,7 +9,7 @@
 ;;; Code:
 
 ;; Produce backtraces when errors occur
-(setq debug-on-error nil)
+(setq debug-on-error t)
 
 ;; Check emacs version
 (let ((minver "24.4"))
@@ -25,7 +25,7 @@
 (add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
 (require 'base-benchmarking) ;; Measure startup time
 
-(defconst *spell-check-support-enabled* nil) ;; Enable with t if you prefer :D
+(defconst *spell-check-support-enabled* t) ;; Enable with t if you prefer :D
 
 ;;----------------------------------------------------------------------------
 ;; Adjust garbage collection thresholds during startup, and thereafter
