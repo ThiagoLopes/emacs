@@ -78,14 +78,19 @@
 (require 'base-windows)
 (require 'base-sessions)
 (require 'base-mmm)
-
 (require 'base-editing-utils)
 (require 'base-whitespace)
+
+;; Version
 (require 'base-vc)
 (require 'base-git)
+(require 'base-github)
 (require 'base-projectile)
+
+;; Compile
 (require 'base-compile)
 
+;; Langs
 (require 'base-markdown)
 (require 'base-csv)
 (require 'base-erlang)
