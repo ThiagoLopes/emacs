@@ -7,6 +7,8 @@
   (add-hook hook 'turn-on-elisp-slime-nav-mode))
 (add-hook 'emacs-lisp-mode-hook (lambda () (setq mode-name "ELisp")))
 
+
+;; TODO move this
 (defvar tips (string-join '(
                             "- Open projectile menu | C-c p p"
                             "- Fast split windon    | <F7>"
@@ -14,6 +16,11 @@
                             "- Open new line        | C-<RET>"
                             "- Search using AG      | M-?"
                             "- Swiper at point      | M-a /"
+                            "- Jump to char         | C-;"
+                            "- Select all indentation | C-M-<backspace>"
+                            "- Browser file at remote | <M-x> browser-at-remote"
+                            "- Go to see the line     | M-g g"
+                            "- To focus in orgmode use| <M-x> writeroom-mode"
                             ) "\n"))
 
 (setq-default initial-scratch-message
