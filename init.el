@@ -59,6 +59,7 @@
 
 (require 'base-frame-hooks)
 (require 'base-themes) ;; customized
+(require 'base-gui-frames)
 
 (require 'base) ;; customized
 
