@@ -51,4 +51,4 @@
 (add-hook 'prog-mode-hook 'paredit-everywhere-mode)
 
 (provide 'base-paredit)
-;;; init-paredit.el ends here
+;;; base-paredit.el ends here
