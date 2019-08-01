@@ -364,7 +364,7 @@ typical word processor."
 
 (when (maybe-require-package 'ox-ioslide))
 
-;; Images
+;; Expand images
 (setq org-startup-with-inline-images t)
 
 
