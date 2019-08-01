@@ -48,7 +48,7 @@
 
 (add-auto-mode 'conf-mode "^Procfile\\'")
 
-(require 'misc)
+;; (require 'misc)
 
 (provide 'base-misc)
 ;;; init-misc.el ends here
