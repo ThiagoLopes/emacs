@@ -69,7 +69,6 @@
 (require 'base-uniquify)
 (require 'base-ibuffer)
 (require 'base-flycheck)
-
 (require 'base-recentf)
 (require 'base-smex)
 (require 'base-ivy)
