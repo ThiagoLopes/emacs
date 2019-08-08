@@ -370,5 +370,8 @@ ORIG is the advised function, which is called with its ARGS."
 ;; Sanatize C-a
 (global-set-key (kbd "C-a") (quote back-to-indentation-or-beginning))
 
+;; Sanitize C-x k <RET>
+(global-set-key (kbd "C-q") 'kill-current-buffer)
+
 (provide 'base-editing-utils)
 ;;; init-editing-utils.el ends here
