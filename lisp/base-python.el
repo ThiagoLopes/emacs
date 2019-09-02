@@ -21,7 +21,8 @@
       (after-load 'python
         (push 'company-anaconda company-backends))))
   (when (maybe-require-package 'virtualenvwrapper))
-  (when (maybe-require-package 'pytest)))
+  (when (maybe-require-package 'pytest))
+  (when (maybe-require-package 'blacken)))
 
 ;; If installed elpy
 (eval-after-load "elpy"
