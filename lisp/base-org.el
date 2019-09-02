@@ -367,6 +367,11 @@ typical word processor."
 ;; Expand images
 (setq org-startup-with-inline-images t)
 
+(when (maybe-require-package 'org-download)
+  (require 'org-download)
+  (add-hook 'dired-mode-hook 'org-download-enable)
+  (setq-default org-download-screenshot-method "xclip -selection clipboard -t image/png -o > %s"))
+
 
 (provide 'base-org)
 ;;; init-org.el ends here
