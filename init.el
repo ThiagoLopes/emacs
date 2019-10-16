@@ -9,7 +9,7 @@
 ;;; Code:
 
 ;; Produce backtraces when errors occur
-(setq debug-on-error t)
+(setq debug-on-error nil)
 
 ;; Check emacs version
 (let ((minver "24.4"))
