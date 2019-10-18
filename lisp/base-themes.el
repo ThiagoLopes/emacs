@@ -67,6 +67,11 @@
     (set-face-attribute 'default nil :font "Hack 10")
   (error nil))
 
+;;------------------------------------------------------------------------------
+;; Theme magic
+;;------------------------------------------------------------------------------
+(when (maybe-require-package 'theme-magic))
+
 
 (provide 'base-themes)
 ;;; base-themes.el ends here
