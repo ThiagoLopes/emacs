@@ -77,6 +77,7 @@
 (require 'base-mmm)
 (require 'base-editing-utils)
 (require 'base-whitespace)
+(require 'base-dumb-jump)
 
 ;; Version
 (require 'base-vc)
