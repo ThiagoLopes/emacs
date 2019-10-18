@@ -373,5 +373,9 @@ ORIG is the advised function, which is called with its ARGS."
 ;; Sanitize C-x k <RET>
 (global-set-key (kbd "C-q") 'kill-current-buffer)
 
+;; goto-last-change keys
+;; TODO implement toggle with goto-last-change-reverse
+(global-set-key (kbd "C-:") 'goto-last-change)
+
 (provide 'base-editing-utils)
 ;;; init-editing-utils.el ends here
