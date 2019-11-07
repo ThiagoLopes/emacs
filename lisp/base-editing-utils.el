@@ -56,6 +56,7 @@
  help-window-select t              ; select help window so it's easy to quit it with 'q' HACK
  confirm-kill-emacs 'y-or-n-p      ; y and n instead of yes and no HACK
  initial-major-mode 'org-mode      ; HACK
+ make-pointer-invisible t          ; HACK
  )
 
 (add-hook 'after-init-hook 'global-auto-revert-mode)

@@ -63,7 +63,8 @@
 
 
 
-(require-package 'disable-mouse)
+(when (maybe-require-package 'disable-mouse)
+  (global-disable-mouse-mode ))
 
 
 (provide 'base-gui-frames)
