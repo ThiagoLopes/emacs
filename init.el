@@ -1,17 +1,65 @@
-;;; init.el --- Load the full configuration -*- lexical-binding: t -*-
+;;; init.el -*- lexical-binding: t; -*-
 ;;; Commentary:
 
-;; This file bootstraps the configuration, which is divided into
-;; a number of other files.
-;; Forkend from purcell https://github.com/purcell/emacs.d/
-;; Highly modified
+;; This file bootstraps the configuration, which is divided into a
+;; number of other files. Forkend from purcell
+;; https://github.com/purcell/emacs.d/
+;; and from
+;; https://github.com/hlissner/doom-emacs
+;; Highly modified by me and other folks
+
+;; Author: Thiago Lopes <thiagolopes@pm.me>
+
+;;Temporary project name: Quake
+
+;;      .,o'       `o,.
+;;    ,o8'           `8o.
+;;   o8'               `8o
+;;  o8:                 ;8o
+;; .88                   88.
+;; :88.                 ,88:
+;; `888                 888'
+;;  888o   `888 888'   o888
+;;  `888o,. `88 88' .,o888'
+;;   `8888888888888888888'
+;;     `888888888888888'
+;;        `::88;88;:'
+;;           88 88
+;;           88 88
+;;           `8 8'
+;;            ` '
 
 ;;; Code:
 
+;;----------------------------------------------------------------------------
+;; Adjust garbage collection thresholds during startup, and thereafter
+;; ----------------------------------------------------------------------------
+;; A big contributor to startup times is garbage collection. We up the
+;; gc threshold to temporarily prevent it from running, then reset it
+;; later added in hook `emacs-startup-hook`. Not resetting it will
+;; cause stuttering/freezes.
+(let ((normal-gc-cons-threshold (* 16 1024 1026)))
+  (setq gc-cons-threshold most-positive-fixnum)
+  (add-hook 'emacs-startup-hook
+            (lambda () (setq gc-cons-threshold normal-gc-cons-threshold))))
+
+;; In noninteractive sessions, prioritize non-byte-compiled source files to
+;; prevent the use of stale byte-code. Otherwise, it saves us a little IO time
+;; to skip the mtime checks on every *.elc file we load.
+(setq load-prefer-newer noninteractive)
+
+(let (file-name-handler-alist)
+  ;; Ensure Quake is running out of this file's directory
+  (setq user-emacs-directory (file-name-directory load-file-name)))
+
+;;----------------------------------------------------------------------------
 ;; Produce backtraces when errors occur
+;;----------------------------------------------------------------------------
 (setq debug-on-error nil)
 
+;;----------------------------------------------------------------------------
 ;; Check emacs version
+;;----------------------------------------------------------------------------
 (let ((minver "24.4"))
   (when (version< emacs-version minver)
     (error "Your Emacs is too old -- this config requires v%s or higher" minver)))
@@ -21,20 +69,13 @@
 (when (version= emacs-version "26.1")
   (setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3"))
 
+;;----------------------------------------------------------------------------
 ;; add list folders
+;;----------------------------------------------------------------------------
 (add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
 (require 'base-benchmarking) ;; Measure startup time
 
 (defconst *spell-check-support-enabled* t) ;; Enable with t if you prefer :D
-
-;;----------------------------------------------------------------------------
-;; Adjust garbage collection thresholds during startup, and thereafter
-;;----------------------------------------------------------------------------
-(let ((normal-gc-cons-threshold (* 16 1024 1026))
-      (init-gc-cons-threshold (* 512 1024 1024)))
-  (setq gc-cons-threshold init-gc-cons-threshold)
-  (add-hook 'emacs-startup-hook
-            (lambda () (setq gc-cons-threshold normal-gc-cons-threshold))))
 
 ;;----------------------------------------------------------------------------
 ;; Bootstrap config init
