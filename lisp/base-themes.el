@@ -11,8 +11,8 @@
 (require-package 'monokai-theme)
 
 ;; If you don't customize it, this is the theme you get.
-(defvar dark-theme '(doom-one))
-(defvar light-theme '(doom-one-light))
+(defvar dark-theme '(doom-acario-dark))
+(defvar light-theme '(doom-acario-light))
 (setq-default custom-enabled-themes dark-theme)
 
 ;; Ensure that themes will be applied even if they have not been customized
@@ -64,7 +64,7 @@
 ;; Good fonts to code - Hack, Iosevka, Terminus, PragmataPro
 ;;------------------------------------------------------------------------------
 (condition-case nil
-    (set-face-attribute 'default nil :font "Hack 10")
+    (set-face-attribute 'default nil :font "Terminus 10")
   (error nil))
 
 ;;------------------------------------------------------------------------------
