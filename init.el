@@ -98,6 +98,8 @@
 (maybe-require-package 'scratch)
 (require-package 'command-log-mode)
 
+(require 'base-editing-utils)
+
 (require 'base-frame-hooks)
 (require 'base-themes) ;; customized
 (require 'base-gui-frames)
@@ -116,7 +118,6 @@
 (require 'base-windows)
 (require 'base-sessions)
 (require 'base-mmm)
-(require 'base-editing-utils)
 (require 'base-whitespace)
 (require 'base-dumb-jump)
 

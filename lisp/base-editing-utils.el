@@ -378,5 +378,12 @@ ORIG is the advised function, which is called with its ARGS."
 ;; TODO implement toggle with goto-last-change-reverse
 (global-set-key (kbd "C-:") 'goto-last-change)
 
+;;----------------------------------------------------------------------------
+;; xclip
+;;----------------------------------------------------------------------------
+(when (maybe-require-package 'xclip)
+  (xclip-mode 1))
+
+
 (provide 'base-editing-utils)
 ;;; init-editing-utils.el ends here
