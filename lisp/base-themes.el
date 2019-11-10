@@ -11,8 +11,8 @@
 (require-package 'monokai-theme)
 
 ;; If you don't customize it, this is the theme you get.
-(defvar dark-theme '(doom-acario-dark))
-(defvar light-theme '(doom-acario-light))
+(defvar dark-theme '(sanityinc-tomorrow-night))
+(defvar light-theme '(sanityinc-tomorrow-day))
 (setq-default custom-enabled-themes dark-theme)
 
 ;; Ensure that themes will be applied even if they have not been customized
