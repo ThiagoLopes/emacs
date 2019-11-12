@@ -365,8 +365,8 @@ ORIG is the advised function, which is called with its ARGS."
 (global-set-key (kbd "M-b") 'backward-to-word)
 
 ;; Sanatize paragraph navegation
-(global-set-key (kbd "M-a") 'backward-paragraph)
-(global-set-key (kbd "M-e") 'forward-paragraph)
+;; (global-set-key (kbd "M-a") 'backward-paragraph)
+;; (global-set-key (kbd "M-e") 'forward-paragraph)
 
 ;; Sanatize C-a
 (global-set-key (kbd "C-a") (quote back-to-indentation-or-beginning))
