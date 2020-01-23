@@ -64,7 +64,7 @@
 ;; Good fonts to code - Hack, Iosevka, Terminus, PragmataPro
 ;;------------------------------------------------------------------------------
 (condition-case nil
-    (set-face-attribute 'default nil :font "Terminus 10")
+    (set-face-attribute 'default nil :font "Hack 09")
   (error nil))
 
 ;;------------------------------------------------------------------------------
