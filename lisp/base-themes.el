@@ -11,7 +11,7 @@
 (require-package 'monokai-theme)
 
 ;; If you don't customize it, this is the theme you get.
-(defvar dark-theme '(sanityinc-tomorrow-night))
+(defvar dark-theme '(doom-dark+))
 (defvar light-theme '(sanityinc-tomorrow-day))
 (setq-default custom-enabled-themes dark-theme)
 
