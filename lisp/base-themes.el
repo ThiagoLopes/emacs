@@ -9,10 +9,11 @@
 (require-package 'alect-themes)
 (require-package 'doom-themes)
 (require-package 'monokai-theme)
+(require-package 'color-theme-modern)
 
 ;; If you don't customize it, this is the theme you get.
-(defvar dark-theme '(doom-dark+))
-(defvar light-theme '(sanityinc-tomorrow-day))
+(defvar dark-theme '(zenburn))
+(defvar light-theme '(jb-simple))
 (setq-default custom-enabled-themes dark-theme)
 
 ;; Ensure that themes will be applied even if they have not been customized
