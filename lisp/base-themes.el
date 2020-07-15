@@ -12,8 +12,8 @@
 (require-package 'color-theme-modern)
 
 ;; If you don't customize it, this is the theme you get.
-(defvar dark-theme '(zenburn))
-(defvar light-theme '(jb-simple))
+(defvar dark-theme '(jsc-dark))
+(defvar light-theme '(jsc-light))
 (setq-default custom-enabled-themes dark-theme)
 
 ;; Ensure that themes will be applied even if they have not been customized
