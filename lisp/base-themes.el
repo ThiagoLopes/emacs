@@ -12,8 +12,8 @@
 (require-package 'color-theme-modern)
 
 ;; If you don't customize it, this is the theme you get.
-(defvar dark-theme '(jsc-dark))
-(defvar light-theme '(jb-simple))
+(defvar dark-theme '(doom-solarized-dark))
+(defvar light-theme '(doom-solarized-light))
 (setq-default custom-enabled-themes dark-theme)
 
 ;; Ensure that themes will be applied even if they have not been customized
@@ -65,7 +65,7 @@
 ;; Good fonts to code - Hack, Iosevka, Terminus, PragmataPro
 ;;------------------------------------------------------------------------------
 (condition-case nil
-    (set-face-attribute 'default nil :font "Hack 09")
+    (set-face-attribute 'default nil :font "Fantasque Sans Mono 11")
   (error nil))
 
 ;;------------------------------------------------------------------------------
