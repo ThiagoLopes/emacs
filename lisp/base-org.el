@@ -186,7 +186,7 @@ typical word processor."
         org-agenda-sticky t
         org-agenda-start-on-weekday nil
         org-agenda-span 'day
-        org-agenda-include-diary nil
+        org-agenda-include-diary t
         org-agenda-sorting-strategy
         '((agenda habit-down time-up user-defined-up effort-up category-keep)
           (todo category-up effort-up)
@@ -261,8 +261,7 @@ typical word processor."
             )))))
 
 
-(setq org-agenda-files
-      (list "~/Documents/Orgs/todo.org"))
+(setq org-agenda-files (directory-files-recursively "~/.org" "org$"))
 
 (add-hook 'org-agenda-mode-hook 'hl-line-mode)
 
